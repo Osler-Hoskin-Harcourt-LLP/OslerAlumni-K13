@@ -1,0 +1,110 @@
+.c-cta {
+    @include flex-column;
+    background-color: $color-white;
+    border-bottom: $xxxs-space solid $color-red;
+    width: 100%;
+    text-decoration: none;
+    padding: $m-space;
+    margin-bottom: $s-space;
+    @include breakpoint(large) {
+        justify-content: flex-start;
+        margin: 0 2% 2% 0;
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 48%;
+        min-height: 325px;
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
+    }
+    &-related{
+        width: 100%;
+        @include breakpoint(large) {
+            width: 32%;
+        }
+        &:nth-child(2n) {
+            margin-right: 2%;
+        }
+        &:nth-child(3n) {
+            margin-right: 0;
+        }
+    }
+    &-wrap {
+        @include flex-column;
+        justify-content: flex-start;
+        @include breakpoint(large) {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    }
+    &-image {
+        max-height: 280px;
+        overflow: hidden;
+        img {
+            position: relative;
+            top: 0;
+        }
+        @extend .show-for-large;
+    }
+    &-content {
+        .has-image & {
+            @include breakpoint(large) {
+                padding: $m-space;
+            }
+        }
+        .s-richtext {
+            padding: 0;
+        }
+    }
+    &-footer {
+        padding-top: $xxxs-space;
+        display: flex;
+        justify-content: flex-end;
+        p {
+            margin-bottom: 0;
+        }
+        .has-image & {
+            @include breakpoint(large) {
+                padding: 0 $m-space $m-space;
+            }
+        }
+    }
+    &-title {
+        color: $color-grey;
+        margin-bottom: $xxs-space;
+    }
+    &-link {
+        display: block;
+        border-top: $border;
+        padding: $xxs-space 0;
+        width: 100%;
+    }
+    &-profile {
+        hr {
+            margin-bottom: $s-space;
+        }
+    }
+    &.has-border {
+        border: 1px solid $color-red;
+    }
+    &.has-image {
+        @include breakpoint(large) {
+            @include padding-none;
+        }
+    }
+    &.is-single {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: $m-space;
+        a {
+            font-size: 18px;
+        }
+        p {
+            a {
+                font-size: inherit;
+            }
+        }
+    }
+}

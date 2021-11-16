@@ -1,0 +1,40 @@
+.c-attendees {
+    &-wrap {
+        overflow-y: auto;
+        max-height: 80%;
+        // make into a global mixin? Talk with Nadia
+        &::-webkit-scrollbar {
+		    width: 10px;
+        }
+
+		&::-webkit-scrollbar-thumb {
+          border-radius: 50px;
+		  background-color: $color-red;
+		  outline: 1px solid $color-red;
+        }
+
+		&::-webkit-scrollbar-track,
+		&::-webkit-scrollbar-track-piece {
+		  background-color: $color-white;
+		}
+    }
+    &-meta {
+        position: relative;
+    }
+    &-list {
+        @include list-unstyled;
+    }
+    &-item {
+        padding-left: 0;
+
+        span {
+            display: inline-block;
+            margin-bottom: $xxs-space;
+        }
+    }
+    &-results {
+        .c-form-error & {
+            color: $color-red;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+@model ResourceFeaturedItemViewModel
+
+@{
+    var FeaturedItemTitleLength = 80;
+}
+
+<div class="row" v-if="searchRequest.pageNumber == 1">
+    <div class="columns medium-12">
+        <div class="c-feature">
+            @if (string.IsNullOrWhiteSpace(Model.ImageUrl))
+            {
+                <div class="c-feature-img has-bg" style="background-image: url('@Html.Osler().ResolveUrl(Model.DefaultImageUrl)')"></div>
+            }
+            else
+            {
+                <div class="c-feature-img">
+                    @(Html.Osler()
+                          .Image(Model.ImageUrl)
+                          .WithAltText(Model.ImageAltText)
+                          .ToHtmlString())
+                </div>
+            }
+            <div class="c-feature-content">
+                <p class="is-small">
+                    @Model.FeaturedText
+                </p>
+
+                <h2>
+                    @if (Model.IsExternal) {
+                        <a href="@Model.PageUrl" target="_blank" class="is-external @(@Model.IsFile ? "is-file" : "")">@Html.TruncateAfterWord(Model.Title?.Trim(), FeaturedItemTitleLength)</a>
+                    }
+                    else
+                    {
+                        <a href="@Model.PageUrl" class="is-internal @(@Model.IsFile ? "is-file" : "")">@Html.TruncateAfterWord(Model.Title?.Trim(), FeaturedItemTitleLength)</a>
+                    }
+                </h2>
+
+                <a @(Model.IsExternal ? "target=\"_blank\"" : "")  href="@Model.PageUrl" class="c-link c-link-primary">
+                    @ResHelper.GetString(Constants.ResourceStrings.Resource.FeaturedLinkText)
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

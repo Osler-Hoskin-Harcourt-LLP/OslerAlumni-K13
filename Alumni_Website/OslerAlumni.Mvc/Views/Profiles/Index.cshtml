@@ -1,0 +1,174 @@
+@model ProfileLandingPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var itemTitleLength = 33;
+    var itemCompanyLength = 130;
+
+}
+
+<div class="c-directory">
+    <div class="c-listing c-directory-listing"
+        data-type="directory"
+        data-culture="@Html.Osler().GetCurrentCultureName()"
+        data-orderby="@nameof(OslerAlumni.Mvc.Api.Models.Profile.LastName)"
+        data-orderbydirection="@OrderByDirection.Ascending"
+        data-ispreviewmode="@Html.Osler().IsPreviewMode()"
+        data-pagenumber="1"
+        data-mainlist="c-directory-listing-main"
+        data-mainpagesize="@Model.MainListPageSize"
+        data-includefilters="true"
+        data-clearcultureparams="true"
+        data-excludednodeguids="@(Model.LoggedInUserPage?.NodeGUID)">
+
+        <div class="row">
+            <div class="columns small-12 medium-12">
+                <div class="o-cell-heading">
+                    <h1>@Model.Title</h1>
+                    @if (!string.IsNullOrWhiteSpace(Model.Description))
+                    {
+                        @Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString()
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="columns small-12 medium-8 large-4 push-right">
+                <h2 class="cloak-h4">@ResHelper.GetString(Constants.ResourceStrings.Profile.SearchProfilesHeader)</h2>
+
+                <div class="c-form-field c-form-field-combo">
+                    <div class="c-form-field-wrapper">
+                        <div class="c-button-clear-wrapper">
+                            <label for="searchDirectory" class="show-for-sr">@ResHelper.GetString(Constants.ResourceStrings.Profile.SearchDirectory)</label>
+                            <input v-model="keywords" @@keyup.enter="keywordSearch" value="keywords" class="text-box single-line" id="searchDirectory" name="searchDirectory" type="text" placeholder="@ResHelper.GetString(Constants.ResourceStrings.Profile.SearchBoxPlaceholder)" aria-describedby="searchDirections">
+                            <button  v-on:click.stop.prevent="clearKeywords" type="submit" class="c-button-clear"><span class="show-for-sr">@ResHelper.GetString(Constants.ResourceStrings.SearchResults.ClearKeywords)</span></button>
+                        </div>
+                        <button v-on:click.stop.prevent="keywordSearch" type="submit" class="c-button-primary c-button-search">@ResHelper.GetString(Constants.ResourceStrings.Profile.SearchButtonText)</button>
+                    </div>
+                </div>
+
+                <span class="is-small" id="searchDirections">@ResHelper.GetString(Constants.ResourceStrings.Profile.SearchDirections)</span>
+
+                <filters :filters="filters" :selectedfilters="selectedFilters" v-on:filter-data="filterPage" :search-request="searchRequest" v-on:clear-filter-data="filterPage" v-if="hasFilters"></filters>
+
+            </div>
+
+            <div class="columns small-12 medium-12 large-8 transition-wrap c-listings-top" tabindex="0" v-cloak>
+                <div aria-live="polite" aria-atomic="true">
+                    <div class="c-list-results" v-if="totalItemCount > 0">
+                        <p class="is-small is-bold">{{totalResultsCountDisplay}}</p>
+                    </div>
+
+                    <!-- show no listings message -->
+                    <div v-if="!hasResults && !IsKeywordOrFilteredSearch && !hasError && loading == false" v-cloak aria-live="polite" aria-atomic="true">
+                        <div class="c-list-error-server" tabindex="0">
+                            <p class="c-list-error-server-title">
+                                @ResHelper.GetString(Constants.ResourceStrings.Profile.NoListingsMessage)</p>
+                        </div>
+                    </div>
+
+                    <!-- show no results found message -->
+                    <div v-if="IsKeywordOrFilteredSearch && !hasResults && !hasError" v-cloak>
+                        @Html.Partial("_ListNoResults")
+                    </div>
+
+                    <!-- show server error -->
+                    <div v-if="hasError" v-cloak>
+                        @Html.Partial("_ListServerError")
+                    </div>
+                </div>
+
+                <div class="c-directory-listing-main" v-cloak>
+                    <transition appear name="fade">
+                        <!-- loader -->
+                        @Html.Partial("_Loader")
+                        <main-list :results="results" v-if="totalItemCount && loading == false"></main-list>
+                    </transition>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- pagination -->
+        <div class="row" v-if="totalItemCount > @Model.MainListPageSize && !loading">
+            <div class="columns small-12 medium-12 large-8 large-offset-4">
+                <nav class="c-pagination" aria-label="pagination">
+                    <uib-pagination class="c-pagination-list"
+                                    v-model="pagination"
+                                    @@change="onPageChange"
+                                    :total-items="totalItemCount"
+                                    :items-per-page="@Model.MainListPageSize"
+                                    :boundary-link-numbers="true"
+                                    :force-ellipses="true"
+                                    :max-size="paginationSize"
+                                    :rotate="true">
+                    </uib-pagination>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- listing template -->
+    <template id="list-template" v-cloak>
+        <div class="c-list c-alumni-list">
+            <div class="c-list-item c-alumni-item" v-for="(result, index) in results" :data-item="index">
+                <h3 class="cloak-cta-small"><a :href="result.pageUrl">{{ result.title | truncate(@itemTitleLength) }}</a></h3>
+
+                <p v-if="result.jobTitle" class="is-description is-bold no-margin-bottom">{{ result.jobTitle }}</p>
+                <p v-if="result.company" class="is-description">{{ result.company | truncate(@itemCompanyLength) }}</p>
+
+                <p v-if="result.city || result.Province || result.country" class="is-small is-bold">
+                    <span v-if="result.city">{{result.city}}, </span>
+                    <span v-if="result.Province">{{result.Province}} | </span>
+                    <span v-if="result.country">{{result.country}}</span>
+                </p>
+            </div>
+        </div>
+    </template>
+
+    <!-- filter group template -->
+    <template id="filters" v-cloak>
+        <div class="c-accordion-wrap">
+            <div class="c-accordion-heading-wrap">
+                <div class="c-accordion-heading">
+                    <h2 class="cloak-h4">@ResHelper.GetString(Constants.ResourceStrings.Resource.FiltersHeader)</h2>
+                    <button class="c-button c-button-primary" v-on:click="handleFilters">@ResHelper.GetString(Constants.ResourceStrings.Resource.ApplyFiltersText)</button>
+                </div>
+                <a href="#" class="is-small" v-on:click.stop.prevent="handleClearAllFilters">@ResHelper.GetString(Constants.ResourceStrings.Resource.ClearFiltersText)</a>
+            </div>
+            <div class="c-accordion-groups">
+                <div class="c-accordion" v-for="(filter, index) in filters">
+                    <button type="button" class="c-accordion-head" data-toggle :aria-expanded="searchRequest.hasOwnProperty(filter.fieldName) ? 'true' : 'false'" v-bind:aria-controls="[filter.fieldName + '-panel']" v-bind:id="[filter.fieldName + '-trigger']" @@click="toggle($event.target)">{{filter.title}}</button>
+                    <div class="c-accordion-panel" v-bind:id="[filter.fieldName + '-panel']" v-bind:aria-labelledby="[filter.fieldName + '-trigger']" :aria-hidden="searchRequest.hasOwnProperty(filter.fieldName) ? 'false' : 'true'">
+                        <div class="c-accordion-body">
+                            <a href="#" class="c-accordion-clear" v-on:click.stop.prevent="handleClearFilterGroup(filter.fieldName)">@ResHelper.GetString(Constants.ResourceStrings.Resource.ClearAllFiltersText)</a>
+                            <fieldset v-if="filter.options" tabindex="-1" role="checkbox" aria-required="false">
+                                <legend><span class="show-for-sr">{{filter.title}}</span></legend>
+                                <div class="c-form-field c-form-field-checkbox" v-for="(filteroption, index) in filter.options">
+                                    <div class="c-form-field-wrapper">
+                                        <input v-model="selectedfilters[filter.fieldName]" :value="filteroption.codeName" :id="filteroption.codeName" type="checkbox" :name="filter.fieldName">
+                                        <label :for="filteroption.codeName" class="is-light is-large">{{filteroption.displayName}}</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div v-else class="c-form-field">
+                                <div class="c-form-field-wrapper">
+                                    <label :for="filter.fieldName" class="show-for-sr">{{filter.title}}</label>
+                                    <input v-model="selectedfilters[filter.fieldName]" class="text-box single-line" :id="filter.fieldName" :name="filter.fieldName" type="text" :placeholder="filter.placeHolderText" v-on:keyup.enter="handleFilters" :aria-describedby="[filter.fieldName + '-explaination']"  pattern="[a-zA-Z0-9- ]+">
+                                    <p class="show-for-sr" :id="[filter.fieldName + '-explaination']">{{filter.placeHolderText}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <button class="c-button c-button-primary" v-on:click="handleFilters">@ResHelper.GetString(Constants.ResourceStrings.Resource.ApplyFiltersText)</button>
+            </div>
+        </div>
+    </template>
+
+</div>

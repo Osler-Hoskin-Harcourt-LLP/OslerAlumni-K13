@@ -1,0 +1,106 @@
+// colour palette
+$color-blue: #355E7C;
+$color-blue-light: #E3EDF0;
+$color-blue-medium: #C8DBE1;
+$color-blue-twitter: #1DA1F2;
+
+$color-red: #CD153E;
+$color-red-dark: #8B0000;
+
+$color-green-success: #008000;
+
+$color-grey: #414141;
+$color-grey-medium: #E1E1E1;
+$color-grey-light: #F0F0F0;
+
+$color-white: #ffffff;
+$color-white-opaque: rgba(255,255,255,0.2);
+
+$color-black: #000000;
+
+
+
+// fonts
+@font-face {
+    font-family: "CelesteSans-Regular";
+    src: url('fonts/celeste-sans/CelesteSansWeb.eot');
+    src: url('fonts/celeste-sans/CelesteSansWeb.eot?#iefix') format('embedded-opentype'),
+         url('fonts/celeste-sans/CelesteSansWeb.woff') format('woff'),
+         url('fonts/celeste-sans/CelesteSansComp.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+@font-face {
+    font-family: "CelesteSans-Bold";
+    src: url('fonts/celeste-sans/bold/celestesanscomp-bold-webfont.eot');
+    src: url('fonts/celeste-sans/bold/celestesanscomp-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/celeste-sans/bold/celestesanscomp-bold-webfont.woff2') format('woff2'),
+         url('fonts/celeste-sans/bold/celestesanscomp-bold-webfont.woff') format('woff'),
+         url('fonts/celeste-sans/bold/celestesanscomp-bold-webfont.ttf') format('truetype'),
+         url('fonts/celeste-sans/bold/celestesanscomp-bold-webfont.svg#celestesanscomp-boldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "CelesteSans-Italic";
+    src: url('fonts/celeste-sans/italic/CelesteSansRegularItalic.eot');
+    src: url('fonts/celeste-sans/italic/CelesteSansRegularItalic.eot?#iefix') format('embedded-opentype'),
+         url('fonts/celeste-sans/italic/CelesteSansRegularItalic.woff') format('woff'),
+         url('fonts/celeste-sans/italic/CelesteSansItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+$font-primary: "CelesteSans-Regular", Helvetica, Arial, sans-serif;
+$font-primary-small: "CelesteSans-Regular", Helvetica, Arial, sans-serif;
+$font-headings: "CelesteSans-Bold", Helvetica, Arial, sans-serif;
+$font-bold: "CelesteSans-Bold", Helvetica, Arial, sans-serif;
+$font-sans: Helvetica, Arial, sans-serif;
+$font-italic: "CelesteSans-Italic", Helvetica, Arial, sans-serif;
+
+// font weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+
+// spacings
+$xxl-space: 100px;
+$xl-space: 80px;
+$l-space: 60px;
+$m-space: 40px;
+$s-space: 20px;
+$xs-space: 15px;
+$xxs-space: 10px;
+$xxxs-space: 5px;
+
+// z-indexes
+$z-negative: -1;
+$z-low: 1;
+$z-mid: 10;
+$z-high: 20;
+
+// paddings
+$padding-x:         18px;
+$padding-y:         35px;
+$padding-x-large:   20px;
+$padding-y-large:   25px;
+
+// borders & border radius'
+$border: 1px solid $color-grey;
+$border-medium: 2px solid $color-grey;
+$border-thick: 2px solid $color-grey;
+$border-thick-dark: 3px solid $color-grey;
+$border-focus: 0.0625rem solid $color-blue;
+$border-focus-thick-dark: 3px solid $color-blue;
+$border-focus-dotted: 3px dotted $color-blue !important;
+$border-radius-small: 3px;
+$border-radius-medium: 50px;
+$border-radius-large: 50px;
+
+// new borders
+$border-red: solid 2px $color-red;
+
+// animation timings
+$transition-timing: 150ms ease;
+// $animation4s: .4s;

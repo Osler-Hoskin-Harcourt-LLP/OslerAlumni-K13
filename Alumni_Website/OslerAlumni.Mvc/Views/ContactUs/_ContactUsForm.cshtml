@@ -1,0 +1,73 @@
+@using Kentico.PageBuilder.Web.Mvc
+@model ContactUsPostModel
+
+@using (Html.BeginForm(
+    "Index",
+    "ContactUs",
+    FormMethod.Post,
+    new
+    {
+        enctype = "multipart/form-data",
+        @class = "c-form",
+        id = "contact-us"
+    }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Kentico().PageData()
+
+    @Html.FormErrorSummary()
+
+
+    if (Model.IsAuthenticated)
+    {
+        @Html.StyledRadioButtonListFor(model => model.ReasonForContactingUsEnum)
+    }
+
+    if (Model.IsAuthenticated)
+    {
+        @Html.StyledEnumDropDownListFor(model => model.OpportunityType, Model.OpportunityTypesEnum)
+    }
+
+    @Html.StyledEditorFor(
+                model => model.FirstName, null, null, new { @class = "is-small is-first" })
+
+    @Html.StyledEditorFor(
+                model => model.LastName, null, null, new { @class = "is-small" })
+
+    @Html.StyledEditorFor(model => model.CompanyName)
+
+    @Html.StyledEditorFor(model => model.PhoneNumber)
+
+    @Html.StyledEditorFor(model => model.Email)
+
+    @Html.StyledEditorFor(model => model.Subject)
+
+    @Html.StyledEditorFor(model => model.Message, null, Html.TextAreaFor(model => model.Message))
+
+    @(Html.StyledFileUploaderFor(
+                          model => model.FileUpload,
+                          Html.LabelFor(
+                              m => m.FileUpload,
+                              new
+                              {
+                                  data_text = ResHelper.GetString(Constants.ResourceStrings.Form.GlobalFileUploadButtonText),
+                                  name = ResHelper.GetString(Constants.ResourceStrings.Form.GlobalFileUploadButtonText)
+                              }),
+                          new
+                          {
+                              data_toggled_by = "FileUpload",
+                              aria_hidden = "true",
+                              @class = "is-medium"
+                          },
+                          jsValidationError: ResHelper.GetString(Constants.ResourceStrings.Form.ContactUs.FileUploadError)))
+
+    @Html.GoogleCaptchaFor(model => model.GoogleCaptchaUserResponse)
+
+    @(Html.Osler()
+                          .FormSubmitButton()
+                          .WithText(Constants.ResourceStrings.Submit)
+                          .ToHtmlString())
+
+    @Html.Partial("_FormServerError")
+}

@@ -1,0 +1,101 @@
+@using OslerAlumni.Mvc.Core.Extensions
+@model LogInFormModel
+
+@{
+    /*Note: this is needed so that html fields aren't
+     prefixed if we have nested view models. However,
+     it also means that this form may appear only once on the page.*/
+    ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
+}
+
+@functions
+{
+
+    bool FieldHasError(Dictionary<string, string[]> errors, string inputFieldName)
+    {
+        return (errors.ContainsKey(inputFieldName) && errors[inputFieldName].Length > 0);
+    }
+
+    string GetErrorId(string inputFieldName)
+    {
+        return "error-" + inputFieldName;
+    }
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    var errors = ViewData.ModelState.GetErrorDictionary();
+
+    if (errors.Any(pair => (pair.Value?.Length ?? 0) > 0))
+    {
+        <div class="c-form-error-summary" tabindex="0">
+            <p class="c-form-error-summary-title has-svg">
+                <img class="c-svg" src="/build/images/icons/ico-error.svg" alt="">@ResHelper.GetString(Constants.ResourceStrings.Form.GlobalErrorTitle)
+            </p>
+            <p class="c-form-error-summary-content">@ResHelper.GetString(Constants.ResourceStrings.Form.GlobalError)</p>
+            <ul>
+                @foreach (var error in errors)
+                {
+                    foreach (var valueError in error.Value)
+                    {
+                        if (!string.IsNullOrWhiteSpace(valueError))
+                        {
+                            <li>
+                                <a href="#@error.Key" data-hash>@valueError</a>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    }
+
+    if (FieldHasError(errors, nameof(Model.UserName)))
+    {
+        <div class="c-form-field c-form-field-text c-form-error">
+            <div class="c-form-field-wrapper">
+                @Html.LabelFor(model => model.UserName)
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { aria_describedby = GetErrorId(nameof(Model.UserName)) } })
+            </div>
+            @Html.ValidationMessageFor(model => model.UserName, null, new { id = GetErrorId(nameof(Model.UserName)), @class = "c-form-error-message" })
+        </div>
+    }
+    else
+    {
+        <div class="c-form-field c-form-field-text">
+            <div class="c-form-field-wrapper">
+                @Html.LabelFor(model => model.UserName)
+                @Html.EditorFor(model => model.UserName)
+            </div>
+        </div>
+    }
+
+    if (FieldHasError(errors, nameof(Model.Password)))
+    {
+        <div class="c-form-field c-form-field-text c-form-error">
+            <div class="c-form-field-wrapper">
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { aria_describedby = GetErrorId(nameof(Model.Password)) } })
+            </div>
+            @Html.ValidationMessageFor(model => model.Password, null, new { id = GetErrorId(nameof(Model.Password)), @class = "c-form-error-message" })
+        </div>
+    }
+    else
+    {
+        <div class="c-form-field c-form-field-text">
+            <div class="c-form-field-wrapper">
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password)
+            </div>
+        </div>
+    }
+
+    <div class="c-form-actions">
+        <a href="@Html.Osler().GetPageUrl(StandalonePageType.RequestPasswordReset)" class="is-small">@ResHelper.GetString(Constants.ResourceStrings.Form.Login.ForgotPassword)</a>
+    </div>
+
+    <button class="c-button c-button-primary is-full-width" type="submit">@ResHelper.GetString(Constants.ResourceStrings.Navigation.Login)</button>
+}

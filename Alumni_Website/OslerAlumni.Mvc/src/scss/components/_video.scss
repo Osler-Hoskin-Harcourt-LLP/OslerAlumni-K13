@@ -1,0 +1,89 @@
+.c-video {
+    display: flex;
+    flex-direction: column;
+
+    &-wrapper {
+        overflow:hidden;
+        // this padding-bottom is based on an expected aspect ratio of 16:9
+        padding-bottom:56.25%;
+        position:relative;
+        height:0;
+        iframe {
+            left:0;
+            top:0;
+            height:100%;
+            width:100%;
+            position:absolute;
+        }
+    }
+
+    &-toggle {
+        border: 0;
+        padding: $s-space 23px $s-space 0;
+        font-family: $font-bold;
+        color: $color-red;
+        text-transform: uppercase;
+        background: url('../images/icons/ico-chevron-down.svg') center right no-repeat;
+        background-size: 12px auto;
+
+        .show-text{
+            display: block;
+        }
+
+        .hide-text{
+            display: none;
+        }
+
+        &.open {
+            background: url('../images/icons/ico-chevron-up.svg') center right no-repeat;
+            .show-text{
+                display: none;
+            }
+
+            .hide-text{
+                display: block;
+            }
+        }
+
+    }
+    &-transcript-wrapper {
+        border-bottom: 4px solid $color-red;
+        background-color: $color-grey-light;
+        padding: 0 $s-space;
+    }
+    
+    &-transcript {
+        height: 0;
+        opacity: 0;
+        overflow-y: auto;
+        transition: all 0.25s ease;
+        scrollbar-color:  $color-red $color-white;
+        scrollbar-face-color: $color-red;
+
+        .s-richtext {
+            padding: 0;
+        }
+
+        &.show{
+            opacity: 1;
+            height: 33.7rem;
+            padding-right: $s-space;
+            margin-bottom: $s-space;
+        }
+
+        &::-webkit-scrollbar {
+		    width: 10px;
+        }
+        
+		&::-webkit-scrollbar-thumb {
+          border-radius: 50px;
+		  background-color: $color-red;
+		  outline: 1px solid $color-red;
+        }
+        
+		&::-webkit-scrollbar-track,
+		&::-webkit-scrollbar-track-piece {
+		  background-color: $color-white;
+		} 
+    }
+}

@@ -1,0 +1,137 @@
+@model NewsLandingPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var featuredItemTitleLength = 130;
+    var itemTitleLength = 85;
+    var itemShortDescriptionLength = 130;
+}
+
+<div class="c-news">
+
+    <div class="c-listing c-news-listing"
+         data-type="news"
+         data-defaultimage="@Html.Osler().ResolveUrl(Model.DefaultImageUrl)"
+         data-culture="@Html.Osler().GetCurrentCultureName()"
+         data-orderby="@nameof(News.DatePublished)"
+         data-orderbydirection="@OrderByDirection.Descending"
+         data-ispreviewmode="@Html.Osler().IsPreviewMode()"
+         data-pagenumber="1"
+         data-mainlist=".c-news-listing-main"
+         data-recentlist=".c-news-listing-recent"
+         data-mainpagesize="@Model.MainListPageSize"
+         data-recentpagesize="@Model.TopListPageSize"
+         data-includefilters="false"
+         data-excludednodeguids="@(Model.FeaturedItem?.NodeGuid)">
+
+        <div class="row">
+            <div class="columns small-12 medium-8">
+                <div class="o-cell-heading">
+                    <h1>@Model.Title</h1>
+                    @if (!string.IsNullOrWhiteSpace(Model.Description))
+                    {
+                        @Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString()
+                    }
+                </div>
+            </div>
+        </div>
+
+        @if (Model.FeaturedItem != null)
+        {
+            @Html.Partial("_NewsFeaturedItem", Model.FeaturedItem)
+        }
+
+        <!-- most recent -->
+        <div class="c-news-listing-recent" v-if="searchRequest.pageNumber == 1 && !hasError">
+            <div class="row">
+                <div class="columns small-12 medium-8 medium-offset-2 large-12 large-offset-0">
+                    <h2 class="c-divider-heading">@ResHelper.GetString(Constants.ResourceStrings.News.MostRecentHeader)</h2>
+                    <recent-list :recent="recent"></recent-list>
+                    <!-- <component :is="" :currentProperties></component> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- main listing -->
+        <div class="c-news-listing-main c-listings-top" v-cloak v-if="!hasError" tabindex="0">
+            <div class="row">
+                <div class="columns medium-8 medium-offset-2 transition-wrap">
+                    <transition appear name="fade">
+
+                        <!-- loader -->
+                        @Html.Partial("_Loader")
+
+                        <main-list :results="results" v-else-if="totalItemCount && loading == false"></main-list>
+                    </transition>
+                </div>
+            </div>
+        </div>
+
+        <!-- show no listings message -->
+        <div class="row column" v-if="!hasResults && !hasError  && loading == false" v-cloak aria-live="polite" aria-atomic="true">
+            <div class="c-list-error-server" tabindex="0">
+                <p class="c-list-error-server-title">
+                    @ResHelper.GetString(Constants.ResourceStrings.News.NoListingsMessage)</p>
+            </div>
+        </div>
+
+        <!-- show server error -->
+        <div class="row column" v-if="hasError == true" v-cloak>
+            <div class="columns medium-12">
+                @Html.Partial("_ListServerError")
+            </div>
+        </div>
+
+
+        <!-- pagination -->
+        <div class="row" v-if="totalItemCount > @Model.MainListPageSize && !loading">
+            <div class="columns small-12 medium-8 medium-offset-2">
+                <nav class="c-pagination" aria-label="pagination">
+                    <uib-pagination class="c-pagination-list"
+                                    v-model="pagination"
+                                    @@change="onPageChange"
+                                    :total-items="totalItemCount - @Model.TopListPageSize"
+                                    :items-per-page="@Model.MainListPageSize"
+                                    :boundary-link-numbers="true"
+                                    :force-ellipses="true"
+                                    :max-size="paginationSize"
+                                    :rotate="true">
+                    </uib-pagination>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- most recent template -->
+    <template id="recent-template" v-cloak>
+        <div class="c-list c-recent-list">
+            <div class="c-recent-item" v-for="(result, index) in recent">
+                <div class="c-recent-img">
+                    <img :src="result.imageUrl" :alt="result.imageAltText">
+                </div>
+                <div class="c-recent-content">
+                    <h3 class="c-recent-title cloak-h4">
+                        <a :href="result.pageUrl">{{result.title | truncate(@featuredItemTitleLength) }}</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- listing template -->
+    <template id="list-template" v-cloak>
+        <div class="c-list c-news-list">
+            <div class="c-list-item c-news-item" v-for="(result, index) in results" :data-item="index">
+                <div class="c-news-item-image">
+                    <img class="b-lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" :data-src="result.imageUrl" :alt="result.imageAltText" v-if="result.imageUrl">
+                </div>
+                <div class="c-news-item-content">
+                    <h3 class="cloak-h4"><a :href="result.pageUrl">{{result.title | truncate(@itemTitleLength) }}</a></h3>
+                    <p v-if="result.shortDescription" class="is-description">{{ result.shortDescription | truncate(@itemShortDescriptionLength) }}</p>
+                </div>
+            </div>
+        </div>
+    </template>
+</div>

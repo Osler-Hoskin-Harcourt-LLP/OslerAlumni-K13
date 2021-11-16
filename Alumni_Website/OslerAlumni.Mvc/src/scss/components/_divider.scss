@@ -1,0 +1,35 @@
+.c-divider {
+    &-heading {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        &:before,
+        &:after {
+            content: '';
+            border-top: 2px solid $color-red;
+            margin: 0 4% 0 0;
+            flex: 1 0 4%;
+        }
+
+        &:after {
+            margin: 0 0 0 4%;
+        }
+
+    }
+    &-inline {
+        &-right {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            &:after {
+                content: '';
+                border-top: 1px solid $color-grey;
+                margin: 0 4% 0 $xxs-space;
+                flex: 1 0 4%;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+@model HeaderViewModel
+
+<div class="c-nav-utilities">
+    <!--hide on desktop-->
+    <div class="c-nav-logo">
+        <a href="@Html.Osler().GetPageUrl(StandalonePageType.Home)" class="c-header-logo">
+            <span class="show-for-sr">@ResHelper.GetString(Constants.ResourceStrings.LogoLinkText)</span>
+            @if (!string.IsNullOrWhiteSpace(Model.MobileLogoImageUrl))
+            {
+                @(Html.Osler()
+                      .Image(Model.MobileLogoImageUrl)
+                      .ToHtmlString())
+            }
+        </a>
+    </div>
+    <button type="button" class="c-nav-toggle" aria-controls="main-nav" aria-expanded="false">
+        <p class="show-for-sr">@ResHelper.GetString(Constants.ResourceStrings.Navigation.OpenNavigation)</p>
+        <p class="show-for-sr" aria-hidden="true">@ResHelper.GetString(Constants.ResourceStrings.Navigation.CloseNavigation)</p>
+        <span class="c-nav-toggle-menu"></span>
+        <span class="c-nav-toggle-menu"></span>
+        <span class="c-nav-toggle-menu"></span>
+    </button>
+</div>

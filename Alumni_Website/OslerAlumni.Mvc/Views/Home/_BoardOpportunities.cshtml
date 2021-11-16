@@ -1,0 +1,25 @@
+@model FeaturedBoardOpportunitiesViewModel
+
+<div class="c-tile has-xs-padding-right">
+    <h2 class="is-red">@Model.BoardsHeader</h2>
+
+
+
+    @if (Model.BoardOpportunityItems?.Any()??false)
+    {
+        <ul class="unstyled">
+            @Html.DisplayFor(vm => Model.BoardOpportunityItems)
+        </ul>
+        <div class="has-s-margin-top">
+            <a href="@Model.BoardsLink" class="c-link c-link-primary">@Model.BoardLinkText</a>
+        </div>
+    }
+    else
+    {
+        @(Html
+            .OslerForModel()
+            .RichTextFieldFor(Model.BoardsNoRecordsDisplay)
+            .ToHtmlString())
+    }
+
+</div>

@@ -1,0 +1,6 @@
+em {
+    font-family: $font-italic;
+    strong & {
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,6 @@
+@model LanguageToggleViewModel
+
+@if ((Model?.ShowToggle ?? false) && !string.IsNullOrWhiteSpace(Model.LinkUrl))
+{
+    <a class="c-nav-link c-nav-link-culture" href="@Html.Raw(Model.LinkUrl)" lang="@ResHelper.GetString(Constants.ResourceStrings.Lang)">@ResHelper.GetString(Constants.ResourceStrings.LanguageToggleText)</a>
+}

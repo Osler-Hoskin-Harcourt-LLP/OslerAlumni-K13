@@ -1,0 +1,10 @@
+@model HeaderViewModel
+
+@if (!Model.IsAuthenticatedUser)
+{
+    <a href="@Html.Osler().GetPageUrl(StandalonePageType.Login)" class="c-button c-button-login">@ResHelper.GetString(Constants.ResourceStrings.Navigation.Login)</a>
+}
+else
+{
+    <a href="@Url.Action("Logout", "Account")" class="c-button c-button-logout">@ResHelper.GetString(Constants.ResourceStrings.Navigation.Logout)</a>
+}

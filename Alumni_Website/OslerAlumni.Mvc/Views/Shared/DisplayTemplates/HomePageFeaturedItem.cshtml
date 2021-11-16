@@ -1,0 +1,13 @@
+@model OslerAlumni.Mvc.Core.Models.HomePageFeaturedItem
+
+@{
+    var FeaturedItemTitleLength = 80;
+}
+<li>
+    <a href="@Model.Url" class="is-large is-bold @(Model.IsExternal? "is-external" : "" ) @(Model.IsFile ? "is-file" : "")" @(Model.IsExternal ? "target=\"_blank\"" : "")>@Html.TruncateAfterWord(Model.Title, FeaturedItemTitleLength)</a>
+     @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+        <p class="is-small">@Html.Raw(@Model.Description)</p>
+            
+    }
+</li>

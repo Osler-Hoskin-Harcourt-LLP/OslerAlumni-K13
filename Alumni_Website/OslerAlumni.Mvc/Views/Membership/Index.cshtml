@@ -1,0 +1,90 @@
+@model MembershipInfoPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = GetPageTitle();
+}
+
+@section Head
+{
+    <link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
+}
+
+@functions
+{
+    string GetPageTitle()
+    {
+        return $"{DataHelper.GetNotEmpty(Model.DocumentPageTitle, Model.Title)}-{GetSelectedTabTitle()}";
+    }
+
+    string GetSelectedTabTitle()
+    {
+        return Model.SubPageNavigation.FirstOrDefault(c => c.IsSelected)?.Title ?? String.Empty;
+    }
+
+    string GetSubPageHref(string subpageAlias)
+    {
+        return $"{Request.Url.GetLeftPart(UriPartial.Path)}?{Constants.RouteParams.SubpageAlias}={subpageAlias}";
+    }
+
+    string GetNodeAliasPath(string controller, string action)
+    {
+        return Model.SubPageNavigation.FirstOrDefault(c => c.Controller == controller && c.Action == action)?.NodeAlias ?? String.Empty;
+    }
+}
+
+<div class="c-membership">
+    <div class="row">
+        <div class="columns small-12 medium-8">
+            <div class="o-cell-heading">
+                <h1>@Model.Title</h1>
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    @Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString()
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="columns small-12 medium-4 large-3 c-local-nav-wrapper">
+            <ul class="c-local-nav-list">
+                @foreach (var navItem in Model.SubPageNavigation)
+                {
+                    <li class="c-local-nav-item @(navItem.IsSelected ? "is-selected":"")"><a href="@GetSubPageHref(navItem.NodeAlias)" class="c-local-nav-link">@navItem.Title</a></li>
+                }
+
+
+            </ul>
+            @if (!string.IsNullOrWhiteSpace(Model.ProfileUrl))
+            {
+                <a href="@Model.ProfileUrl" class="c-link c-link-secondary">@ResHelper.GetString(Constants.ResourceStrings.Profile.ViewProfile)</a>
+            }
+        </div>
+        <div class="columns small-12 medium-8 has-margin-bottom @(Model.IsFullWidth?"large-9":"large-4") " data-scrollto>
+            @{
+                Html.RenderAction(Model.Action, Model.Controller, new { subpageAlias = GetNodeAliasPath(Model.Controller, Model.Action) });
+            }
+        </div>
+
+
+        @if (Model.ShowCta)
+        {
+            <div class="columns small-12 medium-8 large-4 large-offset-1">
+                <div class="c-cta c-cta-profile is-single has-no-border has-bg-grey">
+                    <h3>@Html.Raw(ResHelper.GetString(Constants.ResourceStrings.ProfileAndPreferences.CTATitle))</h3>
+                    <hr />
+                    <p>
+                        @Html.Raw(ResHelper.GetString(Constants.ResourceStrings.ProfileAndPreferences.CTA))
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="https://unpkg.com/jcrop"></script>
+}

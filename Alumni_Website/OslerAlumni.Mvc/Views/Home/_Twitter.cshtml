@@ -1,0 +1,14 @@
+@model TwitterViewModel
+
+<div class="twitter-logo-wrap">
+    <img class="c-svg" src="/build/images/Twitter-logo.svg" alt=""/>
+    <h2 class="twitter-headline">@ResHelper.GetString(Constants.ResourceStrings.Home.TwitterHeader)</h2>
+</div>
+<div class="twitter-wrapper">
+    <a class="twitter-timeline" data-height="500" data-dnt="true" href="@($"https://twitter.com/{Model.TwitterHandle}")" data-tweet-limit="@Model.TwitterNumberOfItemsToDisplay" data-media="hidden" data-chrome="noheader nofooter transparent" >Tweets by @Model.TwitterHandle</a> 
+</div>
+<div class="has-padding-top">
+    <a href="@($"https://twitter.com/{Model.TwitterHandle}?ref_src=twsrc%5Etfw")" class="twitter-follow-button" data-size="large" data-show-count="false">Follow @@(@Model.TwitterHandle)</a>
+</div>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 

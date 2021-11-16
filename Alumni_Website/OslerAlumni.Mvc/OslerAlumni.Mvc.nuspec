@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>OslerAlumniWebsite</id>
+    <version>1.0.0</version>
+    <description>Osler Alumni - Website</description>
+    <title>Osler Alumni - Website</title>
+    <authors>ecentricarts Inc.</authors>
+    <owners>ecentricarts Inc.</owners>
+  </metadata>
+  <files>
+    <file src=".htaccess" target="" />
+    <file src=".htpasswd" target="" />
+    <file src="bin\*.dll" target="bin" />
+    <file src="bin\OslerAlumni*.xml" target="bin" />
+    <file src="build\**\*.*" target="build" />
+    <file src="AppSettings*.config" target="" />
+    <file src="Web*.config" target="" />
+  </files>
+</package>

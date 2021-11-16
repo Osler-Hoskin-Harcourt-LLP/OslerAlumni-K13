@@ -1,0 +1,19 @@
+@model PageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="c-page">
+    <div class="row">
+        <div class="columns small-12 medium-12 large-8">
+            <div class="o-cell-heading">
+                <h1>@Model.Title</h1>
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    @(Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString())
+                }
+            </div>
+        </div>
+    </div>
+</div>

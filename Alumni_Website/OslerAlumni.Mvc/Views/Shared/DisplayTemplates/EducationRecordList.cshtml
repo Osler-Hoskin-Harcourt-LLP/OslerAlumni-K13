@@ -1,0 +1,7 @@
+@model List<OslerAlumni.Core.Models.EducationRecord>
+<ul>
+    @foreach (var educationRecord in Model)
+    {
+        <li>@educationRecord.University, @educationRecord.Degree</li>
+    }
+</ul>

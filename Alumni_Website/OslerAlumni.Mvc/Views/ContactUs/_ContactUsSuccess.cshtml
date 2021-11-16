@@ -1,0 +1,20 @@
+@model ContactUsPageViewModel
+
+<div aria-live="polite">
+    <div class="c-form-success is-full hide">
+        <div class="row align-center">
+            <div class="columns medium-7">
+                <div class="o-container o-container-centered">
+                    <h1 class="cloak-h3">
+                        @Model.SuccessHeader
+                    </h1>
+                    @if (!string.IsNullOrWhiteSpace(Model.SuccessDescription))
+                    {
+                        @Html.OslerForModel().RichTextFieldFor(Model.SuccessDescription).ToHtmlString()
+                    }
+                    <a href="@ResHelper.GetString(Constants.ResourceStrings.Form.ContactUs.ConfirmationCTALink)" class="c-button c-button-primary">@ResHelper.GetString(Constants.ResourceStrings.Form.ContactUs.ConfirmationCTAMessage)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

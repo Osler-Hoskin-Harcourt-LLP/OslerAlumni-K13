@@ -1,0 +1,103 @@
+@model HomePageViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ShowBreadCrumbs = false;
+}
+
+<div class="c-home">
+
+    @if (Model.IsAuthenticated)
+    {
+        <div class="row">
+            @Html.Partial("_HomeBannerLoggedIn", Model.HomeBannerLoggedInViewModel)
+        </div>
+    }
+     else 
+    {
+        <div class="row">
+            @Html.Partial("_HomeBannerLoggedOut", Model.HomeBannerLoggedOutViewModel)
+        </div>
+    }
+
+    @if (Model.IsAuthenticated)
+    {
+        <div class="row align-stretch">
+            <div class="columns small-12 medium-6 o-container no-padding-medium-up">
+                <div class="c-tile c-tile-left c-tile-spotlight release-left o-container-item">
+                    <div class="c-tile-spotlight-image">
+                        @(Html.Osler().Image(Model.SpotlightImage)
+                            .WithAltText(Model.SpotlightImageAltText)
+                                .ToHtmlString())
+                    </div>
+                    <div class="c-tile-spotlight-content">
+                        <div class="content-wrap">
+                            <h2 class="is-red">@Model.SpotlightHeader</h2>
+                            @(Html.OslerForModel()
+                                .RichTextFieldFor(Model.SpotlightDescription)
+                                .ToHtmlString())
+                            
+                            <a href="@Model.SpotlightLink" class="c-link c-link-primary">@Model.SpotlightLinkText</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-tile c-tile-moves c-tile-left has-bg-blue release-left o-container-item">
+                    <h2 class="is-red">@Model.AlumniMovesHeader</h2>
+
+                    @(Html
+                        .OslerForModel()
+                        .RichTextFieldFor( @Model.AlumniMovesDescription)
+                        .ToHtmlString())
+                                
+                        <a href="@Model.AlumniMovesLink" class="c-link c-link-secondary">@Model.AlumniMovesLinkText</a>
+                </div>
+            </div>
+            <div class="columns small-12 medium-6 has-bg-blue-medium has-border-top-white">
+                @Html.Partial("_CommunityNews", Model.FeaturedCommunityNewsSectionViewModel)
+            </div>
+        </div>
+        <div class="row has-mobile-padding has-xxl-padding">
+            <div class="columns small-12 medium-6 large-4">
+                @Html.Partial("_JobOpportunities", Model.FeaturedJobOpportunitiesViewModel)
+            </div>
+            <div class="columns small-12 medium-6 large-4">
+                @Html.Partial("_BoardOpportunities", Model.FeaturedBoardOpportunitiesViewModel)
+            </div>
+            <div class="columns small-12 medium-6 large-4">
+                    @Html.Partial("_Events", Model.FeaturedEventsViewModel)
+            </div>
+            <div class="columns small-12 medium-6 large-12"> 
+                @Html.Partial("_Resources", Model.FeaturedResourcesViewModel)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="columns small-12 medium-6 no-padding">
+                <div class="release-left has-bg-blue-medium is-full-height">
+                    <div class="c-tile c-tile-left c-tile-media">
+                        <h2>@Model.AlumniInTheMediaHeader</h2>
+                        @(Html
+                            .OslerForModel()
+                            .RichTextFieldFor(@Model.AlumniInTheMediaDescription)
+                            .ToHtmlString())
+
+                    </div>
+                </div>
+            </div>
+            <div class="columns small-12 medium-6 no-padding-medium-up">
+            <div class="c-tile c-tile-right c-tile-twitter has-bg-blue release-right">
+                @Html.Partial("_Twitter", Model.TwitterViewModel)
+            </div>
+            </div>
+        </div>
+
+    } 
+    <div class="row has-xxl-padding">
+        <div class="columns small-12">
+            @Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString()
+        </div>
+    </div>
+        
+</div>
+
+
+

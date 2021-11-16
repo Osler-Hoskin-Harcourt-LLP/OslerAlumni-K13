@@ -1,0 +1,11 @@
+@model dynamic
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.GoogleReCaptchaApiPublicKey))
+{
+    <div class="c-form-field">
+        <div class="g-recaptcha" tabindex="-1" id="GoogleCaptchaUserResponse" 
+             data-sitekey="@ViewBag.GoogleReCaptchaApiPublicKey" 
+             data-callback="onReCaptchaSuccess"></div>
+        <span class="c-form-error-message" id="error-GoogleCaptchaUserResponse"></span>
+    </div>
+}

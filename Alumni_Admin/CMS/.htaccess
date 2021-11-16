@@ -1,0 +1,12 @@
+# Helicon Ape version 3.0.0.63
+
+Satisfy any
+Order Deny,Allow
+Deny from all
+Allow from localhost 127.0.0.1 ::1 192.168.0.0/16 172.16.0.0/16
+
+AuthUserFile ".htpasswd"
+AuthType Basic
+AuthName "SITE SECURITY"
+Require valid-user
+

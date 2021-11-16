@@ -1,0 +1,59 @@
+@using Kentico.PageBuilder.Web.Mvc
+@model LogInPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="c-account">
+    <div class="row align-center">
+        <div class="columns medium-6 small-12">
+            <div class="o-container o-container-centered">
+                <h1 class="cloak-h3">@Model.Title</h1>
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    @Html.OslerForModel().RichTextFieldFor(Model.Description, false).ToHtmlString()
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row align-center">
+        <div class="columns medium-4 small-12">
+            @if (Model.ShowLoginViaOslerNetwork)
+            {
+                <div class="c-form-wrapper is-full">
+
+                    @using (Html.BeginForm(
+                        "LogInAsOslerNetwork",
+                        "Account",
+                        FormMethod.Post,
+                        new
+                        {
+                            id = "log-in-as-osler-network"
+                        }))
+                    {
+
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.ReturnUrl)
+
+                        @(Html.Osler()
+                              .FormSubmitButton()
+                              .WithText(Constants.ResourceStrings.Navigation.NetworkLogin)
+                              .AddClass("is-full-width")
+                              .ToHtmlString())
+
+                    }
+                    <div class="is-full has-l-margin-top has-l-margin-bottom">
+                        <p class="c-divider-heading has-m-margin-bottom">@ResHelper.GetString(Constants.ResourceStrings.Navigation.AltLoginText)</p>
+                    </div>
+                </div>
+            }
+            <div class="c-form-wrapper is-full">
+                @Html.EditorFor(model => model.FormPostModel)
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,96 @@
+.c-pagination {
+    padding-top: $s-space;
+    border-top: 2px solid $color-red; // SE todo
+    margin: 30px 0 40px 0; // SE TODO
+    &-list {
+        @include flex-center;
+        @include list-unstyled;
+    }
+    &-item,
+    li {
+        padding: 0 $xxxs-space;
+        margin: 0;
+    }
+    &-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: $font-bold;
+        text-decoration: none;
+        height: rem-calc(28px);
+        width: rem-calc(30px);
+        text-align: center;
+        padding: 2px 1px 0 0; // weird circle issues
+        .active & {
+            color: $color-white;
+            background-color: $color-red;
+            border-radius: 50%;
+            height: rem-calc(35px);
+            width: rem-calc(35px);
+            @include breakpoint(large) {
+                height: rem-calc($m-space);
+                width: rem-calc($m-space);
+            }
+            &:hover {
+                background-color: $color-grey;
+                color: $color-white;
+            }
+        }
+    }
+    &-next,
+    &-previous {
+        position: relative;
+        text-indent: -9999px;
+        display: inline-block;
+        width: .55rem;
+        margin: 0;
+        &:after {
+            margin: 0;
+            position: absolute;
+            display: inline-block;
+            height: 100%;
+            width: .55rem;
+            top: 0;
+            bottom: 0;
+            text-indent: 0;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+    }
+    &-previous {
+        &:after {
+            right: 0;
+            @include red-arrow;
+            transform: rotate(180deg);
+        }
+        .disabled & {
+            &:after {
+                @include gray-light-arrow;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    &-next {
+        &:after {
+            left: 0;
+            @include red-arrow;
+        }
+        .disabled & {
+            &:after {
+                @include gray-light-arrow;
+                cursor: not-allowed;
+            }
+        }
+    }
+    & >.disabled>a,
+    & >.disabled>a:focus,
+    & >.disabled>a:hover,
+    & >.disabled>span,
+    & >.disabled>span:focus,
+    & >.disabled>span:hover {
+
+
+
+    }
+}

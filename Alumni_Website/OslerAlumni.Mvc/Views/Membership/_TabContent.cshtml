@@ -1,0 +1,27 @@
+@model MembershipInfoPageTabContentViewModel
+
+<h2>@Model.Title</h2>
+
+@if (!string.IsNullOrWhiteSpace(Model.Description))
+{
+    @Html.OslerForModel().RichTextFieldFor(Model.Description).AddClass("has-title has-medium-text").ToHtmlString()
+}
+
+@Html.EditorFor(model => Model.FormPostModel)
+
+@if (Model.HasSuccessState)
+{
+    <div aria-live="polite">
+        <div class="c-form-success hide c-form-success-fade-out" tabindex="0">
+            <p class="c-form-success-title has-svg">
+                <img class="c-svg" src="/build/images/icons/ico-success.svg" alt="">
+                @Model.SuccessHeader
+            </p>
+
+            @if (!string.IsNullOrWhiteSpace(Model.SuccessDescription))
+            {
+                @Html.OslerForModel().RichTextFieldFor(Model.SuccessDescription).ToHtmlString()
+            }
+        </div>
+    </div>
+}

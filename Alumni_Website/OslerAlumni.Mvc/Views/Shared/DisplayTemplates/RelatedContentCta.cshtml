@@ -1,0 +1,14 @@
+@model OslerAlumni.Mvc.Core.Models.CtaViewModel
+
+<div class="c-cta c-cta-related">
+    <div class="c-cta-content">
+        <h2 class="c-cta-title cloak-h4">@Model.Title</h2>
+        @Html.OslerForModel().RichTextFieldFor(Model.Content).ToHtmlString()
+    </div>
+    <div class="c-cta-footer">
+        @if (!string.IsNullOrWhiteSpace(Model.Url) && !string.IsNullOrWhiteSpace(Model.LinkText))
+        {
+            <a href="@Model.Url" @( (Model.IsExternal ?? false) ? "target=\"blank\"" :"") class="c-link c-link-primary">@Model.LinkText</a>
+        }
+    </div>
+</div>

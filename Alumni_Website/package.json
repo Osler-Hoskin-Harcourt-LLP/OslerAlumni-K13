@@ -1,0 +1,63 @@
+{
+  "name": "osler_alumni",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "node clean.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm run clean && cross-env NODE_ENV=development webpack --mode development",
+    "watch": "npm run clean && cross-env NODE_ENV=development webpack --watch --mode development",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack -p --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.ecentricarts.com:7990/scm/osler/osleralumni.git"
+  },
+  "author": "Team Frank - Ecentricarts <frank@ecentricarts.com> 🐧",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "copy-webpack-plugin": "^4.6.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "node-sass": "^4.11.0",
+    "postcss-scss": "^2.0.0",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "svg-injector": "^1.1.3",
+    "url-loader": "^1.1.2",
+    "vue": "^2.5.21",
+    "vue-loader": "^15.4.2",
+    "vue-router": "^3.0.2",
+    "vue-template-compiler": "^2.5.21",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-fix-style-only-entries": "^0.3.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.1.5",
+    "axios": "^0.18.0",
+    "blazy": "^1.8.2",
+    "es6-promise": "^4.2.6",
+    "foundation-sites": "^6.5.0-rc.3",
+    "lodash.debounce": "^4.0.8",
+    "polyfill-array-includes": "^2.0.0",
+    "postcss": "^7.0.5",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-loader": "^3.0.0",
+    "unorm": "^1.6.0",
+    "vuejs-uib-pagination": "^1.0.6",
+    "wicg-inert": "^2.1.0"
+  },
+  "browserslist": [
+    "ie 10",
+    "last 2 versions"
+  ]
+}

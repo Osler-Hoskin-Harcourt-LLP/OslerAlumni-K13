@@ -1,0 +1,28 @@
+ @model HomeBannerLoggedOutViewModel
+
+ <div class="c-banner">
+     <div class="release-banner">
+         <picture>
+             <source srcset="@Html.Osler().ResolveUrl(Model.LoggedOutBannerImage3)" media="(max-width: 480px)">
+             <source srcset="@Html.Osler().ResolveUrl(Model.LoggedOutBannerImage2)" media="(max-width: 1024px)">
+             <source srcset="@Html.Osler().ResolveUrl(Model.LoggedOutBannerImage1)" media="(min-width: 1025px)">
+             <img src="@Html.Osler().ResolveUrl(Model.LoggedOutBannerImage1)" srcset="@Html.Osler().ResolveUrl(Model.LoggedOutBannerImage1)" alt="@Model.LoggedOutBannerImageAltText">
+         </picture>    
+     </div>
+     <div class="c-banner-content-centered-wrapper">
+         <div class="c-banner-content-centered">
+             <p class="is-title is-caps no-margin">@Model.LoggedOutBannerHeader</p>
+             <h1 class="is-red">@Model.LoggedOutBannerTitle</h1>
+             @(Html.OslerForModel()
+                 .RichTextFieldFor(Model.LoggedOutBannerDescription)
+                 .ToHtmlString())
+
+             @if (!string.IsNullOrWhiteSpace(Model.LoggedOutBannerLink) && !string.IsNullOrWhiteSpace(Model.LoggedOutBannerLinkText))
+             {
+                 <a href="@Model.LoggedOutBannerLink" class="c-link c-link-secondary">@Model.LoggedOutBannerLinkText</a>
+             }
+
+         </div>
+     </div>
+ </div>
+

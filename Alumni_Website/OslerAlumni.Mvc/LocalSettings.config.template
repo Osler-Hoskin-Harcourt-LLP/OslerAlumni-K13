@@ -1,0 +1,4 @@
+<appSettings>
+  <!--Kentico settings-->
+  <add key="CMSWebFarmServerName" value="OslerAlumniWebsiteXX" />
+</appSettings>
