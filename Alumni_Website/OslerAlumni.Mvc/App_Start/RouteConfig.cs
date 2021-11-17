@@ -17,11 +17,11 @@ namespace OslerAlumni.Mvc
     public class RouteConfig
     {
         #region "Constants"
-        
-        public static readonly string HttpErrorsControllerName = 
+
+        public static readonly string HttpErrorsControllerName =
             typeof(HttpErrorsController).GetControllerName();
 
-        public static readonly string NotFoundActionName = 
+        public static readonly string NotFoundActionName =
             nameof(HttpErrorsController.NotFound);
 
         #endregion
@@ -103,6 +103,11 @@ namespace OslerAlumni.Mvc
                 //            diResolver,
                 //            GetPageUrlConstraintSettings(defaultCulture))
                 //    }),
+                 routes.MapRoute(
+                "Sitemap",
+                    "sitemap.xml",
+                new { controller = "Sitemap", action = "Index" }
+                ),
                 routes.MapRoute(
                     name: "MvcRoute",
                     url: "{controller}/{action}",
@@ -130,7 +135,7 @@ namespace OslerAlumni.Mvc
                 //)
             };
         }
-        
+
         protected static PageUrlConstraintSettings GetPageUrlConstraintSettings(
             CultureInfo defaultCulture)
         {

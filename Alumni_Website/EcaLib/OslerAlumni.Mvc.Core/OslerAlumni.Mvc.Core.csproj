@@ -736,6 +736,7 @@
     <Compile Include="Models\HomePageFeaturedEventItem.cs" />
     <Compile Include="Models\HomePageFeaturedItem.cs" />
     <Compile Include="Models\OslerNetworkConfig.cs" />
+    <Compile Include="Models\SitemapNode.cs" />
     <Compile Include="Modules\MacroRegistrationModule.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
@@ -824,6 +825,7 @@
     <Compile Include="Services\IFileService.cs" />
     <Compile Include="Services\INewsService.cs" />
     <Compile Include="Services\IGenericPageService.cs" />
+    <Compile Include="Services\ISitemapService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ImageService.cs" />
     <Compile Include="Services\BoardOpportunityService.cs" />
@@ -843,6 +845,7 @@
     <Compile Include="Services\CtaService.cs" />
     <Compile Include="Services\ResourceService.cs" />
     <Compile Include="Services\HomeService.cs" />
+    <Compile Include="Services\SitemapService.cs" />
     <Compile Include="Services\TokenService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
