@@ -84,29 +84,17 @@ namespace OslerAlumni.Mvc
         {
             return new List<Route>
             {
-                // TODO##
-                //routes.MapRoute(
-                //    name: "KenticoRoute",
-                //    url: "{culture}/{*path}",
-                //    defaults: new
-                //    {
-                //        controller = HttpErrorsControllerName,
-                //        action = NotFoundActionName,
-                //        culture = UrlParameter.Optional
-                //    },
-                //    constraints: new
-                //    {
-                //        culture = new CultureConstraint(
-                //            allowedCultureCodes,
-                //            true),
-                //        path = new PageUrlConstraint(
-                //            diResolver,
-                //            GetPageUrlConstraintSettings(defaultCulture))
-                //    }),
+
                  routes.MapRoute(
                 "Sitemap",
-                    "sitemap.xml",
-                new { controller = "Sitemap", action = "Index" }
+                    "{culture}/sitemap.xml",
+                new { controller = "Sitemap", action = "Index" },
+               constraints: new
+                    {
+                        culture = new CultureConstraint(
+                            allowedCultureCodes,
+                            true),
+                    }
                 ),
                 routes.MapRoute(
                     name: "MvcRoute",

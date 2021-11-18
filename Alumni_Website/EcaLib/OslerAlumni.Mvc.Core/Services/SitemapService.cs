@@ -38,27 +38,31 @@ namespace OslerAlumni.Mvc.Core.Services
         /// Gets the sitemap.
         /// </summary>
         /// <returns></returns>
-        public string GetSitemap()
+        public string GetSitemap(string culture)
         {
-           return _cacheService.Get(() =>
+            return _cacheService.Get(() =>
             {
-                var documentsEN = _documentRepository
-                    .GetDocuments(cultureName:"en-CA", columnNames: new string[] { nameof(TreeNode.DocumentModifiedWhen) },
+                IEnumerable<TreeNode> documents = new List<TreeNode>();
+
+                if (culture == "en")
+                {
+                    documents = _documentRepository
+                    .GetDocuments(cultureName: "en-CA", columnNames: new string[] { nameof(TreeNode.DocumentModifiedWhen) },
                         whereCondition: new WhereCondition($"ClassName IN ('{PageType_DevelopmentResource.CLASS_NAME}', '{PageType_Page.CLASS_NAME}', '{PageType_BoardOpportunity.CLASS_NAME}', '{PageType_Home.CLASS_NAME}', '{PageType_Job.CLASS_NAME}', '{PageType_LandingPage.CLASS_NAME}', '{PageType_News.CLASS_NAME}', '{PageType_Page.CLASS_NAME}', '{PageType_Profile.CLASS_NAME}')"))
-                    .Where(n => n.HasUrl());
+                    .Where(n => DocumentURLProvider.GetUrl(n) != "~/");
+                }
 
-                var documentsFR = _documentRepository
-                    .GetDocuments(cultureName: "fr-CA", columnNames: new string[] { nameof(TreeNode.DocumentModifiedWhen) },
-                        whereCondition: new WhereCondition($"ClassName IN ('{PageType_DevelopmentResource.CLASS_NAME}', '{PageType_Page.CLASS_NAME}', '{PageType_BoardOpportunity.CLASS_NAME}', '{PageType_Home.CLASS_NAME}', '{PageType_Job.CLASS_NAME}', '{PageType_LandingPage.CLASS_NAME}', '{PageType_News.CLASS_NAME}', '{PageType_Page.CLASS_NAME}', '{PageType_Profile.CLASS_NAME}')"))
-                    .Where(n => n.HasUrl());
+                if (culture == "fr")
+                {
+                    documents = _documentRepository
+                     .GetDocuments(cultureName: "fr-CA", columnNames: new string[] { nameof(TreeNode.DocumentModifiedWhen) },
+                         whereCondition: new WhereCondition($"ClassName IN ('{PageType_DevelopmentResource.CLASS_NAME}', '{PageType_Page.CLASS_NAME}', '{PageType_BoardOpportunity.CLASS_NAME}', '{PageType_Home.CLASS_NAME}', '{PageType_Job.CLASS_NAME}', '{PageType_LandingPage.CLASS_NAME}', '{PageType_News.CLASS_NAME}', '{PageType_Page.CLASS_NAME}', '{PageType_Profile.CLASS_NAME}')"))
+                     .Where(n => DocumentURLProvider.GetUrl(n) != "~/");
+                }
 
-                List<TreeNode> documents = new List<TreeNode>();
-                documents.AddRange(documentsEN);
-                documents.AddRange(documentsFR);
+                return GetSitemapDocument(documents.Select(n => new SitemapNode() { Url = DocumentURLProvider.GetAbsoluteLiveSiteURL(n), LastModified = n.DocumentModifiedWhen }));
+            }, new CacheParameters() { CacheKey = nameof(GetSitemap), Duration = 600 });
 
-                return GetSitemapDocument(documents.Select(n => new SitemapNode() { Url = DocumentURLProvider.GetAbsoluteUrl(n), LastModified = n.DocumentModifiedWhen }));
-            }, new CacheParameters() {CacheKey = nameof(GetSitemap), Duration = 600});
-            
         }
 
         #region "Private Methods"

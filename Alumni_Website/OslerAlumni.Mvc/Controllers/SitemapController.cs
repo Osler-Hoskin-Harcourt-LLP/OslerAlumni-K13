@@ -27,11 +27,11 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string culture)
         {
             try
             {
-                return Content(_sitemapService.GetSitemap(), "application/xml", Encoding.UTF8);
+                return Content(_sitemapService.GetSitemap(culture), "application/xml", Encoding.UTF8);
             }
             catch (Exception ex)
             {
