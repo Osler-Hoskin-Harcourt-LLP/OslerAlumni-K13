@@ -256,7 +256,10 @@ Alumni_Website/OslerAlumni.Mvc/build/
 **/CMS/App_Data/CMSModules/WinServices/[!services.xml]
 **/CMS/App_Data/CMSTemp/
 **/CMS/App_Data/Persistent/
-**/CMS/App_Data/CMSModules/SmartSearch/
+**/CMS/App_Data/CMSModules/SmartSearch/**
+!**/CMS/App_Data/CMSModules/SmartSearch/*/
+!**/CMS/App_Data/CMSModules/SmartSearch/_StopWords/**
+!**/CMS/App_Data/CMSModules/SmartSearch/_Synonyms/**
 **/CMS/App_Data/Translations/Export/
 **/CMS/App_Data/VersionHistory/Attachments/
 **/CMS/CMSSiteUtils/Import/
