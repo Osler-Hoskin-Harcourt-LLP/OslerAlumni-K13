@@ -109,7 +109,7 @@ namespace ECA.PageURL.Repositories
 
                 if (page != null)
                 {
-                    url = DocumentURLProvider.GetUrl(page);
+                    url = DocumentURLProvider.GetUrl(page).TrimStart('~');
                 }
 
                 return url;
