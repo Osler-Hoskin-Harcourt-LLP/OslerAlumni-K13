@@ -1,0 +1,68 @@
+@using CMS.Helpers
+@using ECA.PageURL.Definitions
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.Image
+@using OslerAlumni.Mvc.Models
+@model FooterViewModel
+
+<footer class="c-footer">
+    <div class="c-footer-wrap">
+        <div class="row">
+            <div class="columns medium-12">
+                <div class="o-container-row-footer is-spaced">
+
+                    <div class="c-nav-logo c-logo">
+                        <a href="@Html.Osler().GetPageUrl(StandalonePageType.Home)" class="c-footer-logo">
+                            <span class="show-for-sr">@ResHelper.GetString(Constants.ResourceStrings.LogoLinkText)</span>
+                            @if (!string.IsNullOrWhiteSpace(Model.LogoImageUrl))
+                            {
+                                @(Html.Osler()
+                                    .Image(Model.LogoImageUrl)
+                                    .ToHtmlString())
+                            }
+                        </a>
+                    </div>
+
+                    <div class="c-footer-content">
+                        <ul class="c-nav-list c-footer-nav-list">
+                        @if (Model.FooterNavigationItems != null)
+                        {
+                            foreach (var navItem in Model.FooterNavigationItems)
+                            {
+                                <li class="c-nav-item">
+                                    @if (navItem.IsExternal.HasValue)
+                                    {
+                                        <a href="@navItem.Url" class="c-nav-link" target="@(navItem.IsExternal.Value ? "_blank" : null)">@navItem.Title</a>
+                                    }
+                                    else
+                                    {
+                                        @navItem.Title
+                                    }
+                                </li>
+                            }
+                        }
+                        </ul>
+                    </div>
+
+                    <div class="c-social">
+                        <a href="@ResHelper.GetString(Constants.ResourceStrings.Social.TwitterLink)" target="_blank" class="c-social-link has-svg-small">
+                            <img class="c-svg" src="/build/images/icons/ico-twitter.svg" alt="">
+                            <span class="show-for-sr">@ResHelper.GetString(Constants.ResourceStrings.Social.TwitterLinkText)</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c-footer-copyright">
+        <div class="row">
+            <div class="columns medium-12">
+                <div class="o-container-row is-centered">
+                    <span class="is-small">@ResHelper.GetString(Constants.ResourceStrings.Copyright)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

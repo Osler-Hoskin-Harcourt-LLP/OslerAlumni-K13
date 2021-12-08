@@ -1,0 +1,23 @@
+.has-svg {
+    display: flex;
+    align-items: center;
+    svg {
+        height: rem-calc(30px);
+        width: rem-calc(35px);
+        margin-right: $xxxs-space;
+    }
+    &-small {
+        display: flex;
+        align-items: center;
+        svg {
+            height: rem-calc(20px);
+            width: rem-calc(17px);
+            margin-right: $s-space;
+            &:hover {
+                path {
+                    fill: $color-blue;
+                }
+            }
+        }
+    }
+}

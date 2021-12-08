@@ -1,0 +1,42 @@
+.o-container {
+    @include flex-column;
+    justify-content: center;
+    &-row {
+        @include flex-column;
+        @include breakpoint(medium) {
+            @include flex-row;
+        }
+    }
+    &-row-footer {
+        @include flex-column;
+        @include breakpoint(medium) {
+            @include flex-row;
+        }
+    }
+    &-heading {
+        margin-bottom: $m-space;
+    }
+    &-column {
+        &-half {
+            width: 50%;
+            word-break: break-word;
+            &:first-child {
+                padding-right: $m-space;
+            }
+            ul li {
+                font-size: rem-calc(18px);
+                line-height: 1.5;
+                @include breakpoint(medium) {
+                    font-size: rem-calc(20px);
+                }
+            }
+        }
+    }
+    &-item {
+        width: auto;
+        flex-grow: 1;
+    }
+    &-centered {
+        @extend .is-centered;
+    }
+}

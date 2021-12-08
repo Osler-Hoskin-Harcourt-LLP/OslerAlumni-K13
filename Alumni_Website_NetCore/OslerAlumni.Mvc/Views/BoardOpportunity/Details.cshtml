@@ -1,0 +1,56 @@
+@using CMS.Helpers
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.Image
+@using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
+@using OslerAlumni.Mvc.Models
+@model BoardOpportunityDetailsPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var hasLogo = !string.IsNullOrWhiteSpace(Model.SourceCompanyLogo);
+}
+
+
+
+<div class="c-jobs">
+    <div class="row">
+        <div class="columns small-12 medium-8">
+            <div class="o-cell-heading has-border-bottom">
+                <h1>@Model.Title</h1>
+                <p class="is-large no-margin-bottom"> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.BoardOpportunity.Company, Model.Company))</p>
+                <p class="is-large no-margin-bottom"> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.BoardOpportunity.Location, Model.BoardOpportunityLocation))</p>
+                @if(!string.IsNullOrWhiteSpace(Model.BoardOpportunityTypeDisplayName)){
+                    <p class="is-large no-margin-bottom"> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.BoardOpportunity.BoardOpportunityType, Model.BoardOpportunityTypeDisplayName))</p>
+
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.SourceDisplayName) || hasLogo)
+                {
+                    <div class="c-company">
+                        <p class="is-large no-margin-bottom">
+                            @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.BoardOpportunity.Source, Model.SourceDisplayName))
+                        </p>
+                        @if (hasLogo)
+                        {
+                            @(Html.Osler()
+                                  .Image(Model.SourceCompanyLogo)
+                                  .WithAltText(Model.SourceCompanyLogoAltText)
+                                  .AddClass("c-company-logo")
+                                  .ToHtmlString())
+
+                        }
+
+                    </div>
+                }
+                <p class="has-xs-margin-top"> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.BoardOpportunity.DatePostedAndCategory, Html.DisplayFor(model => model.PostedDate), Model.JobCategoryDisplayName))</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns medium-8 small-12">
+            @Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString()
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
+@using OslerAlumni.Mvc.Models
+@model FeaturedCommunityNewsSectionViewModel
+<div class="has-bg-blue-medium release-right is-full-height c-tile c-tile-right">
+    <h2>@Model.NewsHeader</h2>
+
+
+
+    @if (Model.CommunityNewsItems?.Any()??false)
+    {
+        <ul class="unstyled">
+            @Html.DisplayFor(vm => Model.CommunityNewsItems)
+        </ul>
+        <a href="@Model.NewsLink" class="c-link c-link-secondary">@Model.NewsLinkText</a>
+    }
+    else
+    {
+        @(Html
+            .OslerForModel()
+            .RichTextFieldFor(Model.NewsNoRecordsDisplay)
+            .ToHtmlString())
+    }
+
+</div>

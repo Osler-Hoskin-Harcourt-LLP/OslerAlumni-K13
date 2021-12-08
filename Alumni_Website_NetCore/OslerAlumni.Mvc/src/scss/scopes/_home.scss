@@ -1,0 +1,8 @@
+.c-home {
+    .c-link {
+        @include breakpoint(large) {
+            font-size: rem-calc(24px);
+        }
+    }
+}
+    

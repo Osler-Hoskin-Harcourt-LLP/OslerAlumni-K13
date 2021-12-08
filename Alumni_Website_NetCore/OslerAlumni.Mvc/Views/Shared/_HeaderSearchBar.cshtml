@@ -1,0 +1,21 @@
+@using CMS.Helpers
+@using OslerAlumni.Mvc.Core.Definitions
+@**
+    Note: You need to pass in the url to the global search page for this view to work. 
+*@
+
+@model string
+
+<div class="c-nav-search">
+    <div class="c-form-field c-form-field-global c-form-field-search has-icon" data-searchurl="@Model">
+        <div class="c-form-field-wrapper">
+            <input name="searchKeywords" type="text" id="global-search" placeholder="@ResHelper.GetString(Constants.ResourceStrings.Form.GlobalSearchPlaceholderText)" aria-required="false">
+            <label for="global-search">
+                <button type="submit" name="">
+                    @Html.Partial("_SearchIcon")
+                    <span class="show-for-sr">@ResHelper.GetString(Constants.ResourceStrings.Form.GlobalSearchButtonText)</span>
+                </button>
+            </label>
+        </div>
+    </div>
+</div>

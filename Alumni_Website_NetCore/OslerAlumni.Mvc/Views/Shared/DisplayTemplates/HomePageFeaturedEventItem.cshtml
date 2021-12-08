@@ -1,0 +1,16 @@
+@using CMS.Helpers
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@model OslerAlumni.Mvc.Core.Models.HomePageFeaturedEventItem
+
+@{
+   var FeaturedItemTitleLength = 80;
+}
+<li>
+    <p class="is-title">@Html.TruncateAfterWord(Model.Title, FeaturedItemTitleLength)</p>
+    @if (Model.HostedByOsler)
+    {
+    <p class="is-red is-caps is-tag">@ResHelper.GetString(Constants.ResourceStrings.Events.HostedByOsler)</p>
+    }
+    <p class="is-small">@Html.Raw(@Model.Description)</p>
+</li>

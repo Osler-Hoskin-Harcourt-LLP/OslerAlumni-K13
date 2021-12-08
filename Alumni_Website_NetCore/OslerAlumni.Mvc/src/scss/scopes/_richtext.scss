@@ -1,0 +1,140 @@
+.s-richtext {
+    @include padding-y();
+
+    &.has-medium-text {
+        p,
+        ul,
+        ol,
+        a {
+            font-size: rem-calc(18px);
+        }
+    }
+}
+.s-richtext,
+.cke_editable  {
+    hr {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    ol,
+    ul {
+        margin-bottom: 10px;
+        font-size: rem-calc(18px);
+        @include breakpoint(medium) {
+            font-size: rem-calc(20px);
+        }
+        
+        li {
+            ol,
+            ul {
+                margin-left: 16px;
+            }
+        }
+
+    }
+
+
+    ul {
+        padding: 0;
+        list-style: none;
+
+        li {
+            position: relative;
+            &:before{
+                content: '\25CF';
+                color: $color-grey;
+                position: absolute;
+                left: 0;
+                font-size: 16px;
+            }
+
+            ul li {
+                &:before {
+                    content: '\2218';
+                    color: $color-grey;
+                    position: absolute;
+                    left: 0;
+                    font-size: 22px;
+                }
+                ul li {
+
+                    &:before {
+                        content: '\25AA';
+                        color: $color-grey;
+                        position: absolute;
+                        left: 0;
+                        font-size: 26px;
+                    }
+                }
+            }
+        }
+    }
+
+    ul.c-stat-list,
+    ul.unstyled {
+        li {
+            &:before {
+                content: '';
+            }
+        }
+    }
+    a:not(.c-link):not(.c-button):not(.is-grey):not(.is-red) {
+        color: $color-blue;
+        text-decoration: underline;
+
+        &:hover,
+        &:focus {
+            color: $color-blue;
+            text-decoration: none;
+        }
+    }
+
+    a.no-underline {
+        text-decoration: none;
+    }
+
+    table, th, td  {
+        border: 1px solid $color-grey-medium;
+    }
+
+    .table-scroll {
+        margin-bottom: 1rem;
+
+        thead {
+          background: $color-grey-medium;
+          th {
+            border-bottom: 2px solid $color-grey;
+            font-family: $font-headings;
+            padding: 20px;
+            text-align: left;
+          }
+        }
+        tbody {
+          td {
+            border-right: 1px solid $color-grey;
+            padding: 20px;
+            &:last-of-type{
+                border: none;
+            }
+        }
+        tr {
+            &:nth-child(even) {
+                background: $color-grey-medium;
+            }
+
+          }
+        }
+
+        &-wrapper {
+          display: block;
+          width: 100% !important;
+          max-width: 100%;
+          overflow-x: auto;
+        }
+    }
+
+    &.has-title {
+        @include no-padding-top();
+    }
+}

@@ -1,0 +1,42 @@
+@using CMS.Helpers
+@using ECA.PageURL.Definitions
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
+@using OslerAlumni.Mvc.Models
+@model ContactUsPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="c-contact">
+    <div class="row">
+        <div class="columns medium-8">
+            <h1>@Model.Title</h1>
+            @if (!string.IsNullOrWhiteSpace(Model.Description))
+            {
+                if (!Model.IsAuthenticated)
+                {
+                    Model.Description += ResHelper.GetStringFormat(Constants.ResourceStrings.ContactUs.ContactUsNotLoggedInMessage, Html.Osler().GetPageUrl(StandalonePageType.Login));
+                }
+
+                @Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString()
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns medium-7">
+            <div class="c-form-wrapper is-full" data-form="contact-us">
+                @Html.Partial("_ContactUsForm", Model.FormPostModel)
+                @Html.Partial("_OverlayLoader")
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("_ContactUsSuccess", Model)
+
+@section Scripts
+{
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+}

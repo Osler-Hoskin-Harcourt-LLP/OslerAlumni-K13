@@ -1,0 +1,37 @@
+@using OslerAlumni.Mvc.Models
+@model HeaderViewModel
+
+<nav class="c-nav-secondary">
+    <div class="row small-collapse medium-collapse large-uncollapse">
+        <div class="columns medium-12">
+            <div class="o-container-row is-right">
+                <ul class="c-nav-list">
+                    @if (Model.SecondaryNavigationItems != null)
+                    {
+                        foreach (var navItem in Model.SecondaryNavigationItems)
+                        {
+                            <li class="c-nav-item @(navItem.IsSelected ? "is-selected":"")">
+                                @if (navItem.IsExternal.HasValue)
+                                {
+                                    <a href="@navItem.Url" class="c-nav-link" target="@(navItem.IsExternal.Value ? "_blank" : null)">@navItem.Title</a>
+                                }
+                                else
+                                {
+                                    @navItem.Title
+                                }
+                            </li>
+                        }
+                    }
+                    <li class="c-nav-item">@Html.DisplayFor(vm => Model.LanguageToggle)</li>
+                </ul>
+                @if (Model.IsAuthenticatedUser)
+                {
+                    @Html.Partial("_HeaderSearchBar", Model.GlobalSearchPageUrl)
+                }
+                <div class="c-nav-auth">
+                     @Html.Partial("_AuthMobile", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

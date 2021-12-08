@@ -1,0 +1,59 @@
+h1,h2,h3,h4,h5,h6 {
+    font-family: $font-headings;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    color: $color-grey;
+    font-size: 32px;
+    line-height: 1.2;
+    @include breakpoint(medium) {
+        font-size: 50px;
+    }
+}
+
+h2 {
+    color: $color-grey;
+    font-size: 30px;
+    line-height: 1.2;
+    @include breakpoint(medium) {
+        font-size: 40px;
+    }
+}
+
+h3 {
+    color: $color-grey;
+    font-size: 28px;
+    line-height: 1.2;
+    @include breakpoint(medium) {
+        font-size: 30px;
+    }
+}
+
+h4 {
+    color: $color-grey;
+    font-size: 24px;
+    line-height: 1.2;
+    @include breakpoint(medium) {
+        font-size: 28px;
+    }
+}
+
+h5 {
+    color: $color-grey;
+    font-size: 22px;
+    line-height: 1.2;
+    @include breakpoint(medium) {
+        font-size: 24px
+    }
+}
+
+h6 {
+    color: $color-red;
+    font-size: 18px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    @include breakpoint(medium) {
+        font-size: 20px;
+    }
+}

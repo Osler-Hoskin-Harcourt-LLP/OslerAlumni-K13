@@ -1,0 +1,17 @@
+@using OslerAlumni.Mvc.Models
+@model BreadCrumbsViewModel
+
+@if (Model?.BreadCrumbs?.Any() ?? false)
+{   <div class="row no-padding">
+        <div class="columns smal-12">
+            <nav aria-label="Breadcrumb">
+                <ul class="c-breadcrumbs">
+                    @foreach (var breadCrumb in Model.BreadCrumbs.Take(Model.BreadCrumbs.Count() - 1))
+                    {
+                        <li><a href="@breadCrumb.Url" class="c-breadcrumbs-link">@breadCrumb.Title</a></li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+}

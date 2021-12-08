@@ -1,0 +1,19 @@
+@using CMS.Helpers
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Models
+@model HeaderViewModel
+
+<header class="c-header o-container">
+    <a href="#content" class="show-on-focus">@ResHelper.GetString(Constants.ResourceStrings.SkipLinkText)</a>
+
+    <!-- utilities section -->
+    @Html.Partial("_NavUtilities", Model)
+
+    <div class="c-nav" id="main-nav">
+        <!-- primary navigation -->
+        @Html.Partial("_NavPrimary", Model)
+
+        <!-- secondary navigation -->
+        @Html.Partial("_NavSecondary", Model)
+    </div>
+</header>

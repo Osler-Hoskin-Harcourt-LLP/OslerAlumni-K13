@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Attributes\Error\**" />
+    <Compile Remove="ECA\PageURL\**" />
+    <Compile Remove="Handlers\**" />
+    <Compile Remove="Infrastructure\**" />
+    <Compile Remove="ModelBinders\**" />
+    <Compile Remove="Modules\**" />
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Attributes\Error\**" />
+    <EmbeddedResource Remove="ECA\PageURL\**" />
+    <EmbeddedResource Remove="Handlers\**" />
+    <EmbeddedResource Remove="Infrastructure\**" />
+    <EmbeddedResource Remove="ModelBinders\**" />
+    <EmbeddedResource Remove="Modules\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Attributes\Error\**" />
+    <None Remove="ECA\PageURL\**" />
+    <None Remove="Handlers\**" />
+    <None Remove="Infrastructure\**" />
+    <None Remove="ModelBinders\**" />
+    <None Remove="Modules\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Attributes\ActionFilters\OslerAuthorizeAttribute.cs" />
+    <Compile Remove="Attributes\ActionFilters\ValidateHeaderAntiForgeryTokenAttribute.cs" />
+    <Compile Remove="Attributes\Validation\PasswordPolicyEnforceAttribute.cs" />
+    <Compile Remove="Extensions\ModelBinderDictionaryExtensions.cs" />
+    <Compile Remove="Helpers\HttpResponseHelper.cs" />
+    <Compile Remove="Repositories\CookieStoreRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IPAddressRange" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SharedEcaLib\OslerAlumni.Core.NetCore\OslerAlumni.Core.NetCore.csproj" />
+    <ProjectReference Include="..\..\SharedEcaLib\OslerAlumni.OnePlace.NetCore\OslerAlumni.OnePlace.NetCore.csproj" />
+  </ItemGroup>
+
+</Project>

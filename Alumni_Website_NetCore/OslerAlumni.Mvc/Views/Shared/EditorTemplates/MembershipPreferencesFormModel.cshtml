@@ -1,0 +1,49 @@
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.Button
+@using OslerAlumni.Mvc.Models
+@model MembershipPreferencesFormModel
+
+@{
+    /*Note: this is needed so that html fields aren't
+     prefixed if we have nested view models. However,
+     it also means that this form may appear only once on the page.*/
+    ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
+}
+
+<div class="c-form-wrapper" data-form="membership-preferences">
+    @using (Html.BeginForm(
+                "MembershipUpdatePreferences",
+                "Membership",
+                FormMethod.Post,
+                new { @class = "c-form", id = "membership-preferences" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.FormErrorSummary()
+
+        @Html.HiddenFor(model => model.UserGuid)
+
+        <fieldset tabindex="-1" role="checkbox" aria-required="false">
+            <legend><span class="show-for-sr">preferences resource string</span></legend>
+            <div class="c-form-field-wrapper">
+                @Html.StyledCheckboxFor(model => model.IncludeEmailInDirectory)
+            </div>
+            @* The story for profile images is descoped at the moment *@
+            @*<div class="c-form-field-wrapper">
+                @Html.StyledCheckboxFor(model => model.DisplayImageInDirectory)
+            </div>*@
+            <div class="c-form-field-wrapper">
+                @Html.StyledCheckboxFor(model => model.SubscribeToEmailUpdates)
+            </div>
+        </fieldset>
+
+        @(Html.Osler()
+              .FormSubmitButton()
+              .WithText(Constants.ResourceStrings.SaveEdits)
+              .ToHtmlString())
+
+        @Html.Partial("_FormServerError")
+    }
+    @Html.Partial("_OverlayLoader")
+</div>

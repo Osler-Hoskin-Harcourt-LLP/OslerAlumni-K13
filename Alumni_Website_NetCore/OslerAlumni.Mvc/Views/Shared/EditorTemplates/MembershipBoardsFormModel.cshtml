@@ -1,0 +1,54 @@
+@using CMS.Helpers
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.Button
+@using OslerAlumni.Mvc.Models
+@model MembershipBoardsFormModel
+
+@{
+    /*Note: this is needed so that html fields aren't
+     prefixed if we have nested view models. However,
+     it also means that this form may appear only once on the page.*/
+    ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
+}
+
+<div class="c-form-wrapper" data-form="membership-basic-info">
+
+    @using (Html.BeginForm(
+        "MembershipUpdateBoards",
+        "Membership",
+        FormMethod.Post,
+        new { @class = "c-form", id = "membership-boards" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.FormErrorSummary()
+
+        @Html.HiddenFor(model => model.UserGuid)
+        <div class="c-form-field">
+            <div class="c-form-field-wrapper">
+            <p class="is-label">@Html.DisplayNameFor(model => model.BoardMembershipList)</p>
+
+
+            @if (Model.BoardMembershipList?.Any() ?? false)
+            {
+                @Html.DisplayFor(model => model.BoardMembershipList, "UnorderedList")
+            }
+            else
+            {
+                <p>@ResHelper.GetString(Constants.ResourceStrings.Form.MembershipBoards.NoBoards)</p>
+            }
+            </div>
+        </div>
+
+        @Html.StyledEditorFor(model => model.NewBoard)
+
+        @(Html.Osler()
+                .FormSubmitButton()
+                .WithText(Constants.ResourceStrings.Form.MembershipBoards.AddCompanyName)
+                .ToHtmlString())
+
+        @Html.Partial("_FormServerError")
+    }
+    @Html.Partial("_OverlayLoader")
+</div>

@@ -1,0 +1,71 @@
+@using CMS.Helpers
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.Image
+@using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
+@using OslerAlumni.Mvc.Models
+@model NewsDetailsPageViewModel
+
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var isSpotlight = Model.NewsPageType == NewsPageType.Spotlight;
+}
+
+<div class="c-community-news">
+    <div class="row">
+        <div class="columns small-12 medium-@(isSpotlight ? "12" : "8")">
+            <h1>@Model.Title</h1>
+        </div>
+        <div class="columns small-12 medium-@(isSpotlight ? "12" : "8")">
+            <div class="o-container-row is-spaced">
+                <p class="is-large">@Html.DisplayFor(model => model.DatePublished)</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        @if (isSpotlight)
+        {
+            <div class="columns large-4 small-12">
+                @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+                {
+                    <div class="c-img">
+                        @(Html.Osler()
+                              .Image(Model.ImageUrl)
+                              .WithAltText(Model.ImageAltText)
+                              .ToHtmlString())
+                    </div>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.Vitals))
+                {
+                    if (string.IsNullOrWhiteSpace(Model.VitalsHeader))
+                    {
+                        <h3>@ResHelper.GetString(Constants.ResourceStrings.News.SpotlightVitalsDefaultHeader)</h3>
+                    }
+                    else
+                    {
+                        <h3>@ResHelper.GetStringFormat(Constants.ResourceStrings.News.SpotlightVitalsHeader, Model.VitalsHeader)</h3>
+                    }
+
+                    @(Html.OslerForModel().RichTextFieldFor(Model.Vitals).AddClass("has-title").ToHtmlString())
+                    <br />
+                }
+            </div>
+        }
+        <div class="columns medium-8 small-12">
+            @if (isSpotlight && !string.IsNullOrWhiteSpace(Model.StoryHighlights))
+            {
+                <hr>
+                <div class="c-lead">
+                    <h2>@ResHelper.GetString(Constants.ResourceStrings.News.SpotlightStoryHighlightsHeader) </h2>
+                    <p>@Model.StoryHighlights</p>
+                </div>
+            }
+            <hr>
+            @(Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString())
+        </div>
+    </div>
+</div>

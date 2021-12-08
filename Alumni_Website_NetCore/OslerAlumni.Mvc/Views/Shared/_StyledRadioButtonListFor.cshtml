@@ -1,0 +1,13 @@
+@model dynamic
+
+<div id="@ViewBag.DivId" class="c-form-field c-form-field-radiogroup">
+    <fieldset id="@ViewBag.ElementId" tabindex="-1" role="radiogroup" aria-required="true">
+        <legend class="c-form-field-radio-legend">
+            @Html.Raw(ViewBag.Legend)
+        </legend>
+        <div class="c-form-field-wrapper">
+            @Html.Raw(ViewBag.RadioButtonList)
+        </div>
+        <span class="c-form-error-message" id="error-@ViewBag.ElementId"></span>
+    </fieldset>
+</div>

@@ -1,0 +1,46 @@
+@using CMS.Helpers
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.Image
+@using OslerAlumni.Mvc.Models
+@model NewsFeaturedItemViewModel
+@{
+    var isSpotlight = Model.NewsPageType == NewsPageType.Spotlight;
+
+
+    var FeaturedItemTitleLength = 80;
+}
+
+<div class="row" v-if="searchRequest.pageNumber == 1 && !hasError">
+    <div class="columns medium-12">
+        <div class="c-feature">
+            @if (string.IsNullOrWhiteSpace(Model.ImageUrl))
+            {
+                <div class="c-feature-img has-bg" style="background-image: url('@Html.Osler().ResolveUrl(Model.DefaultImageUrl)')"></div>
+            }
+            else
+            {
+                <div class="c-feature-img">
+                    @(Html.Osler()
+                          .Image(Model.ImageUrl)
+                          .WithAltText(Model.ImageAltText)
+                          .ToHtmlString())
+                </div>
+            }
+            <div class="c-feature-content">
+
+                <p class="is-small">
+                    @ResHelper.GetString(
+                        isSpotlight
+                            ? Constants.ResourceStrings.News.FeaturedSpotlight
+                            : Constants.ResourceStrings.News.FeaturedNews)
+                </p>
+
+                <h2><a href="@Model.PageUrl">@Html.TruncateAfterWord(Model.Title, FeaturedItemTitleLength)</a></h2>
+                <a href="@Model.PageUrl" class="c-link c-link-primary">
+                    @ResHelper.GetString(Constants.ResourceStrings.News.FeaturedLinkText)
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+// cancel out foundation default styles on blockquote
+blockquote {
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: inherit;
+    color: inherit;
+}
+
+/* Figure - Blockquote - Figcaption for blockquote with attribution */
+figure.e-blockquote-wrap {
+    margin: $m-space $s-space;
+    padding-left: $s-space;
+
+    @include breakpoint(medium) {
+        margin: $m-space $l-space;
+    }
+
+    blockquote {
+        color: $color-red;
+        font-family: $font-bold;
+        font-size: rem-calc(22px);
+        line-height: 30px;
+        position: relative;
+        &:before {
+            display: block;
+            content: "\201C";
+            font-size: rem-calc(30px);
+            position: absolute;
+            left: -16px;
+            line-height: 30px;
+            top: 3px;
+            color: $color-red;
+        }
+        @include breakpoint(medium) {
+            font-size: rem-calc(30px);
+            line-height: 38px;
+        }
+    }
+    figcaption {
+        margin-top: 15px;
+    }
+    figcaption,
+    figcaption p {
+        color: $color-red;
+        font-size: rem-calc(16px);
+        line-height: rem-calc(20px);
+        margin-bottom: 0;
+    }
+}

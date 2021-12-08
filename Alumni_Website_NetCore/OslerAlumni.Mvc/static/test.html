@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <header class="c-header">
+        <div class="c-nav-utilities">
+            <div class="c-nav-toggle"></div> <!--hide on desktop-->
+            <div class="c-logo"></div>
+            <button class="c-button-alternate" aria-controls="main-navigation">LOGOUT</button> <!--hide on desktop-->
+        </div>
+        <div class="c-nav" id="main-navigation" aria-hidden="false">
+            <div class="c-nav-primary">
+                <ul class="c-list">
+                    <li class="c-list-item"><a href="" class="c-list-link"></a></li>
+                    <li class="c-list-item"><a href="" class="c-list-link"></a></li>
+                    <li class="c-list-item"><a href="" class="c-list-link"></a></li>
+                    <li class="c-list-item"><a href="" class="c-list-link"></a></li>
+                </ul>
+                <button class="c-button-alternate">LOGOUT</button>
+            </div>
+            <div class="c-nav-secondary">
+                <ul class="c-list">
+                    <li class="c-list-item"><a href="" class="c-list-link"></a></li>
+                    <li class="c-list-item"><a href="" class="c-list-link"></a></li>
+                    <li class="c-list-item"><a href="" class="c-list-link"></a></li>
+                </ul>
+                <label for=""></label>
+                <input type="text" class="c-global-search">
+            </div>
+        </div>
+    </header>
+    <!-- trigger -->
+    <button type="button" class="c-modal-toggle c-button c-button-secondary" data-modal-toggle="eventAttendees">See Who's Coming</button>
+
+    <!-- Modal -->
+    <div class="c-modal" data-modal="eventAttendees" role="dialog" aria-hidden="true" tabindex="0" aria-labelledby="c-modal-title">
+        <div class="c-modal-window" role="document">
+            <p id="c-modal-title">See Who's Coming</p>
+            <button type="button" class="c-modal-close" data-modal-close="eventAttendees">
+                <span class="show-for-sr">Close Event Attendees list</span>
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

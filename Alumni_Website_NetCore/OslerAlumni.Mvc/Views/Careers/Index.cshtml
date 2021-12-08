@@ -1,0 +1,27 @@
+@using DocumentFormat.OpenXml.Wordprocessing
+@using OslerAlumni.Mvc.Core.Services
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
+@using OslerAlumni.Mvc.Models
+@inject ICtaService CtaService
+
+@model PageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="c-careers">
+    <div class="row">
+        <div class="columns small-12 medium-12 large-8">
+            <div class="o-cell-heading">
+                <h1>@Model.Title</h1>
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    @Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString()
+                }
+            </div>
+        </div>
+    </div>
+    @{ await Html.PartialAsync("_TopWidgetZoneSection", (object)CtaService.GetTopWidgetZoneCtasAsync(ViewBag.page));}
+</div>

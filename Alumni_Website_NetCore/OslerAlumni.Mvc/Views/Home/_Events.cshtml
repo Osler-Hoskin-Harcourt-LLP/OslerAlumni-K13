@@ -1,0 +1,27 @@
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
+@using OslerAlumni.Mvc.Models
+@model FeaturedEventsViewModel
+<div class="c-tile">
+    <h2 class="is-red">@Model.EventsHeader</h2>
+
+
+
+    @if (Model.EventItems?.Any()??false)
+    {
+        <ul class="c-list c-home-events-list">
+            @Html.DisplayFor(vm => Model.EventItems)
+        </ul>
+        <div class="has-s-margin-top">
+            <a href="@Model.EventsLink"  class="c-link c-link-primary">@Model.EventsLinkText</a>
+        </div>
+    }
+    else
+    {
+        @(Html
+            .OslerForModel()
+            .RichTextFieldFor(Model.EventsNoRecordsDisplay)
+            .ToHtmlString())
+    }
+
+</div>

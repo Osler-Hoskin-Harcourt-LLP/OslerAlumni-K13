@@ -1,0 +1,45 @@
+.c-stat {
+  @include list-unstyled;
+  @include flex-column;
+  align-items: center;
+  align-self: stretch;
+  padding: $xxs-space $xxs-space $m-space;
+  text-align: center;
+  width: 50%;
+  
+  @include breakpoint(large) {
+    padding: $xxs-space;
+    width: 25%;
+  }
+
+
+  &-list {
+    @include list-unstyled;
+    @include flex-row;
+    padding: $m-space 0;
+
+    @include breakpoint(medium) {
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    @include breakpoint(large up) {
+      margin-top: $m-space;
+      margin-bottom: $m-space;
+    }
+    img {
+      margin-bottom: 30px;
+      height: 128px;
+    }
+  }
+
+  hr {
+    // fix later
+    background-color: $color-red;
+    width: 57px;
+    margin: $xxs-space 0;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}

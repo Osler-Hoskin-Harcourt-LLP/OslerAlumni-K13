@@ -1,0 +1,118 @@
+@using CMS.Helpers
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
+@using OslerAlumni.Mvc.Models
+@model LandingPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var itemTitleLength = 75;
+    var itemShortDescriptionLength = 200;
+}
+
+<div class="c-events">
+
+    <div class="c-listing c-events-listing"
+        data-type="events"
+        data-culture="@Html.Osler().GetCurrentCultureName()"
+        data-ispreviewmode="@Html.Osler().IsPreviewMode()"
+        data-pagenumber="1"
+        data-mainlist=".c-events-list"
+        data-mainpagesize="@Model.MainListPageSize">
+
+        <div class="row">
+            <div class="columns small-12 medium-12 large-8">
+                <div class="o-cell-heading">
+                    <h1>@Model.Title</h1>
+                    @if (!string.IsNullOrWhiteSpace(Model.Description))
+                    {
+                        @Html.OslerForModel().RichTextFieldFor(Model.Description).ToHtmlString()
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- loader -->
+        @Html.Partial("_Loader")
+        <!-- main listing -->
+        <div class="c-events-listing-main c-listings-top" tabindex="0" v-cloak>
+            <div class="row">
+                <div class="columns small-12 medium-12 large-8 transition-wrap">
+                    <div class="c-list-results" v-if="totalItemCount > 0" aria-live="polite" aria-atomic="true">
+                        <p class="is-small is-bold">{{totalResultsCountDisplay}}</p>
+                    </div>
+                    <transition appear name="fade">
+                        <main-list :results="results" v-on:open-modal="openModal" v-if="totalItemCount && loading == false"></main-list>
+                    </transition>
+
+                    <!-- modal -->
+                    <transition appear name="fade">
+                        <eventattendees-modal v-if="showModal" :active-item="activeItem" :culture="searchRequest.culture" v-on:close-modal="closeModal"></eventattendees-modal>
+                    </transition>
+
+                    <!-- show no listings message -->
+                    <div v-if="!hasResults && !hasError && loading == false" v-cloak aria-live="polite" aria-atomic="true">
+                        <div class="c-list-error-server" tabindex="0">
+                            <p class="c-list-error-server-title">
+                                @ResHelper.GetString(Constants.ResourceStrings.Events.NoListingsMessage)</p>
+                        </div>
+                    </div>
+
+                    <!-- show server error -->
+                    <div class="" v-if="hasError" v-cloak>
+                        @Html.Partial("_ListServerError")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- pagination -->
+        <div class="row" v-if="totalItemCount > @Model.MainListPageSize && !loading">
+            <div class="columns small-12 medium-12 large-8">
+                <nav class="c-pagination" aria-label="pagination">
+                    <uib-pagination class="c-pagination-list"
+                                    v-model="pagination"
+                                    @@change="onPageChange"
+                                    :total-items="totalItemCount - @Model.TopListPageSize"
+                                    :items-per-page="@Model.MainListPageSize"
+                                    :boundary-link-numbers="true"
+                                    :force-ellipses="true"
+                                    :max-size="paginationSize"
+                                    :rotate="true">
+                    </uib-pagination>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+    <template id="list-template" v-cloak>
+        <div class="c-list c-events-list">
+            <div class="c-list-item c-events-item" v-for="(result, index) in results" :data-item="index">
+                <div class="c-events-item-subcontent">
+                    <div class="subcontent-main">
+                        <p class="cloak-h3">{{result.displayDate}}</p>
+                        <hr />
+                        <p class="cloak-h4">{{result.displayTime}}</p>
+                    </div>
+                    <div class="subcontent-callout" v-if="result.hostedByOsler">
+                        <p>@ResHelper.GetString(Constants.ResourceStrings.Events.HostedByOsler)</p>
+                    </div>
+                </div>
+
+                <div class="c-events-item-content">
+                    <p class="cloak-h6 no-margin-bottom">{{result.deliveryMethodsDisplay}}</p>
+                    <h2 class="cloak-cta-large">
+                        <a :href="result.eventUrl" class="is-external" target="_blank">{{result.title | trimSpace | truncate(@itemTitleLength) }}</a>
+                    </h2>
+                    <p class="is-description">{{result.location}}</p>
+                    <p v-if="result.shortDescription" class="is-description">{{ result.shortDescription | truncate(@itemShortDescriptionLength) }}</p>
+                    <button v-if="result.showAttendees" type="button" class="c-modal-toggle c-button c-link-primary" aria-controls="eventAttendees-modal" v-on:click="handleModal(result)">@ResHelper.GetString(Constants.ResourceStrings.Events.Attendees.SeeWhosComing)</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    @Html.Partial("_ModalAttendees")
+</div>

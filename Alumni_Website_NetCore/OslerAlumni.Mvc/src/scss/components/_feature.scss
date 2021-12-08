@@ -1,0 +1,52 @@
+.c-feature {
+    @include flex-column;
+    background-color: $color-blue-light;
+    border-bottom: 4px solid $color-red;
+    margin-bottom: $l-space;
+    max-height: none;
+    @include breakpoint(medium up) {
+        min-height: 275px; 
+        max-height: 340px; 
+        overflow: hidden;
+        @include flex-row;
+    }
+    &-img {
+        width: 33%;
+        @include breakpoint(small only) {
+            width: auto;
+            text-align: center;
+        }
+        img {
+            @include breakpoint(medium up) {
+                min-height: 100%;
+                min-width: 100%;
+            }
+        }
+    }
+    .has-bg {
+        @include breakpoint(small) {
+            background-size: cover;
+            background-repeat: no-repeat;
+            justify-content: flex-end;
+            min-height: 275px;
+        }
+    }
+    &-content {
+        padding: 1.5625rem  0.9375rem;
+        h2 {
+            margin-bottom: 1.5rem;
+        }
+        p {
+            font-family: $font-bold;
+        }
+        width: 100%;
+        @include breakpoint(medium) {
+            width: 66%
+        }
+        .has-bg & {
+            @include breakpoint(medium) {
+                width: 67.5%;
+            }
+        }
+    }
+}

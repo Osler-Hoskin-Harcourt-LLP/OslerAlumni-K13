@@ -1,0 +1,49 @@
+@using CMS.Helpers
+@using ECA.PageURL.Definitions
+@using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Extensions
+@using OslerAlumni.Mvc.Extensions.OslerControls.Image
+@using OslerAlumni.Mvc.Models
+@model HeaderViewModel
+
+<nav class="c-nav-primary">
+    <div class="row small-collapse medium-collapse large-uncollapse">
+        <div class="columns medium-12">
+            <div class="o-container-row is-spaced no-wrap-large">
+                <div class="c-nav-logo">
+                    <a href="@Html.Osler().GetPageUrl(StandalonePageType.Home)" class="c-header-logo">
+                        <span class="show-for-sr">@ResHelper.GetString(Constants.ResourceStrings.LogoLinkText)</span>
+                        @if (!string.IsNullOrWhiteSpace(Model.DesktopLogoImageUrl))
+                        {
+                            @(Html.Osler()
+                                  .Image(Model.DesktopLogoImageUrl)
+                                  .ToHtmlString())
+                        }
+                    </a>
+                </div>
+                <div class="o-container-row is-spaced no-wrap-large c-nav-list-wrap">
+                    <ul class="c-nav-list">
+                        @if (Model.PrimaryNavigationItems != null)
+                        {
+                            foreach (var navItem in Model.PrimaryNavigationItems)
+                            {
+                                <li class="c-nav-item @(navItem.IsSelected ? "is-selected":"")">
+                                    @if (navItem.IsExternal.HasValue)
+                                    {
+                                        <a href="@navItem.Url" class="c-nav-link" target="@(navItem.IsExternal.Value ? "_blank" : null)">@navItem.Title</a>
+                                    }
+                                    else
+                                    {
+                                        @navItem.Title
+                                    }
+                                </li>
+                            }
+                        }
+                    
+                    </ul>
+                    @Html.Partial("_AuthDesktop", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

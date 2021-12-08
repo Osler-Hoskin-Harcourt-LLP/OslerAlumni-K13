@@ -1,0 +1,32 @@
+.c-breadcrumbs {
+    list-style: none;
+    padding: 0;
+    margin: $l-space 0 0 0;
+  
+    li {
+      display: inline-block;
+      position: relative;
+      margin-right: $xxs-space;
+  
+      &:after {
+        content: '/';
+        position: absolute;
+        right: -$s-space;
+      }
+      &:last-of-type:after {
+        content: '';
+      }
+      &:first-of-type {
+        padding-left: 0;
+      }
+    }
+
+    &-link {
+        color: $color-blue;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+  }

@@ -1,0 +1,28 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://osleralumni-lh.reasononeinc.com:8080",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "BlankSiteCore": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://osleralumni-lh.reasononeinc.com:8080/home",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://osleralumni-lh.reasononeinc.com:8080"
+    }
+  }
+}

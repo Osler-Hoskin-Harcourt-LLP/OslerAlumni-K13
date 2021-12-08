@@ -1,0 +1,4 @@
+@using OslerAlumni.Mvc.Core.Helpers
+@using OslerAlumni.Mvc.Extensions
+@model DateTime
+@Model.ToString(StringHelper.GetDateTimeFormat(Html.Osler().GetCurrentCultureName()))

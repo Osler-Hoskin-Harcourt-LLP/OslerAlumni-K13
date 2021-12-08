@@ -1,0 +1,16 @@
+@model IEnumerable<OslerAlumni.Mvc.Core.Models.CtaViewModel>
+
+@if (Model?.Any() ?? false)
+{
+    <div class="row">
+        <div class="columns small-12 medium-12">
+            <div class="c-cta-wrap">
+                @foreach (var cta in Model)
+                {
+                    @Html.DisplayFor(vm => cta, "TopWidgetZoneCta")
+                }
+            </div>
+        </div>
+    </div>
+}
+
