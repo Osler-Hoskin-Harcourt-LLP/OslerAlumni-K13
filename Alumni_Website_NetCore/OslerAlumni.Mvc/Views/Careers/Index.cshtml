@@ -1,9 +1,13 @@
+@using CMS.DocumentEngine
 @using DocumentFormat.OpenXml.Wordprocessing
+@using Kentico.Content.Web.Mvc
 @using OslerAlumni.Mvc.Core.Services
 @using OslerAlumni.Mvc.Extensions
 @using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
 @using OslerAlumni.Mvc.Models
 @inject ICtaService CtaService
+@inject IPageDataContextRetriever dataRetriever
+
 
 @model PageViewModel
 
@@ -23,5 +27,8 @@
             </div>
         </div>
     </div>
-    @{ await Html.PartialAsync("_TopWidgetZoneSection", (object)CtaService.GetTopWidgetZoneCtasAsync(ViewBag.page));}
+    @{
+        var page = dataRetriever.Retrieve<TreeNode>().Page;
+        @await Html.PartialAsync("_TopWidgetZoneSection", (object)CtaService.GetTopWidgetZoneCtasAsync(page))
+    }
 </div>

@@ -30,7 +30,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// </summary>
         //[AllowedJobClassification(ErrorMessage = "Incorrect Location")]
         [JsonProperty("jobLocation")]
-        public string JobLocation { get; set; }
+        public string JobLocation { get; set; } = "";
 
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// </summary>
         [AllowedJobClassification(ErrorMessage = "Incorrect Job Classifications")]
         [JsonProperty("jobClassifications")]
-        public List<string> JobClassifications { get; set; }
+        public List<string> JobClassifications { get; set; } = new List<string>();
 
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// </summary>
         [AllowedJobCategories(ErrorMessage = "Incorrect Job Categories")]
         [JsonProperty("jobCategories")]
-        public List<string> JobCategories { get; set; }
+        public List<string> JobCategories { get; set; } = new List<string>();
 
         #endregion
 

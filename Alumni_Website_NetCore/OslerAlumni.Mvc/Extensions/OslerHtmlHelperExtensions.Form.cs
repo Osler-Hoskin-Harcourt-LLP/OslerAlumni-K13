@@ -1,8 +1,8 @@
 using CMS.Helpers;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OslerAlumni.Mvc.Core.Attributes.Validation;
 using OslerAlumni.Mvc.Core.Definitions;
 using OslerAlumni.Mvc.Core.Extensions;
@@ -14,6 +14,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using OslerAlumni.Mvc.Core.Helpers;
 
 namespace OslerAlumni.Mvc.Extensions
 {
@@ -45,6 +46,7 @@ namespace OslerAlumni.Mvc.Extensions
         public static IHtmlContent StyledEditorFor<TModel, TValue>(
             this IHtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
+            string propertyName,
             HtmlString labelMarkup = null,
             IHtmlContent editorMarkup = null,
             object htmlAttributes = null)
@@ -52,6 +54,7 @@ namespace OslerAlumni.Mvc.Extensions
             return GetStyledEditor(
                 html,
                 expression,
+                propertyName,
                 labelMarkup,
                 editorMarkup,
                 htmlAttributes);
@@ -77,13 +80,18 @@ namespace OslerAlumni.Mvc.Extensions
         public static IHtmlContent StyledCheckboxFor<TModel>(
             this IHtmlHelper<TModel> html,
             Expression<Func<TModel, bool>> expression,
+            string propertyName,
             object htmlAttributes = null)
         {
             return GetStyledEditor(
                 html,
                 expression,
+                propertyName,
                 html.OslerForModel().CheckBoxFor(expression).ToHtmlString(),  /*The order is switched on purpose, since label appear after for checkboxes*/
-                html.LabelFor(expression),
+                html.LabelFor(expression, ResHelper.GetString(html.MetadataProvider
+                .GetMetadataForProperties(expression.Parameters[0].Type)
+                .Where(prop => prop.PropertyName == propertyName)
+                .FirstOrDefault()?.DisplayName)),
                 htmlAttributes);
         }
 
@@ -91,6 +99,7 @@ namespace OslerAlumni.Mvc.Extensions
         public static IHtmlContent StyledFileUploaderFor<TModel, TValue>(
             this IHtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
+            string propertyName,
             IHtmlContent labelMarkup = null,
             object htmlAttributes = null,
             string jsValidationError = null)
@@ -147,6 +156,7 @@ namespace OslerAlumni.Mvc.Extensions
             return GetStyledEditor(
                 html,
                 expression,
+                propertyName,
                 labelMarkup,
                 viewName: "_StyledUploadEditorFor",
                 htmlAttributes: htmlAttributes,
@@ -181,7 +191,7 @@ namespace OslerAlumni.Mvc.Extensions
 
                 radioButtonList += $@"
                     <div>
-                        {html.RadioButtonFor(expression, enumValue, customHtmlAttributes)}
+                        {HtmlContentHelper.GetString(html.RadioButtonFor(expression, enumValue, customHtmlAttributes))}
                         <label for={inputId}>{((Enum)enumValue).GetLocalizedDisplayName()}</label>
                     </div>";
             }
@@ -197,7 +207,7 @@ namespace OslerAlumni.Mvc.Extensions
 
         public static IHtmlContent StyledEnumDropDownListFor<TModel, TValue>(
             this IHtmlHelper<TModel> html,
-            Expression<Func<TModel, TValue>> expression, Enum options)
+            Expression<Func<TModel, TValue>> expression, Enum options, string propertyName)
         {
             var elementId = $"{html.IdFor(expression)}";
 
@@ -217,8 +227,11 @@ namespace OslerAlumni.Mvc.Extensions
             return html.Partial("_StyledEnumDropDownListFor", new ViewDataDictionary(html.MetadataProvider, html.ViewContext.ModelState)
             {
                 {"DivId", $"{elementId}_{Guid.NewGuid()}" },
-                {"Label", html.LabelFor(expression).ToString()},
-                {"DropDownList", html.DropDownListFor(expression, optionList).ToString()}
+                {"Label", html.LabelFor(expression, ResHelper.GetString(html.MetadataProvider
+                .GetMetadataForProperties(expression.Parameters[0].Type)
+                .Where(prop => prop.PropertyName == propertyName)
+                .FirstOrDefault()?.DisplayName))},
+                {"DropDownList", html.DropDownListFor(expression, optionList)}
             });
         }
 
@@ -303,6 +316,7 @@ namespace OslerAlumni.Mvc.Extensions
         private static IHtmlContent GetStyledEditor<TModel, TValue>(
             IHtmlHelper<TModel> html,
             Expression<Func<TModel, TValue>> expression,
+            string propertyName,
             IHtmlContent labelMarkup = null,
             IHtmlContent editorMarkup = null,
             object htmlAttributes = null,
@@ -332,8 +346,14 @@ namespace OslerAlumni.Mvc.Extensions
             divContainer.AddCssClass(GetFormFieldCssClassByType(typeof(TValue)));
             divContainer.AddCssClass("c-form-field");
 
-            var label = labelMarkup?.ToString() ?? html.LabelFor(expression).ToString();
-            var editor = editorMarkup?.ToString() ?? html.EditorFor(expression).ToString();
+            var metaData = html.MetadataProvider
+                .GetMetadataForProperties(expression.Parameters[0].Type)
+                .Where(prop => prop.PropertyName == propertyName)
+                .FirstOrDefault();
+
+
+            var label = labelMarkup ?? html.LabelFor(expression, ResHelper.GetString(metaData.DisplayName));
+            var editor = editorMarkup ?? html.EditorFor(expression);
 
             if (viewData == null)
             {
@@ -342,12 +362,11 @@ namespace OslerAlumni.Mvc.Extensions
 
             viewData.Add("Label", label);
             viewData.Add("Editor", editor);
-            viewData.Add("ExplanationText", html.DisplayTextFor(expression));
+            viewData.Add("ExplanationText", ResHelper.GetString(metaData.Description));
 
             divContainer.InnerHtml.AppendHtml(
                 html
-                .Partial(viewName, viewData)
-                .ToString());
+                .Partial(viewName, viewData));
 
             return divContainer;
         }

@@ -30,7 +30,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// </summary>
         //[AllowedJobClassification(ErrorMessage = "Incorrect Location")]
         [JsonProperty("location")]
-        public string Location { get; set; }
+        public string Location { get; set; } = "";
 
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// </summary>
         [AllowedJobCategories(ErrorMessage = "Incorrect Job Categories")]
         [JsonProperty("jobCategories")]
-        public List<string> JobCategories { get; set; }
+        public List<string> JobCategories { get; set; } = new List<string>();
 
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// </summary>
         [AllowedBoardOpportunityTypes(ErrorMessage = "Incorrect Board Oppurtunity Type")]
         [JsonProperty("boardOpportunityTypes")]
-        public List<string> BoardOpportunityTypes { get; set; }
+        public List<string> BoardOpportunityTypes { get; set; } = new List<string>();
 
         #endregion
 

@@ -12,6 +12,7 @@ using ECA.PageURL.Services;
 using OslerAlumni.Core.Kentico.Models;
 using OslerAlumni.Core.Models;
 using OslerAlumni.Core.Repositories;
+using CMS.SiteProvider;
 
 namespace OslerAlumni.Core.Services
 {
@@ -206,7 +207,7 @@ namespace OslerAlumni.Core.Services
                         return (object)_pageUrlService
                             .ResolveToAbsolute(
                                 url,
-                                _context.Site);
+                                SiteContext.CurrentSite);
                     });
         }
 
@@ -222,7 +223,7 @@ namespace OslerAlumni.Core.Services
                         $"{EmailLogoParameterName}_{cultureName.Replace("-", string.Empty)}",
                     cultureName => (object) _pageUrlService.ResolveToAbsolute(
                         _globalAssetService.GetEmailLogoUrl(cultureName),
-                        _context.Site));
+                        SiteContext.CurrentSite));
         }
 
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CMS.Helpers;
+using CMS.SiteProvider;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 using ECA.Core.Services;
@@ -69,7 +70,7 @@ namespace OslerAlumni.Core.Services
         {
             return string.IsNullOrWhiteSpace(str)
                 ? string.Empty
-                : $"{resStringPrefix}{str.ToSafeKenticoIdentifier(_context.Site?.SiteName)}";
+                : $"{resStringPrefix}{str.ToSafeKenticoIdentifier(SiteContext.CurrentSiteName)}";
         }
 
         #endregion

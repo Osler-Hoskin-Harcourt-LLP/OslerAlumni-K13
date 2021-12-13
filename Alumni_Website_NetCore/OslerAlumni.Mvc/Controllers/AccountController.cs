@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CMS.Activities.Loggers;
@@ -20,6 +21,7 @@ using OslerAlumni.Mvc.Core.Attributes.ActionFilters;
 using OslerAlumni.Mvc.Core.Controllers;
 using OslerAlumni.Mvc.Core.Definitions;
 using OslerAlumni.Mvc.Core.Kentico.Models;
+using OslerAlumni.Mvc.Core.Models;
 using OslerAlumni.Mvc.Core.Services;
 using OslerAlumni.Mvc.Models;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -196,7 +198,7 @@ namespace OslerAlumni.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateModel]
-        public async Task<IActionResult> RequestPasswordReset(
+        public async Task<IActionResult> RequestPasswordReset([FromBody]
             RequestPasswordResetPostModel model)
         {
             var user = _userRepository.GetByName(model.UserNameOrEmail) ??
@@ -268,15 +270,15 @@ namespace OslerAlumni.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateModel]
-        public async Task<IActionResult> ResetPassword(
+        public async Task<IActionResult> ResetPassword([FromBody]
             ResetPasswordFormModel model)
         {
-            var identityResult = _authenticationService.ResetUserPassword(
+            var identityResult = await _authenticationService.ResetUserPassword(
                 model.UserGuid, 
                 model.Token, 
                 model.Password);
 
-            if (identityResult.IsCompletedSuccessfully)
+            if (identityResult == IdentityResult.Success)
             {
                 switch (model.SetPasswordMode)
                 {
@@ -317,15 +319,14 @@ namespace OslerAlumni.Mvc.Controllers
                 }
             }
 
+            string errorMessage = string.Join(",", identityResult.Errors.Select(e => e.Description));
             _eventLogRepository.LogError(
                 GetType(),
                 nameof(ResetPassword),
-                $"Could not reset user password: {string.Join(",", identityResult.Exception.Message)}");
+                $"Could not reset user password: {errorMessage}");
 
-            return JsonContent(new BaseWebResponse<object>
-            {
-                Status = WebResponseStatus.Error,
-            });
+            ModelState.AddModelError(nameof(ResetPasswordFormModel.Password), errorMessage);
+            return new ValidationErrorJsonResult(ModelState);
         }
 
 

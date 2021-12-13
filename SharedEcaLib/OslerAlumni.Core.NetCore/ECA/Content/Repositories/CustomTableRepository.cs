@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CMS.CustomTables;
 using CMS.DataEngine;
+using CMS.SiteProvider;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 
@@ -98,7 +99,7 @@ namespace ECA.Content.Repositories
             var query = CustomTableItemProvider
                 .GetItems<T>()
                 .Columns(columnNames)
-                .OnSite(siteName.ReplaceIfEmpty(_context.Site?.SiteName));
+                .OnSite(siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName));
 
             if (enabledOnly && !string.IsNullOrWhiteSpace(EnabledColumnName))
             {

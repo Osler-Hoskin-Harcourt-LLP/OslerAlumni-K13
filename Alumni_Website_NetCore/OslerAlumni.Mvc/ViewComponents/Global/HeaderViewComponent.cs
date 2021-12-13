@@ -1,4 +1,6 @@
 using CMS.DocumentEngine;
+using CMS.Helpers;
+using CMS.Localization;
 using ECA.Core.Models;
 using ECA.Mvc.Navigation.Definitions;
 using ECA.Mvc.Navigation.Models;
@@ -8,6 +10,7 @@ using ECA.PageURL.Services;
 using Kentico.Content.Web.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using OslerAlumni.Core.Repositories;
 using OslerAlumni.Core.Services;
 using OslerAlumni.Mvc.Core.Services;
@@ -48,7 +51,7 @@ namespace OslerAlumniWebsite.ViewComponents.Global
 
             string searchPageUrl;
 
-            _pageUrlService.TryGetPageMainUrl(StandalonePageType.Search, _context.CultureName, out searchPageUrl);
+            _pageUrlService.TryGetPageMainUrl(StandalonePageType.Search, LocalizationContext.CurrentCulture.CultureCode, out searchPageUrl);
 
             var header = new HeaderViewModel
             {
@@ -120,7 +123,7 @@ namespace OslerAlumniWebsite.ViewComponents.Global
             return new LanguageToggleViewModel
             {
                 ShowToggle = true,
-                LinkUrl = $"{url}{Request.Query}"
+                LinkUrl = QueryHelpers.AddQueryString(url, Request.Query)
             };
         }
 

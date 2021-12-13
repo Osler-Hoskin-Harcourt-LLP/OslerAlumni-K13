@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using CMS.EmailEngine;
+using CMS.SiteProvider;
 using ECA.Caching.Models;
 using ECA.Caching.Services;
 using ECA.Core.Extensions;
@@ -34,7 +35,7 @@ namespace OslerAlumni.Core.Repositories
             string templateName,
             string siteName = null)
         {
-            siteName = siteName.ReplaceIfEmpty(_context.Site?.SiteName);
+            siteName = siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName);
 
             var cacheParameters = new CacheParameters
             {

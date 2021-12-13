@@ -1,3 +1,4 @@
+using CMS.SiteProvider;
 using ECA.Core.Models;
 using ECA.Core.Repositories;
 using ECA.PageURL.Kentico.Models;
@@ -46,7 +47,7 @@ namespace OslerAlumni.Mvc.Controllers
                     urlItem.NodeGUID,
                     urlItem.Culture,
                     out redirectUrl,
-                    _context.Site?.SiteName))
+                   SiteContext.CurrentSiteName))
             {
                 _eventLogRepository.LogError(
                     GetType(),

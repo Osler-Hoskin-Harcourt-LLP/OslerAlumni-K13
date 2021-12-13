@@ -1,4 +1,5 @@
 using CMS.Helpers;
+using CMS.Localization;
 using ECA.Core.Models;
 using ECA.PageURL.Services;
 using Kentico.Content.Web.Mvc;
@@ -78,7 +79,7 @@ namespace OslerAlumni.Mvc.Controllers
             boardOpportunityDetailsPageViewModel.SourceDisplayName = ResHelper.GetString(source?.CompanyName);
 
             boardOpportunityDetailsPageViewModel.SourceCompanyLogo =
-                _context.CultureName == GlobalConstants.Cultures.English ? source?.LogoEn : source?.LogoFr;
+                LocalizationContext.CurrentCulture.CultureCode == GlobalConstants.Cultures.English ? source?.LogoEn : source?.LogoFr;
 
             boardOpportunityDetailsPageViewModel.SourceCompanyLogoAltText = source?.LogoAltText;
 

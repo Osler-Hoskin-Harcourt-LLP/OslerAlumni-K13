@@ -42,7 +42,7 @@ namespace OslerAlumni.Mvc.Extensions.OslerControls.Button
                 _button.AddCssClass("c-button");
                 _button.AddCssClass("c-button-primary");
 
-                _button.InnerHtml.AppendHtml(ResHelper.GetString(Constants.ResourceStrings.Submit));
+                //_button.InnerHtml.AppendHtml(ResHelper.GetString(Constants.ResourceStrings.Submit));
             }
 
             /// <summary>
@@ -82,10 +82,10 @@ namespace OslerAlumni.Mvc.Extensions.OslerControls.Button
                 return this;
             }
 
-            public HtmlString ToHtmlString()
+            public IHtmlContent ToHtmlString()
             {
-                _divContainer.InnerHtml.AppendHtml(_button.ToString());
-                return new HtmlString(_divContainer.ToString());
+                _divContainer.InnerHtml.AppendHtml(_button);
+                return _divContainer;
             }
         }
     }

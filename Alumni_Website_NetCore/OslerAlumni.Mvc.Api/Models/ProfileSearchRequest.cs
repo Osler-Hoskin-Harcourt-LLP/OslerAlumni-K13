@@ -20,34 +20,34 @@ namespace OslerAlumni.Mvc.Api.Models
         public bool IncludeFilters { get; set; }
 
         [JsonProperty("location")]
-        public string Location { get; set; }
+        public string Location { get; set; } = "";
 
         [JsonProperty("yearOfCall")]
-        public string YearOfCall { get; set; }
+        public string YearOfCall { get; set; } = "";
 
         [JsonProperty("jurisdictions")]
-        public List<int> Jurisdictions { get; set; }
+        public List<int> Jurisdictions { get; set; } = new List<int>();
 
         [JsonIgnore]
-        public List<string> JurisdictionsCodeNames { get; set; }
+        public List<string> JurisdictionsCodeNames { get; set; } = new List<string>();
 
         [JsonProperty("industries")]
-        public List<int> Industries { get; set; }
+        public List<int> Industries { get; set; } = new List<int>();
 
         [JsonIgnore]
-        public List<string> IndustriesCodeNames { get; set; }
+        public List<string> IndustriesCodeNames { get; set; } = new List<string>();
 
         [JsonProperty("practiceAreas")]
-        public List<int> PracticeAreas { get; set; }
+        public List<int> PracticeAreas { get; set; } = new List<int>();
 
         [JsonIgnore]
-        public List<string> PracticeAreasCodeNames { get; set; }
+        public List<string> PracticeAreasCodeNames { get; set; } = new List<string>();
 
         [JsonProperty("officeLocations")]
-        public List<int> OfficeLocations { get; set; }
+        public List<int> OfficeLocations { get; set; } = new List<int>();
 
         [JsonIgnore]
-        public List<string> OfficeLocationsCodeNames { get; set; }
+        public List<string> OfficeLocationsCodeNames { get; set; } = new List<string>();
 
         #endregion
 

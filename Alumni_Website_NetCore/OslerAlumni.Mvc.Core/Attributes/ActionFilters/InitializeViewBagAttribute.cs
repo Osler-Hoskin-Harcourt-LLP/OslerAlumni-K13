@@ -18,13 +18,11 @@ namespace OslerAlumni.Mvc.Core.Attributes.ActionFilters
 
         public override void OnResultExecuting(ResultExecutingContext context)
         {
-            var configurationService = CMS.Core.Service.Resolve<IConfigurationService>();
-            var reCaptchaApiPublicKey = configurationService.GetWebConfigSetting<string>(
-                nameof(GoogleRecaptchaConfig.ReCaptchaApiPublicKey),
-                nameof(GoogleRecaptchaConfig));
+            var googleConfigration = CMS.Core.Service.Resolve<GoogleRecaptchaConfig>();
+            var reCaptchaApiPublicKey = googleConfigration.ReCaptchaApiPublicKey;
+;
 
-            var gtmCodeKey = configurationService.GetWebConfigSetting<string>(
-                nameof(GlobalConstants.Config.GTMCode));
+            var gtmCodeKey = GlobalConstants.Config.GTMCode;
 
             ((Controller)context.Controller).ViewBag.GoogleReCaptchaApiPublicKey =
                 reCaptchaApiPublicKey;

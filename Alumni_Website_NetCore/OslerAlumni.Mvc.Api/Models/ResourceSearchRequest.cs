@@ -28,7 +28,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// </summary>
         [AllowedResourceTypes(ErrorMessage = "Invalid Resource Types provided to filter by.")]
         [JsonProperty("resourceTypes")]
-        public List<string> ResourceTypes { get; set; }
+        public List<string> ResourceTypes { get; set; } = new List<string>();
 
         #endregion
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CMS.Helpers;
+using CMS.Localization;
 using ECA.Caching.Extensions;
 using ECA.Caching.Models;
 using ECA.Caching.Services;
@@ -43,7 +44,7 @@ namespace OslerAlumni.Mvc.Core.Repositories
         {
             if (string.IsNullOrWhiteSpace(cultureName))
             {
-                cultureName = _context.CultureName;
+                cultureName = LocalizationContext.CurrentCulture.CultureCode;
             }
 
             string cultureKey;

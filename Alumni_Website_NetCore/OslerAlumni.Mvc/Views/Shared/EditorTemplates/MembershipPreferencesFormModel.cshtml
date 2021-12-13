@@ -27,14 +27,14 @@
         <fieldset tabindex="-1" role="checkbox" aria-required="false">
             <legend><span class="show-for-sr">preferences resource string</span></legend>
             <div class="c-form-field-wrapper">
-                @Html.StyledCheckboxFor(model => model.IncludeEmailInDirectory)
+                @Html.StyledCheckboxFor(model => model.IncludeEmailInDirectory, nameof(MembershipPreferencesFormModel.IncludeEmailInDirectory))
             </div>
             @* The story for profile images is descoped at the moment *@
             @*<div class="c-form-field-wrapper">
                 @Html.StyledCheckboxFor(model => model.DisplayImageInDirectory)
             </div>*@
             <div class="c-form-field-wrapper">
-                @Html.StyledCheckboxFor(model => model.SubscribeToEmailUpdates)
+                @Html.StyledCheckboxFor(model => model.SubscribeToEmailUpdates, nameof(MembershipPreferencesFormModel.SubscribeToEmailUpdates))
             </div>
         </fieldset>
 

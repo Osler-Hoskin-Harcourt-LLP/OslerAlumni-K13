@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using CMS.EmailEngine;
 using CMS.MacroEngine;
+using CMS.SiteProvider;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 using ECA.Core.Repositories;
@@ -48,7 +49,7 @@ namespace OslerAlumni.Core.Repositories
                 }
 
                 EmailSender.SendEmailWithTemplateText(
-                    siteName.ReplaceIfEmpty(_context.Site?.SiteName),
+                    siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName),
                     email,
                     template,
                     resolver,

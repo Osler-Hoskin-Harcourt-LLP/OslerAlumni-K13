@@ -1,3 +1,4 @@
+using CMS.Base;
 using CMS.Membership;
 using ECA.Core.Services;
 using Kentico.Membership;
@@ -41,7 +42,7 @@ namespace OslerAlumni.Mvc.Core.Services
 
             if (user != null)
             {
-                return _userManager.GeneratePasswordResetTokenAsync(new ApplicationUser((UserInfo)user));
+                return _userManager.GeneratePasswordResetTokenAsync(new ApplicationUser(user.UserInfo));
             }
 
             return Task.FromResult(string.Empty);

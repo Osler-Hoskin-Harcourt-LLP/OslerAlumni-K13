@@ -2,11 +2,16 @@ using System;
 using System.Linq;
 using CMS.DocumentEngine;
 using CMS.Helpers;
+using CMS.Localization;
+using CMS.SiteProvider;
 using ECA.Caching.Models;
 using ECA.Core.Definitions;
 using ECA.Core.Models;
 using ECA.Core.Repositories;
 using ECA.Core.Services;
+using Kentico.Content.Web.Mvc;
+using Kentico.Web.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace ECA.Caching.Services
 {
@@ -194,7 +199,7 @@ namespace ECA.Caching.Services
             }
 
             // If we are in preview mode do not cache!
-            if (_context.IsPreviewMode)
+            if (CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().Preview().Enabled ?? false)
             {
                 return func(parameters);
             }
@@ -249,13 +254,13 @@ namespace ECA.Caching.Services
             // If the site name is not provided, use current site name
             if (string.IsNullOrEmpty(parameters.SiteName))
             {
-                parameters.SiteName = _context.Site?.SiteName;
+                parameters.SiteName = SiteContext.CurrentSiteName;
             }
 
             // If the culture code is not provided, use current culture code
             if (string.IsNullOrEmpty(parameters.CultureCode))
             {
-                parameters.CultureCode = _context.CultureName;
+                parameters.CultureCode = LocalizationContext.CurrentCulture.CultureCode;
             }
 
             // If a specific value is provided, it has priority

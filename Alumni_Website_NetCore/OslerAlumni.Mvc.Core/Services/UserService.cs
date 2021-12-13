@@ -1,3 +1,4 @@
+using CMS.Localization;
 using CMS.MediaLibrary;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
@@ -133,7 +134,7 @@ namespace OslerAlumni.Mvc.Core.Services
             return _profileService
                 .GetProfileUrl(
                     user?.OnePlaceReference,
-                    culture.ReplaceIfEmpty(_context.CultureName));
+                    culture.ReplaceIfEmpty(LocalizationContext.CurrentCulture.CultureCode));
         }
 
         public bool UploadProfileImage(IOslerUserInfo user, IFormFile file)

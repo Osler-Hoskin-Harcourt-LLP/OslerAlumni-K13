@@ -1,7 +1,8 @@
-using System;
-using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 using OslerAlumni.Mvc.Core.Attributes.Validation;
 using OslerAlumni.Mvc.Core.Definitions;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OslerAlumni.Mvc.Models
 {

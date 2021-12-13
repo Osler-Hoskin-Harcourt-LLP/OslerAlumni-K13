@@ -1,4 +1,5 @@
 using CMS.DocumentEngine;
+using CMS.Localization;
 using ECA.Core.Models;
 using ECA.PageURL.Definitions;
 using ECA.PageURL.Services;
@@ -68,7 +69,7 @@ namespace OslerAlumni.Mvc.Core.Controllers
 
             if (!_pageUrlService.TryGetPageMainUrl(
                     standalonePageType,
-                    _context.CultureName,
+                    LocalizationContext.CurrentCulture.CultureCode,
                     out url))
             {
                 return NotFound();

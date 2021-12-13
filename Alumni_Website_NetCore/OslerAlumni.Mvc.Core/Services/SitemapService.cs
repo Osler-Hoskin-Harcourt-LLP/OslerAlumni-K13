@@ -61,7 +61,7 @@ namespace OslerAlumni.Mvc.Core.Services
                 }
 
                 return GetSitemapDocument(documents.Select(n => new SitemapNode() { Url = DocumentURLProvider.GetAbsoluteLiveSiteURL(n), LastModified = n.DocumentModifiedWhen }));
-            }, new CacheParameters() { CacheKey = nameof(GetSitemap), Duration = 600 });
+            }, new CacheParameters() { CacheKey = nameof(GetSitemap) + culture, Duration = 600 });
 
         }
 

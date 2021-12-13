@@ -33,7 +33,6 @@
   <ItemGroup>
     <Compile Remove="Attributes\ActionFilters\OslerAuthorizeAttribute.cs" />
     <Compile Remove="Attributes\ActionFilters\ValidateHeaderAntiForgeryTokenAttribute.cs" />
-    <Compile Remove="Attributes\Validation\PasswordPolicyEnforceAttribute.cs" />
     <Compile Remove="Extensions\ModelBinderDictionaryExtensions.cs" />
     <Compile Remove="Helpers\HttpResponseHelper.cs" />
     <Compile Remove="Repositories\CookieStoreRepository.cs" />

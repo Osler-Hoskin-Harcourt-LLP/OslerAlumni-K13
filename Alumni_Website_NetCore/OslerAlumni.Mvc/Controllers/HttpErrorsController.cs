@@ -1,4 +1,6 @@
 using CMS.DocumentEngine;
+using CMS.Localization;
+using CMS.SiteProvider;
 using ECA.Content.Extensions;
 using ECA.Core.Models;
 using ECA.PageURL.Definitions;
@@ -59,8 +61,8 @@ namespace OslerAlumni.Mvc.Controllers
 
             if (!_pageService.TryGetStandalonePage(
                     errorPageType,
-                    _context.CultureName,
-                    _context.Site?.SiteName,
+                    LocalizationContext.CurrentCulture.CultureCode,
+                    SiteContext.CurrentSiteName,
                     out page,
                     includeAllCoupledColumns: true))
             {

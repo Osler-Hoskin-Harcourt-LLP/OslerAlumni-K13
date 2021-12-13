@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Web;
 using CMS.Membership;
+using CMS.SiteProvider;
 using ECA.Core.Definitions;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
@@ -33,9 +34,7 @@ namespace OslerAlumni.Core.Repositories
             {
                 if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                 {
-                    return (_context.User == null)
-                        ? null
-                        : new OslerUserInfo(_context.User);
+                    return new OslerUserInfo(MembershipContext.AuthenticatedUser);
                 }
 
                 return null;
@@ -162,18 +161,18 @@ namespace OslerAlumni.Core.Repositories
                 {
                     UserInfoProvider.AddUserToSite(
                         user.UserName,
-                        siteName.ReplaceIfEmpty(_context.Site?.SiteName));
+                        siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName));
                 }
 
                 if (user.IsCompetitor)
                 {
                     UserInfoProvider.AddUserToRole(user.UserName, GlobalConstants.Roles.CompetitorRole,
-                        siteName.ReplaceIfEmpty(_context.Site?.SiteName));
+                        siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName));
                 }
                 else
                 {
                     UserInfoProvider.RemoveUserFromRole(user.UserName, GlobalConstants.Roles.CompetitorRole,
-                        siteName.ReplaceIfEmpty(_context.Site?.SiteName));
+                        siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName));
                 }
 
 

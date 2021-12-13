@@ -4,6 +4,8 @@ using System.Linq;
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.Helpers;
+using CMS.Localization;
+using CMS.SiteProvider;
 using ECA.Caching.Models;
 using ECA.Caching.Services;
 using ECA.Core.Definitions;
@@ -13,6 +15,9 @@ using ECA.Core.Repositories;
 using ECA.Mvc.Navigation.Kentico.Models;
 using ECA.Mvc.Navigation.Kentico.Providers;
 using ECA.PageURL.Definitions;
+using Kentico.Content.Web.Mvc;
+using Kentico.Web.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace ECA.Mvc.Navigation.Repositories
 {
@@ -52,9 +57,9 @@ namespace ECA.Mvc.Navigation.Repositories
             }
 
             cultureName =
-                cultureName.ReplaceIfEmpty(_context.CultureName);
+                cultureName.ReplaceIfEmpty(LocalizationContext.CurrentCulture.CultureCode);
             siteName =
-                siteName.ReplaceIfEmpty(_context.Site?.SiteName);
+                siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName);
 
             var cacheParameters = new CacheParameters
             {
@@ -88,8 +93,8 @@ namespace ECA.Mvc.Navigation.Repositories
                         .Culture(cultureName)
                         .CombineWithDefaultCulture(false)
                         .Path(path)
-                        .LatestVersion(_context.IsPreviewMode)
-                        .Published(!_context.IsPreviewMode);
+                        .LatestVersion(CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().Preview().Enabled??false)
+                        .Published(!(CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().Preview().Enabled ?? false));
 
                     if (!includeProtected)
                     {

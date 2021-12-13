@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using CMS.Localization;
+using CMS.SiteProvider;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 using ECA.Core.Repositories;
@@ -55,7 +57,7 @@ namespace OslerAlumni.Core.Services
             try
             {
                 cultureName =
-                    cultureName.ReplaceIfEmpty(_context.CultureName);
+                    cultureName.ReplaceIfEmpty(LocalizationContext.CurrentCulture.CultureCode);
 
                 string logoUrl;
 
@@ -89,7 +91,7 @@ namespace OslerAlumni.Core.Services
             try
             {
                 cultureName =
-                    cultureName.ReplaceIfEmpty(_context.CultureName);
+                    cultureName.ReplaceIfEmpty(SiteContext.CurrentSiteName);
 
                 string logoUrl;
 
@@ -122,7 +124,7 @@ namespace OslerAlumni.Core.Services
             try
             {
                 cultureName =
-                    cultureName.ReplaceIfEmpty(_context.CultureName);
+                    cultureName.ReplaceIfEmpty(LocalizationContext.CurrentCulture.CultureCode);
 
                 string logoUrl;
 

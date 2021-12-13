@@ -1,5 +1,6 @@
 @using CMS.Helpers
 @using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Core.Helpers
 @using OslerAlumni.Mvc.Extensions
 @using OslerAlumni.Mvc.Extensions.OslerControls.Button
 @using OslerAlumni.Mvc.Models
@@ -27,7 +28,7 @@
         @Html.HiddenFor(model => model.UserGuid)
         <div class="c-form-field">
             <div class="c-form-field-wrapper">
-            <p class="is-label">@Html.DisplayNameFor(model => model.BoardMembershipList)</p>
+            <p class="is-label">@ModelMetaDataHelper.GetModelLocalizedDisplayName(Html, typeof(MembershipBoardsFormModel), nameof(MembershipBoardsFormModel.BoardMembershipList))</p>
 
 
             @if (Model.BoardMembershipList?.Any() ?? false)
@@ -41,7 +42,7 @@
             </div>
         </div>
 
-        @Html.StyledEditorFor(model => model.NewBoard)
+        @Html.StyledEditorFor(model => model.NewBoard, nameof(MembershipBoardsFormModel.NewBoard))
 
         @(Html.Osler()
                 .FormSubmitButton()

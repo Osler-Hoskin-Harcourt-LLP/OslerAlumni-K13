@@ -18,9 +18,9 @@ namespace OslerAlumni.Mvc.Api.Models
     public class EventSearchRequest
         : SearchRequest<Event>
     {
-        
+
         [JsonIgnore]
-        public override string OrderBy { get; set; }
+        public override string OrderBy { get; set; } = "";
 
         [JsonIgnore]
         public override OrderByDirection? OrderByDirection { get; set; }

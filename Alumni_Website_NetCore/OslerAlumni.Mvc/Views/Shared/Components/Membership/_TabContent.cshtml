@@ -10,7 +10,7 @@
     @Html.OslerForModel().RichTextFieldFor(Model.Description).AddClass("has-title has-medium-text").ToHtmlString()
 }
 
-@Html.EditorFor(model => Model.FormPostModel, "MembershipBasicInfoFormModel")
+@Html.EditorFor(model => Model.FormPostModel, Model.FormPostModel.GetType().Name)
 
 @if (Model.HasSuccessState)
 {

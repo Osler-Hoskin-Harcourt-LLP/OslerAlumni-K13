@@ -5,6 +5,7 @@ using System.Linq;
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.Helpers;
+using CMS.SiteProvider;
 using ECA.Caching.Models;
 using ECA.Caching.Services;
 using ECA.Content.Repositories;
@@ -70,7 +71,7 @@ namespace OslerAlumni.Core.Services
                     return false;
                 }
 
-                if (!user.IsAlumniUser(_context.Site?.SiteName))
+                if (!user.IsAlumniUser(SiteContext.CurrentSiteName))
                 {
                     // Don't need to log an error - there are non-Alumni users in the system
                     return false;
@@ -212,7 +213,7 @@ namespace OslerAlumni.Core.Services
                     return false;
                 }
 
-                if (!user.IsAlumniUser(_context.Site?.SiteName))
+                if (!user.IsAlumniUser(SiteContext.CurrentSiteName))
                 {
                     // Don't need to log an error - there are non-Alumni users in the system
                     return false;
@@ -394,7 +395,7 @@ namespace OslerAlumni.Core.Services
                 AllowNullValue = false,
                 CacheDependencies = new List<string>()
                 {
-                    string.Format(GlobalConstants.Caching.Pages.PagesByType, _context.Site.SiteName,
+                    string.Format(GlobalConstants.Caching.Pages.PagesByType, SiteContext.CurrentSiteName,
                         PageType_Profile.CLASS_NAME)
                 }
             };
@@ -428,7 +429,7 @@ namespace OslerAlumni.Core.Services
                 CultureCode = culture,
                 CacheDependencies = new List<string>()
                 {
-                    string.Format(GlobalConstants.Caching.Pages.PagesByType, _context.Site.SiteName,
+                    string.Format(GlobalConstants.Caching.Pages.PagesByType, SiteContext.CurrentSiteName,
                         PageType_Profile.CLASS_NAME)
                 }
             };

@@ -10,6 +10,7 @@ using ECA.Core.Repositories;
 using ECA.Core.Services;
 using Newtonsoft.Json;
 using OslerAlumni.Core.Models;
+using CMS.SiteProvider;
 
 namespace OslerAlumni.Core.Services
 {
@@ -82,7 +83,7 @@ namespace OslerAlumni.Core.Services
             try
             {
                 var responseBody = await GetAsync<BaseWebResponse<string>>(
-                        $"{_context.Site.SitePresentationURL}/internalapi/getpasswordresettoken?userguid={userGuid}");
+                        $"{SiteContext.CurrentSite.SitePresentationURL}/internalapi/getpasswordresettoken?userguid={userGuid}");
 
                 if (responseBody.Status == WebResponseStatus.Success)
                 {

@@ -1,5 +1,6 @@
 using CMS.DocumentEngine;
 using CMS.Helpers;
+using CMS.Localization;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 using ECA.Core.Services;
@@ -111,7 +112,7 @@ namespace OslerAlumni.Mvc.Core.Services
                 (news, item) =>
                 {
                     item.Description =
-                        news.DatePublished.ToString(StringHelper.GetDateTimeFormat(_context.CultureName));
+                        news.DatePublished.ToString(StringHelper.GetDateTimeFormat(LocalizationContext.CurrentCulture.CultureCode));
                 }
             );
             return featuredItems;

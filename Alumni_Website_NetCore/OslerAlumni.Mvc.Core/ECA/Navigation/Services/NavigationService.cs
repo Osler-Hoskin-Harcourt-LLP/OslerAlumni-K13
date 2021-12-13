@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using CMS.DataEngine;
 using CMS.Helpers;
+using CMS.Localization;
+using CMS.SiteProvider;
 using ECA.Caching.Models;
 using ECA.Caching.Services;
 using ECA.Content.Repositories;
@@ -62,8 +64,8 @@ namespace ECA.Mvc.Navigation.Services
             bool includeProtected = false,
             string pageTypeName = null)
         {
-            var cultureName = _context.CultureName;
-            var siteName = _context.Site?.SiteName;
+            var cultureName = LocalizationContext.CurrentCulture.CultureCode;
+            var siteName = SiteContext.CurrentSiteName;
 
             //If LoggedInViaOlserNetwork remove ProfileAndPreferences link
             var loggedInViaOlserNetwork = _userRepository.IsSystemUser(_userRepository.CurrentUser?

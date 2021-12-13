@@ -60,21 +60,17 @@ namespace OslerAlumni.Mvc.Models
         [Display(Name = Constants.ResourceStrings.Form.MembershipBasicInfo.CurrentIndustry)]
         public string CurrentIndustry { get; set; }
 
-        [Display(Name = Constants.ResourceStrings.Form.MembershipBasicInfo.LinkedInUrl)]
-        [Description(Constants.ResourceStrings.Form.MembershipBasicInfo.LinkedInUrlExplanation)]
-        
+        [Display(Name = Constants.ResourceStrings.Form.MembershipBasicInfo.LinkedInUrl, Description = Constants.ResourceStrings.Form.MembershipBasicInfo.LinkedInUrlExplanation)]        
         [RegularExpression(GlobalConstants.RegexExpressions.LinkedInUrlRegex, ErrorMessage = Constants.ResourceStrings.Form.MembershipBasicInfo.LinkedInUrlError)]
         [LocalizedMaxLength(200)]
         public string LinkedInUrl { get; set; }
 
-        [Display(Name = Constants.ResourceStrings.Form.MembershipBasicInfo.TwitterUrl)]
-        [Description(Constants.ResourceStrings.Form.MembershipBasicInfo.TwitterUrlExplanation)]
+        [Display(Name = Constants.ResourceStrings.Form.MembershipBasicInfo.TwitterUrl, Description = Constants.ResourceStrings.Form.MembershipBasicInfo.TwitterUrlExplanation)]
         [RegularExpression(GlobalConstants.RegexExpressions.TwitterUrlRegex, ErrorMessage = Constants.ResourceStrings.Form.MembershipBasicInfo.TwitterUrlError)]
         [LocalizedMaxLength(200)]
         public string TwitterUrl { get; set; }
 
-        [Display(Name = Constants.ResourceStrings.Form.MembershipBasicInfo.InstagramUrl)]
-        [Description(Constants.ResourceStrings.Form.MembershipBasicInfo.InstagramUrlExplanation)]
+        [Display(Name = Constants.ResourceStrings.Form.MembershipBasicInfo.InstagramUrl, Description = Constants.ResourceStrings.Form.MembershipBasicInfo.InstagramUrlExplanation)]
         [RegularExpression(GlobalConstants.RegexExpressions.InstagramUrlRegex, ErrorMessage = Constants.ResourceStrings.Form.MembershipBasicInfo.InstagramUrlError)]
         [LocalizedMaxLength(200)]
         public string InstagramUrl { get; set; }

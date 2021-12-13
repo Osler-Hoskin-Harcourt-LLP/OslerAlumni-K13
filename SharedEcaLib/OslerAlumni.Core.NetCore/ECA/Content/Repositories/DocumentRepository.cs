@@ -1,16 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.Helpers;
+using CMS.Localization;
 using CMS.Membership;
+using CMS.SiteProvider;
 using ECA.Content.Extensions;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 using ECA.Core.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Kentico.Content.Web.Mvc;
+using Kentico.Web.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace ECA.Content.Repositories
 {
@@ -114,7 +118,7 @@ namespace ECA.Content.Repositories
             int nodeId,
             out string siteName)
         {
-            siteName = _context.Site?.SiteName;
+            siteName = SiteContext.CurrentSiteName;
 
             try
             {
@@ -909,9 +913,9 @@ namespace ECA.Content.Repositories
                 .Culture(querySettings.CultureName)
                 .CombineWithDefaultCulture(false)
                 .LatestVersion(
-                    querySettings.IgnorePublishedState || _context.IsPreviewMode)
+                    querySettings.IgnorePublishedState || (CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().Preview().Enabled ?? false))
                 .Published(
-                    !querySettings.IgnorePublishedState && !_context.IsPreviewMode)
+                    !querySettings.IgnorePublishedState && (!CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().Preview().Enabled ?? false))
                 .OrderBy();
 
             if (!string.IsNullOrWhiteSpace(querySettings.Path))
@@ -987,9 +991,9 @@ namespace ECA.Content.Repositories
                 .Culture(querySettings.CultureName)
                 .CombineWithDefaultCulture(false)
                 .LatestVersion(
-                    querySettings.IgnorePublishedState || _context.IsPreviewMode)
+                    querySettings.IgnorePublishedState || (CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().Preview().Enabled ?? false))
                 .Published(
-                    !querySettings.IgnorePublishedState && !_context.IsPreviewMode);
+                    !querySettings.IgnorePublishedState && (CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().Preview().Enabled ?? false));
 
             if (!string.IsNullOrWhiteSpace(querySettings.Path))
             {
@@ -1197,10 +1201,10 @@ namespace ECA.Content.Repositories
                     .ToList();
 
                 SiteName =
-                    siteName.ReplaceIfEmpty(context.Site?.SiteName);
+                    siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName);
 
                 CultureName =
-                    cultureName.ReplaceIfEmpty(context.CultureName);
+                    cultureName.ReplaceIfEmpty(LocalizationContext.CurrentCulture.CultureCode);
             }
         }
 

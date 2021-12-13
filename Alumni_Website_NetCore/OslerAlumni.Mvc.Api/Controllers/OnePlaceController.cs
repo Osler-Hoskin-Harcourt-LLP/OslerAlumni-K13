@@ -20,7 +20,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
     /// It expects to run in the context of a session
     /// of an authenticated user on the main site.
     /// </summary>
-    [Area("oneplace")]
     [Authorize]
     public class OnePlaceController
         : BaseApiController
@@ -52,7 +51,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// <remarks>
         /// This returns all active functions in OnePlace.
         /// </remarks>
-        [Route("functions")]
         [HttpPost]
         public ActionResult Functions()
         {
@@ -100,7 +98,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// <remarks>
         /// This search returns all attendees for a oneplace function who have RSVP = yes.
         /// </remarks>
-        [Route("functionAttendeesMock")]
         [HttpPost]
         public ActionResult FunctionAttendeesMock(
             [FromBody] FunctionAttendeeSearchRequest searchRequest)
@@ -139,7 +136,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// <remarks>
         /// This search returns all attendees for a oneplace function who have RSVP = yes.
         /// </remarks>
-        [Route("functionAttendees")]
         [HttpPost]
         public ActionResult FunctionAttendees(
             [FromBody] FunctionAttendeeSearchRequest searchRequest)

@@ -29,7 +29,7 @@
 
     string GetSubPageHref(string subpageAlias)
     {
-        return $"{new Uri(ViewContext.HttpContext.Request.Scheme + "://" + ViewContext.HttpContext.Request.Host + "/" + ViewContext.HttpContext.Request.Path)}?{Constants.RouteParams.SubpageAlias}={subpageAlias}";
+        return $"{new Uri(ViewContext.HttpContext.Request.Scheme + "://" + ViewContext.HttpContext.Request.Host + ViewContext.HttpContext.Request.Path)}?{Constants.RouteParams.SubpageAlias}={subpageAlias}";
     }
 
     string GetNodeAliasPath(string controller, string action)

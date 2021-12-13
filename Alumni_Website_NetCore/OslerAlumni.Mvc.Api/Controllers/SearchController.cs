@@ -16,7 +16,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
     /// It expects to run in the context of a session
     /// of an authenticated user on the main site.
     /// </summary>
-    [Area("search")]
     [Authorize]
     public class SearchController
         : BaseApiController
@@ -73,7 +72,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// <remarks>
         /// This search returns all currently published Board Opportunities.
         /// </remarks>
-        [Route("boardOpportunities")]
         [HttpPost]
         public ActionResult BoardOpportunities(
             [Microsoft.AspNetCore.Mvc.FromBody] BoardOpportunitySearchRequest searchRequest)
@@ -89,7 +87,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        [Route("developmentResources")]
         [HttpPost]
         public ActionResult DevelopmentResources(
             [FromBody] DevelopmentResourceSearchRequest searchRequest)
@@ -102,7 +99,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        [Route("directory")]
         [HttpPost]
         public ActionResult Directory(
             [FromBody] ProfileSearchRequest searchRequest)
@@ -121,7 +117,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// This search returns all types of upcoming events as well
         /// as past events that are of type On-Demand Webinar.
         /// </remarks>
-        [Route("events")]
         [HttpPost]
         public ActionResult Events(
             [FromBody] EventSearchRequest searchRequest)
@@ -137,7 +132,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        [Route("global")]
         [HttpPost]
         public ActionResult GlobalSearch(
             [FromBody] GlobalSearchRequest searchRequest)
@@ -155,7 +149,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// <remarks>
         /// This search returns all currently published jobs postings.
         /// </remarks>
-        [Route("jobs")]
         [HttpPost]
         public ActionResult Jobs(
             [FromBody] JobSearchRequest searchRequest)
@@ -170,7 +163,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        [Route("news")]
         [HttpPost]
         public ActionResult News(
             [FromBody] NewsSearchRequest searchRequest)
@@ -185,7 +177,6 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// </summary>
         /// <param name="searchRequest"></param>
         /// <returns></returns>
-        [Route("resources")]
         [HttpPost]
         public ActionResult Resources(
             [FromBody] ResourceSearchRequest searchRequest)

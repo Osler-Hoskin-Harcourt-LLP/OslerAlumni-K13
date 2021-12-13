@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using CMS.DataEngine;
+using CMS.Localization;
+using CMS.SiteProvider;
 using ECA.Caching.Models;
 using ECA.Caching.Services;
 using ECA.Content.Extensions;
@@ -47,10 +49,10 @@ namespace OslerAlumni.Mvc.Core.Services
                 CacheKey = GlobalConstants.Caching.Prefix +
                            $"{nameof(JobsService)}|{nameof(GetLatestJobs)}|top|{top}",
                 AllowNullValue = false,
-                CultureCode = _context.CultureName,
+                CultureCode = LocalizationContext.CurrentCulture.CultureCode,
                 CacheDependencies = new List<string>()
                 {
-                    string.Format(GlobalConstants.Caching.Pages.PagesByType, _context.Site.SiteName,
+                    string.Format(GlobalConstants.Caching.Pages.PagesByType, SiteContext.CurrentSiteName,
                         PageType_Job.CLASS_NAME)
                 }
             };

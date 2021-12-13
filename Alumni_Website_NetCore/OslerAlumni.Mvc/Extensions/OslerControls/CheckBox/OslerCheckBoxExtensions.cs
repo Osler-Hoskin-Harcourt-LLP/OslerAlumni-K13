@@ -47,9 +47,9 @@ namespace OslerAlumni.Mvc.Extensions.OslerControls.CheckBox
                 }
             }
 
-            public HtmlString ToHtmlString()
+            public IHtmlContent ToHtmlString()
             {
-                return new HtmlString(input.ToString());
+                return input;
             }
 
         }

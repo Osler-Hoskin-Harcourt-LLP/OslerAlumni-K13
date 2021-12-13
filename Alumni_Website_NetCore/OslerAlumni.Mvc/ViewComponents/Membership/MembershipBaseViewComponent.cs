@@ -42,7 +42,7 @@ namespace OslerAlumniWebsite.ViewComponents.Membership
 
             var model = new MembershipInfoPageTabContentViewModel(subPage)
             {
-                FormPostModel = formPostModel.Invoke(_userRepository.CurrentUser),
+                FormPostModel = formPostModel.Invoke(_userRepository.GetByName(_userRepository.CurrentUser.UserName)),
             };
 
             return View("~/Views/Shared/Components/Membership/_TabContent.cshtml", model);

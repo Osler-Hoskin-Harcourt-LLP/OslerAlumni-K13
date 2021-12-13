@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CMS.DocumentEngine;
 using CMS.Helpers;
+using CMS.Localization;
+using CMS.SiteProvider;
 using ECA.Caching.Models;
 using ECA.Caching.Services;
 using ECA.Content.Repositories;
@@ -66,8 +68,8 @@ namespace ECA.PageURL.Services
                 return false;
             }
 
-            cultureName = cultureName.ReplaceIfEmpty(_context.CultureName);
-            siteName = siteName.ReplaceIfEmpty(_context.Site?.SiteName);
+            cultureName = cultureName.ReplaceIfEmpty(LocalizationContext.CurrentCulture.CultureCode);
+            siteName = siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName);
 
             var columnNameList = columnNames?.ToArray();
 
@@ -148,7 +150,7 @@ namespace ECA.PageURL.Services
                         if (!TryGetPage(
                                 page.NodeGUID,
                                 culture.Value,
-                                _context.Site?.SiteName,
+                                SiteContext.CurrentSiteName,
                                 out culturePage,
                                 page.NodeClassName,
                                 columnNameList,

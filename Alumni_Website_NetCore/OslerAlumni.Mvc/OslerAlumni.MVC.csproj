@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Remove="Controllers\HttpGetAttribute.cs" />
     <Compile Remove="Controllers\MetadataController.cs" />
+    <Compile Remove="Infrastructure\MvcBootstrapItem.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,14 +19,14 @@
 
   <ItemGroup>
     <PackageReference Include="kentico.xperience.aspnetcore.webapp" Version="13.0.49" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Membership\EditorTemplates\" />
-    <Folder Include="Views\Shared\Components\Membership\EditorTemplates\" />
+    <Folder Include="Infrastructure\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

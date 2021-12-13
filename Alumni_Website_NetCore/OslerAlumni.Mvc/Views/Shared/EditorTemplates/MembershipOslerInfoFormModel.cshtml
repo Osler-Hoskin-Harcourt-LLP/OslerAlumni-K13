@@ -1,15 +1,16 @@
 @using CMS.Helpers
 @using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Core.Helpers
 @using OslerAlumni.Mvc.Models
 @model MembershipOslerInfoFormModel
 
 <div class="c-form-field-wrapper">
-    <p class="is-label">@Html.DisplayNameFor(model => model.YearsAtOsler)</p>
+    <p class="is-label">@ModelMetaDataHelper.GetModelLocalizedDisplayName(Html, typeof(MembershipOslerInfoFormModel), nameof(MembershipOslerInfoFormModel.YearsAtOsler))</p>
     <p>@(!string.IsNullOrWhiteSpace(Model.YearsAtOsler)? Model.YearsAtOsler : ResHelper.GetString(Constants.ResourceStrings.Form.OslerInformation.YearsAtOslerEmpty) )</p>
 </div>
 
 <div class="c-form-field-wrapper">
-<p class="is-label">@Html.DisplayNameFor(model => model.OslerLocations)</p>
+<p class="is-label">@ModelMetaDataHelper.GetModelLocalizedDisplayName(Html, typeof(MembershipOslerInfoFormModel), nameof(MembershipOslerInfoFormModel.OslerLocations))</p>
 
 @if (Model.OslerLocations.Any())
 {
@@ -24,7 +25,7 @@ else
 </div>
 
 <div class="c-form-field-wrapper">
-<p class="is-label">@Html.DisplayNameFor(model => model.OslerPracticeAreas)</p>
+<p class="is-label">@ModelMetaDataHelper.GetModelLocalizedDisplayName(Html, typeof(MembershipOslerInfoFormModel), nameof(MembershipOslerInfoFormModel.OslerPracticeAreas))</p>
 
 @if (Model.OslerPracticeAreas.Any())
 {

@@ -3,6 +3,7 @@ using System.IO;
 using System.Web;
 using CMS.Helpers;
 using CMS.MediaLibrary;
+using CMS.SiteProvider;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 using ECA.Core.Repositories;
@@ -51,7 +52,7 @@ namespace OslerAlumni.Mvc.Core.Services
 
             var mediaLibrary =
                 MediaLibraryInfoProvider.GetMediaLibraryInfo(mediaLibraryType.ToStringRepresentation(),
-                    _context.Site.SiteName);
+                    SiteContext.CurrentSiteName);
 
             if (mediaLibrary == null)
             {
@@ -101,7 +102,7 @@ namespace OslerAlumni.Mvc.Core.Services
                     FileTitle = fileName,
                     FilePath = "/",
                     FileExtension = fileExtension,
-                    FileSiteID = _context.Site.SiteID,
+                    FileSiteID = SiteContext.CurrentSiteID,
                     FileLibraryID = mediaLibrary.LibraryID,
                     FileGUID = fileGuid
                 };
@@ -128,7 +129,7 @@ namespace OslerAlumni.Mvc.Core.Services
 
             try
             {
-                mediaFileInfo = MediaFileInfoProvider.GetMediaFileInfo(fileGuid, _context.Site.SiteName);
+                mediaFileInfo = MediaFileInfoProvider.GetMediaFileInfo(fileGuid, SiteContext.CurrentSiteName);
 
                 if (mediaFileInfo == null)
                 {
@@ -172,7 +173,7 @@ namespace OslerAlumni.Mvc.Core.Services
         {
             try
             {
-                var previousFile = MediaFileInfoProvider.GetMediaFileInfo(fileGuid, _context.Site.SiteName);
+                var previousFile = MediaFileInfoProvider.GetMediaFileInfo(fileGuid, SiteContext.CurrentSiteName);
 
                 if (previousFile != null)
                 {

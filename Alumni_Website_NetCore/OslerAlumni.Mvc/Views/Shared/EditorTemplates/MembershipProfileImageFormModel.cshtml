@@ -92,6 +92,7 @@ else
             </div>
             @(Html.StyledFileUploaderFor(
                           model => model.FileUpload,
+                          nameof(MembershipProfileImageFormModel.FileUpload),
                           Html.LabelFor(
                               m => m.FileUpload,
                               new

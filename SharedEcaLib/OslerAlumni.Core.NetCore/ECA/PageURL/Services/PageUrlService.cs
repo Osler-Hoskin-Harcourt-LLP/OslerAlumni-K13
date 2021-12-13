@@ -350,7 +350,7 @@ namespace ECA.PageURL.Services
                 return false;
             }
 
-            siteName = siteName.ReplaceIfEmpty(_context.Site?.SiteName);
+            siteName = siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName);
 
             var cacheParameters = new CacheParameters
             {

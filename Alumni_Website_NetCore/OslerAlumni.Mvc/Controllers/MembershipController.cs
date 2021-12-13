@@ -112,7 +112,7 @@ namespace OslerAlumni.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken(Order = 1)]
         [ValidateModel(Order = 2)]
-        public IActionResult MembershipUpdateBasicInfo(
+        public IActionResult MembershipUpdateBasicInfo([FromBody]
             MembershipBasicInfoFormModel model)
         {
             var currentUser = _userRepository.CurrentUser;
@@ -155,7 +155,7 @@ namespace OslerAlumni.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken(Order = 1)]
         [ValidateModel(Order = 2)]
-        public IActionResult MembershipUpdateBoards(
+        public IActionResult MembershipUpdateBoards([FromBody]
             MembershipBoardsFormModel model)
         {
             var currentUser = _userRepository.CurrentUser;
@@ -197,7 +197,7 @@ namespace OslerAlumni.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken(Order = 1)]
         [ValidateModel(Order = 2)]
-        public IActionResult MembershipUpdatePreferences(
+        public IActionResult MembershipUpdatePreferences([FromBody]
             MembershipPreferencesFormModel model)
         {
             var currentUser = _userRepository.CurrentUser;
@@ -229,7 +229,7 @@ namespace OslerAlumni.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken(Order = 1)]
         [ValidateModel(Order = 2)]
-        public IActionResult MembershipUploadProfileImage(
+        public IActionResult MembershipUploadProfileImage([FromBody]
             MembershipProfileImageFormModel model)
         {
             bool updated = false;

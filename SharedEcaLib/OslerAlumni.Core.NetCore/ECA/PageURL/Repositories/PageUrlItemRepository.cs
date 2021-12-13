@@ -5,6 +5,7 @@ using CMS.CustomTables;
 using CMS.DataEngine;
 using CMS.DocumentEngine;
 using CMS.DocumentEngine.Internal;
+using CMS.SiteProvider;
 using ECA.Content.Repositories;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
@@ -161,7 +162,7 @@ namespace ECA.PageURL.Repositories
                 var query = GetPageUrlItemsQuery(
                     nodeGuid,
                     cultureNames,
-                    siteName.ReplaceIfEmpty(_context.Site?.SiteName),
+                    siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName),
                     columnNames);
 
                 if (isMainOnly)
@@ -211,7 +212,7 @@ namespace ECA.PageURL.Repositories
                 var query = CustomTableItemProvider
                     .GetItems<CustomTable_PageURLItem>()
                     .Columns(columnNames)
-                    .OnSite(siteName.ReplaceIfEmpty(_context.Site?.SiteName))
+                    .OnSite(siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName))
                     .WhereEquals(
                         nameof(CustomTable_PageURLItem.Culture),
                         cultureName)
@@ -293,7 +294,7 @@ namespace ECA.PageURL.Repositories
                 var query = CustomTableItemProvider
                     .GetItems<CustomTable_PageURLItem>()
                     .Columns(columnNames)
-                    .OnSite(siteName.ReplaceIfEmpty(_context.Site?.SiteName))
+                    .OnSite(siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName))
                     .WhereEquals(
                         nameof(CustomTable_PageURLItem.Culture),
                         cultureName)
@@ -389,7 +390,7 @@ namespace ECA.PageURL.Repositories
             var query = CustomTableItemProvider
                 .GetItems<CustomTable_PageURLItem>()
                 .Columns(columnNames)
-                .OnSite(siteName.ReplaceIfEmpty(_context.Site?.SiteName))
+                .OnSite(siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName))
                 .WhereEquals(
                     nameof(CustomTable_PageURLItem.NodeGUID),
                     nodeGuid);

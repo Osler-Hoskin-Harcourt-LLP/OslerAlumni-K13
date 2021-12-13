@@ -1,6 +1,9 @@
 using CMS.Localization;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
+using Kentico.Content.Web.Mvc;
+using Kentico.Web.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using OslerAlumni.Core.Definitions;
@@ -98,7 +101,7 @@ namespace OslerAlumni.Mvc.Extensions
         {
             PopulateContextIfEmpty(html, ref context);
 
-            return (context?.CultureName)
+            return (LocalizationContext.CurrentCulture.CultureCode)
                 .ReplaceIfEmpty(GlobalConstants.Cultures.Default);
         }
 
@@ -117,7 +120,7 @@ namespace OslerAlumni.Mvc.Extensions
         {
             PopulateContextIfEmpty(html, ref context);
 
-            return (context?.IsPreviewMode) ?? false;
+            return CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().Preview().Enabled ?? false;
         }
 
         private static void PopulateContextIfEmpty(

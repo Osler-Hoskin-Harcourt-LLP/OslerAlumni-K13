@@ -1,5 +1,6 @@
 @using CMS.Helpers
 @using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Core.Helpers
 @using OslerAlumni.Mvc.Extensions
 @using OslerAlumni.Mvc.Extensions.OslerControls.Button
 @using OslerAlumni.Mvc.Models
@@ -20,48 +21,50 @@
         FormMethod.Post,
         new { @class = "c-form", id = "membership-basic-info" }))
     {
-        @Html.AntiForgeryToken()
-
         @Html.FormErrorSummary()
 
         @Html.HiddenFor(model => model.UserGuid)
 
         @Html.StyledEditorFor(
                       model => model.UserName,
+                      nameof(MembershipBasicInfoFormModel.UserName),
                       null,
                       Html.DisplayFor(model => model.UserName, "ReadOnlyString"),
                       new { @class = "word-wrap" })
 
-        @Html.StyledEditorFor(model => model.FirstName)
+        @Html.StyledEditorFor(model => model.FirstName, nameof(MembershipBasicInfoFormModel.FirstName))
 
-        @Html.StyledEditorFor(model => model.LastName)
+        @Html.StyledEditorFor(model => model.LastName, nameof(MembershipBasicInfoFormModel.LastName))
 
-        @Html.StyledEditorFor(model => model.Email)
+        @Html.StyledEditorFor(model => model.Email, nameof(MembershipBasicInfoFormModel.Email))
 
-        @Html.StyledEditorFor(model => model.CompanyName)
+        @Html.StyledEditorFor(model => model.CompanyName, nameof(MembershipBasicInfoFormModel.CompanyName))
 
-        @Html.StyledEditorFor(model => model.JobTitle)
+        @Html.StyledEditorFor(model => model.JobTitle, nameof(MembershipBasicInfoFormModel.JobTitle))
 
-        @Html.StyledEditorFor(model => model.City)
+        @Html.StyledEditorFor(model => model.City, nameof(MembershipBasicInfoFormModel.City))
 
-        @Html.StyledEditorFor(model => model.Province)
+        @Html.StyledEditorFor(model => model.Province, nameof(MembershipBasicInfoFormModel.Province))
 
-        @Html.StyledEditorFor(model => model.Country)
+        @Html.StyledEditorFor(model => model.Country, nameof(MembershipBasicInfoFormModel.Country))
 
         @Html.StyledEditorFor(
                       model => model.LinkedInUrl,
+                      nameof(MembershipBasicInfoFormModel.LinkedInUrl),
                       null,
                       null,
                       new { @class = "c-form-field-social" })
 
         @Html.StyledEditorFor(
                       model => model.TwitterUrl,
+                      nameof(MembershipBasicInfoFormModel.TwitterUrl),
                       null,
                       null,
                       new { @class = "c-form-field-social" })
 
         @Html.StyledEditorFor(
                       model => model.InstagramUrl,
+                      nameof(MembershipBasicInfoFormModel.InstagramUrl),
                       null,
                       null,
                       new { @class = "c-form-field-social" })
@@ -70,14 +73,16 @@
         {
             @Html.StyledEditorFor(
                           model => model.YearOfCallAndJurisdictions,
+                          nameof(MembershipBasicInfoFormModel.YearOfCallAndJurisdictions),
                           null,
                           Html.DisplayFor(model => model.YearOfCallAndJurisdictions))
         }
         else
         {
+            
             <div class="c-form-field">
                 <div class="c-form-field-wrapper">
-                    @Html.LabelFor(model => Model.YearOfCallAndJurisdictions)
+                    @Html.LabelFor(model => Model.YearOfCallAndJurisdictions, ModelMetaDataHelper.GetModelLocalizedDisplayName(Html, typeof(MembershipBasicInfoFormModel), nameof(MembershipBasicInfoFormModel.YearOfCallAndJurisdictions)))
                     <p>@(ResHelper.GetString(Constants.ResourceStrings.Form.MembershipBasicInfo.BarAdmissionAndJurisdictionEmpty))</p>
                 </div>
             </div>
@@ -85,7 +90,7 @@
 
         <div class="c-form-field">
             <div class="c-form-field-wrapper">
-                @Html.LabelFor(model => Model.CurrentIndustry)
+                @Html.LabelFor(model => Model.CurrentIndustry, ModelMetaDataHelper.GetModelLocalizedDisplayName(Html, typeof(MembershipBasicInfoFormModel), nameof(MembershipBasicInfoFormModel.CurrentIndustry)))
                 <p>@(!string.IsNullOrWhiteSpace(Model.CurrentIndustry) ? Model.CurrentIndustry : ResHelper.GetString(Constants.ResourceStrings.Form.MembershipBasicInfo.CurrentIndustryEmpty) )</p>
             </div>
         </div>
@@ -95,6 +100,7 @@
         {
             @Html.StyledEditorFor(
                           model => model.EducationHistory,
+                          nameof(MembershipBasicInfoFormModel.EducationHistory),
                           null,
                           Html.DisplayFor(model => model.EducationHistory, "EducationRecordList"))
         }
@@ -102,7 +108,7 @@
         {
             <div class="c-form-field">
                 <div class="c-form-field-wrapper">
-                    @Html.LabelFor(model => Model.EducationHistory)
+                    @Html.LabelFor(model => Model.EducationHistory, ModelMetaDataHelper.GetModelLocalizedDisplayName(Html, typeof(MembershipBasicInfoFormModel), nameof(MembershipBasicInfoFormModel.EducationHistory)))
                     <p>@(ResHelper.GetString(Constants.ResourceStrings.Form.MembershipBasicInfo.EducationHistoryEmpty))</p>
                 </div>
             </div>

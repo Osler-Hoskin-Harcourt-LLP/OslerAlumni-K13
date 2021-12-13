@@ -1,5 +1,7 @@
 using CMS.DataEngine;
 using CMS.DocumentEngine;
+using CMS.Localization;
+using CMS.SiteProvider;
 using ECA.Caching.Models;
 using ECA.Caching.Services;
 using ECA.Content.Extensions;
@@ -84,8 +86,8 @@ namespace OslerAlumni.Mvc.Core.Services
 
             if (!_pageService.TryGetStandalonePage(
                 StandalonePageType.Home,
-                _context.CultureName,
-                _context.Site?.SiteName,
+                LocalizationContext.CurrentCulture.CultureCode,
+                SiteContext.CurrentSiteName,
                 out page,
                 //columnNames: new []{nameof(PageType_Home.Title) },
                 includeAllCoupledColumns: true))
@@ -100,7 +102,7 @@ namespace OslerAlumni.Mvc.Core.Services
 
             if (!_pageUrlService.TryGetPageMainUrl(
                 StandalonePageType.Home,
-                _context.CultureName,
+                LocalizationContext.CurrentCulture.CultureCode,
                 out urlOutput))
             {
                 _eventLogRepository.LogError(GetType(), nameof(GetBreadCrumbs),
@@ -137,7 +139,7 @@ namespace OslerAlumni.Mvc.Core.Services
                 // Bust the cache whenever the page is modified
                 CacheDependencies = new List<string>
                 {
-                    $"node|{_context.Site.SiteName}|{nodeAliasPath}",
+                    $"node|{SiteContext.CurrentSiteName}|{nodeAliasPath}",
                 }
             };
 
@@ -170,7 +172,7 @@ namespace OslerAlumni.Mvc.Core.Services
                         ancestorPageAlias += $"/{alias}";
 
                         // Bust the cache whenever the ancestor pages are modified.
-                        cp.CacheDependencies.Add($"node|{_context.Site.SiteName}|{ancestorPageAlias}");
+                        cp.CacheDependencies.Add($"node|{SiteContext.CurrentSiteName}|{ancestorPageAlias}");
                     }
 
 

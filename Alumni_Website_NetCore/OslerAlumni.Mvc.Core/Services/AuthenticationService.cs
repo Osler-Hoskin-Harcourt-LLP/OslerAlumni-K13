@@ -79,7 +79,7 @@ namespace OslerAlumni.Mvc.Core.Services
             {
                 var user = _userRepository.GetByGuid(userGuid);
 
-                return await _userManager.ResetPasswordAsync(new ApplicationUser((UserInfo)user), token, password);
+                return await _userManager.ResetPasswordAsync(new ApplicationUser(user.UserInfo), token, password);
             }
             catch (InvalidOperationException)
             {

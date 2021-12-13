@@ -9,6 +9,8 @@ using ECA.Core.Models;
 using ECA.Core.Repositories;
 using ECA.Mvc.Navigation.Repositories;
 using ECA.Mvc.Navigation.Services;
+using ECA.Mvc.Recaptcha.Models;
+using ECA.Mvc.Recaptcha.Services;
 using ECA.PageURL.Repositories;
 using ECA.PageURL.Services;
 using Kentico.Activities.Web.Mvc;
@@ -32,6 +34,8 @@ using OslerAlumni.Core.Kentico.Models;
 using OslerAlumni.Core.Models;
 using OslerAlumni.Core.Repositories;
 using OslerAlumni.Core.Services;
+using OslerAlumni.Mvc.Api.Models;
+using OslerAlumni.Mvc.Api.Services;
 using OslerAlumni.Mvc.Controllers;
 using OslerAlumni.Mvc.Core.Constraints;
 using OslerAlumni.Mvc.Core.Definitions;
@@ -97,6 +101,7 @@ namespace BlankSiteCore
                 kenticoServiceCollection.DisableVirtualContextSecurityForLocalhost();
 
             }
+            services.AddMvc().AddNewtonsoftJson();
             // Adds Xperience services required by the system's Identity implementation
             services.AddScoped<IPasswordHasher<ApplicationUser>, Kentico.Membership.PasswordHasher<ApplicationUser>>();
             services.AddScoped<IMessageService, MessageService>();
@@ -131,6 +136,13 @@ namespace BlankSiteCore
             // Ensures that the cookie is preserved when changing a visitor's allowed cookie level below 'Visitor'
             CookieHelper.RegisterCookie(AUTHENTICATION_COOKIE_NAME, CookieLevel.Essential);
 
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "__requestverificationtoken";
+            });
+
+            services.AddControllers().AddNewtonsoftJson();
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Default Password settings.
@@ -141,13 +153,16 @@ namespace BlankSiteCore
                 options.Password.RequiredLength = Configuration.GetValue<int>("PasswordPolicyConfig:RequiredLength");
             });
 
+            services.AddSingleton(gc => new GoogleRecaptchaConfig(
+                Configuration.GetValue<string>($"{nameof(GoogleRecaptchaConfig)}:{nameof(GoogleRecaptchaConfig.ReCaptchaApiUrl)}"),
+                Configuration.GetValue<string>($"{nameof(GoogleRecaptchaConfig)}:{nameof(GoogleRecaptchaConfig.ReCaptchaApiSecretKey)}"),
+                Configuration.GetValue<string>($"{nameof(GoogleRecaptchaConfig)}:{nameof(GoogleRecaptchaConfig.ReCaptchaApiPublicKey)}")
+
+                ));
             services.AddSwaggerGen();
             services.AddTransient(cc => new ContextConfig
             {
-                CultureName = LocalizationContext.CurrentCulture.CultureCode,
-                User = MembershipContext.AuthenticatedUser,
-                Site = SiteContext.CurrentSite,
-                IsPreviewMode = CMS.Core.Service.Resolve<IHttpContextAccessor>()?.HttpContext?.Kentico().GetFeature<IPreviewFeature>()?.Enabled ?? false,
+          
                 AllowedCultureCodes = GlobalConstants.Cultures.AllowedCultureCodes,
                 BasePageType = PageType_BasePageType.CLASS_NAME
             });
@@ -204,7 +219,7 @@ namespace BlankSiteCore
             services.AddSingleton<IEventsService, EventsService>();
             services.AddSingleton<IJobsService, JobsService>();
             services.AddSingleton<INewsService, NewsService>();
-            services.AddSingleton<ICustomTableRepository, CustomTableRepository>();
+            services.AddTransient<ICustomTableRepository, CustomTableRepository>();
             services.AddSingleton<IResourceTypeItemRepository, ResourceTypeItemRepository>();
             services.AddSingleton<IResourceService, ResourceService>();
             services.AddSingleton<IHomeService, HomeService>();
@@ -234,6 +249,30 @@ namespace BlankSiteCore
             services.AddSingleton<IImageService, ImageService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IMediaLibraryService, MediaLibraryService>();
+            services.AddSingleton<IContactUsFormRepository, ContactUsFormRepository>();
+            services.AddSingleton<IGoogleRecaptchaService, GoogleRecaptchaService>();
+            services.AddSingleton<ISitemapService, SitemapService>();
+            services.AddSingleton<IBoardOpportunityTypeItemRepository, BoardOpportunityTypeItemRepository>();
+            services.AddSingleton<IDevelopmentResourceService, DevelopmentResourceService>();
+            services.AddSingleton<ILocationItemRepository, LocationItemRepository>();
+            services.AddSingleton<IKenticoResourceStringRepository, KenticoResourceStringRepository>();
+            services.AddSingleton<IJobCategoryItemRepository, JobCategoryItemRepository>();
+            services.AddSingleton<ISearchService, AzureSearchService>();
+            services.AddSingleton<IKenticoSearchIndexRepository, KenticoSearchIndexRepository>();
+            services.AddSingleton<IDevelopmentResourceTypeItemRepository, DevelopmentResourceTypeItemRepository>();
+            services.AddSingleton<IBoardOpportunitySourceItemRepository, BoardOpportunitySourceItemRepository>();
+            services.AddSingleton(sc => new SearchConfig()
+            {
+                IndexName = Configuration.GetValue<string>($"{nameof(SearchConfig)}:{nameof(SearchConfig.IndexName)}")
+            });
+            services.AddSingleton<ISearchService<BoardOpportunitySearchRequest, BoardOpportunity>, BoardOpportunitySearchService>();
+            services.AddSingleton<ISearchService<DevelopmentResourceSearchRequest, DevelopmentResource>, DevelopmentResourceSearchService>();
+            services.AddSingleton<ISearchService<EventSearchRequest, Event>, EventSearchService>();
+            services.AddSingleton<ISearchService<GlobalSearchRequest, GlobalResult>, GlobalSearchService>();
+            services.AddSingleton<ISearchService<JobSearchRequest, Job>, JobSearchService>();
+            services.AddSingleton<ISearchService<NewsSearchRequest, News>, NewsSearchService>();
+            services.AddSingleton<ISearchService<ProfileSearchRequest, Profile>, ProfileSearchService>();
+            services.AddSingleton<ISearchService<ResourceSearchRequest, Resource>, ResourceSearchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -280,6 +319,12 @@ namespace BlankSiteCore
                 endpoints.MapControllerRoute(
                     name: "MvcRoute",
                     pattern: "{controller}/{action}",
+                    defaults: new { controller = HttpErrorsControllerName, action = NotFoundActionName }
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "APIRoute",
+                    pattern: "api/{controller}/{action}",
                     defaults: new { controller = HttpErrorsControllerName, action = NotFoundActionName }
                     );
 

@@ -1,6 +1,7 @@
 using System;
 using CMS.DataEngine;
 using CMS.Helpers;
+using CMS.SiteProvider;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 
@@ -39,7 +40,7 @@ namespace ECA.Core.Repositories
                 keyName = $"{keyName}_{CultureHelper.GetShortCultureCode(culture).ToUpper()}";
             }
 
-            var site = siteName.ReplaceIfEmpty(_context.Site?.SiteName);
+            var site = siteName.ReplaceIfEmpty(SiteContext.CurrentSiteName);
 
             object value = null;
 

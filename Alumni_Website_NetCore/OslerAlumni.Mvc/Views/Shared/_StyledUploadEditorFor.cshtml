@@ -1,8 +1,8 @@
 @model dynamic
 
 <div class="c-form-field-wrapper">
-    @Html.Raw(ViewBag.Label)
-    @Html.Raw(ViewBag.Editor)
+    @ViewBag.Label
+    @ViewBag.Editor
     <div aria-live="polite">
         <p class="c-form-error-message hide">@ViewBag.JsValidationError</p>
     </div>

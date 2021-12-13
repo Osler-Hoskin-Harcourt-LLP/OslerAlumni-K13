@@ -1,5 +1,7 @@
-﻿using System;
+using System;
 using CMS.EventLog;
+using CMS.Membership;
+using CMS.SiteProvider;
 using ECA.Core.Models;
 
 namespace ECA.Core.Repositories
@@ -104,11 +106,11 @@ namespace ECA.Core.Repositories
                 EventCode = eventCode,
                 EventDescription = eventDescription,
                 Exception = exception,
-                SiteID = (siteId ?? _context.Site?.SiteID) ?? 0,
+                SiteID = SiteContext.CurrentSiteID,
                 NodeID = nodeId,
                 DocumentName = documentName,
-                UserID = _context.User?.UserID ?? 0,
-                UserName = _context.User?.UserName,
+                UserID = MembershipContext.AuthenticatedUser.UserID,
+                UserName = MembershipContext.AuthenticatedUser.UserName,
                 // TODO: [VI] Pass in request and system contexts from Admin and MVC
                 //IPAddress = RequestContext.UserHostAddress,
                 //EventMachineName = SystemContext.MachineName,
