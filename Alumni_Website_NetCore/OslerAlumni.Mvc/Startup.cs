@@ -57,7 +57,7 @@ namespace BlankSiteCore
         private const string AUTHENTICATION_COOKIE_NAME = "identity.authentication";
         public readonly string HttpErrorsControllerName = nameof(HttpErrorsController);
 
-        public readonly string NotFoundActionName = nameof(HttpErrorsController.NotFound);
+        public readonly string ErrorAction = nameof(HttpErrorsController.Error);
         public IWebHostEnvironment Environment { get; }
         private IConfiguration Configuration { get; }
 
@@ -286,6 +286,8 @@ namespace BlankSiteCore
 
             app.UseStaticFiles();
 
+            app.UseStatusCodePagesWithReExecute("/httperrors/error/{0}");
+
             app.UseKentico();
 
             app.UseCookiePolicy();
@@ -319,25 +321,29 @@ namespace BlankSiteCore
                 endpoints.MapControllerRoute(
                     name: "MvcRoute",
                     pattern: "{controller}/{action}",
-                    defaults: new { controller = HttpErrorsControllerName, action = NotFoundActionName }
+                    defaults: new { controller = HttpErrorsControllerName, action = ErrorAction }
                     );
 
                 endpoints.MapControllerRoute(
                     name: "APIRoute",
                     pattern: "api/{controller}/{action}",
-                    defaults: new { controller = HttpErrorsControllerName, action = NotFoundActionName }
+                    defaults: new { controller = HttpErrorsControllerName, action = ErrorAction }
                     );
 
                 endpoints.MapControllerRoute(
                     name: "MvcLocalizedRoute",
                     pattern: "{culture}/{controller}/{action}",
-                    defaults: new { controller = HttpErrorsControllerName, action = NotFoundActionName }
+                    defaults: new { controller = HttpErrorsControllerName, action = ErrorAction }
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "MvcLocalizedRoute",
+                    pattern: "/{controller}/{action}/{statusCode?}",
+                    defaults: new { controller = HttpErrorsControllerName, action = ErrorAction }
                     );
 
 
             });
-
-            app.UseExceptionHandler("/Error");
 
             // Set Default Serialization Options
             JsonConvert.DefaultSettings = () =>

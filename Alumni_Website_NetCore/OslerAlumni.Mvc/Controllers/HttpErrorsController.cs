@@ -5,8 +5,11 @@ using ECA.Content.Extensions;
 using ECA.Core.Models;
 using ECA.PageURL.Definitions;
 using ECA.PageURL.Services;
+using Kentico.Content.Web.Mvc;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using OslerAlumni.Mvc.Core.Attributes.ActionFilters;
+using OslerAlumni.Mvc.Core.Helpers;
 using OslerAlumni.Mvc.Core.Kentico.Models;
 using OslerAlumni.Mvc.Models;
 using System;
@@ -33,16 +36,19 @@ namespace OslerAlumni.Mvc.Controllers
 
         private readonly IPageService _pageService;
         private readonly ContextConfig _context;
+        private readonly IPageDataContextInitializer _pageDataContextInitializer;
 
         #endregion
 
         public HttpErrorsController(
             IPageService pageService,
-            ContextConfig context)
+            ContextConfig context,
+            IPageDataContextInitializer pageDataContextInitializer)
         {
             _pageService = pageService;
 
             _context = context;
+            _pageDataContextInitializer = pageDataContextInitializer;
         }
 
         #region "Actions"
@@ -57,11 +63,23 @@ namespace OslerAlumni.Mvc.Controllers
                 return this.BadRequest();
             }
 
+            var statusCodeReExecuteFeature =
+            HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+
+            if (statusCodeReExecuteFeature is not null)
+            {
+                var culture = CustomCultureHelper.GetCultureCodeFromUrl(statusCodeReExecuteFeature.OriginalPath);
+                if (culture != null)
+                {
+                    LocalizationContext.CurrentCulture = culture;
+                }
+            }
+
             TreeNode page;
 
             if (!_pageService.TryGetStandalonePage(
                     errorPageType,
-                    LocalizationContext.CurrentCulture.CultureCode,
+                   LocalizationContext.CurrentCulture.CultureCode,
                     SiteContext.CurrentSiteName,
                     out page,
                     includeAllCoupledColumns: true))
@@ -78,6 +96,8 @@ namespace OslerAlumni.Mvc.Controllers
                     $"Incorrect page type casting from '{nameof(TreeNode)}' to '{nameof(PageType_Page)}'.");
             }
 
+            _pageDataContextInitializer.Initialize(genericPage);
+
             var pageViewModel = new PageViewModel(genericPage);
 
             return View("Index", pageViewModel);
@@ -85,20 +105,21 @@ namespace OslerAlumni.Mvc.Controllers
 
         [HttpGet]
         [HttpPost]
-        public ActionResult NotFound()
+        public ActionResult Error(string statusCode)
         {
-            Response.StatusCode = (int)HttpStatusCode.NotFound;
+            if (statusCode == "404")
+            {
+                Response.StatusCode = (int)HttpStatusCode.NotFound;
 
-            return Index(
-                StandalonePageType.PageNotFound);
-        }
-
-        [HttpGet]
-        [HttpPost]
-        public ActionResult ServerError()
-        {
-            return Index(
-                StandalonePageType.ServerError);
+                return Index(
+                    StandalonePageType.PageNotFound);
+            }
+            else
+            {
+                return Index(
+               StandalonePageType.ServerError);
+            }
+            
         }
 
         #endregion
