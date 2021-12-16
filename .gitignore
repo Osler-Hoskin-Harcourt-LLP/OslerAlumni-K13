@@ -272,3 +272,5 @@ Alumni_Admin/CMS/LocalSettings.config
 Alumni_Website/OslerAlumni.Mvc/LocalSettings.config
 
 **/MediaRoot/
+Alumni_Website_NetCore/OslerAlumni.Mvc/OslerAlumni/
+Alumni_Admin/CMS/OslerAlumni/

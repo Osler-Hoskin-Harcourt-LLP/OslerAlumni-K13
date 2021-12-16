@@ -354,14 +354,7 @@ namespace BlankSiteCore
                     DateTimeZoneHandling = DateTimeZoneHandling.Local
                 };
 
-            //register other compoments
-            var configurationService =
-               CMS.Core.Service.Resolve<IConfigurationService>();
-
-            var rootMediaStoragePath = Configuration.GetValue<string>(GlobalConstants.Config.RootMediaStoragePath);
-
-            OslerAlumniStorageProvider.RegisterProvider(
-                rootMediaStoragePath);
+            
 
         }
     }
