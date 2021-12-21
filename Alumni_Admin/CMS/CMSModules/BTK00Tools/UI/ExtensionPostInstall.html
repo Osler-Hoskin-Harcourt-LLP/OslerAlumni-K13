@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+        body {
+            text-align:center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+
+        .cms-bootstrap h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        #slide-container {
+            height:100%;
+            position: relative;
+        }
+        .btk-slide {
+            height: 100%;
+            width: 100%;
+            white-space: nowrap;
+            text-align: center; margin: 1em 0;
+            position: absolute;
+        }
+
+        .btk-slide img {
+            margin: auto;
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="cms-bootstrap">
+
+    <div>
+        <h3>Reloading Kentico, please wait...</h3>
+    </div>
+    <div id="slide-container"></div>
+    
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script language="javascript">
+
+        var SLIDE_SPEED = 10000;
+
+        var $slideContianer = $("#slide-container");
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        (function () {
+            var slidestring = getParameterByName('slides');
+            var slides = slidestring.split(",");
+
+            function buildSlides() {
+
+                $(slides).each(function (i) {
+                    $slideContianer.append('<div class="btk-slide" id="slide-' + i + '" style="display:none;"><img src="' + this + '" /></div>')
+                });
+
+                //console.log(slides)
+            }
+
+            function showSlide(slideNumber) {
+
+                $currSlide = $(".btk-slide:visible");
+                $nextSlide = $("#slide-" + slideNumber);
+                if ($currSlide.length > 0)
+                {
+                    $nextSlide.stop(true, true).fadeIn(1000);
+                    $currSlide.stop(true, true).fadeOut(1000, function () {
+
+                    });
+                } else {
+                    // first time, slide 0
+                    $nextSlide.fadeIn(2000);
+                }
+
+
+                setTimeout(function () {
+                    nextSlide = slideNumber + 1;
+                    if (nextSlide >= slides.length) nextSlide = 0;
+                    showSlide(nextSlide);
+                }, SLIDE_SPEED)
+            }
+
+            function startSlideShow() {
+                buildSlides();
+                showSlide(0);
+            }
+
+
+            startSlideShow();
+
+            setTimeout(function () {
+                //alert(top.window.location.href)
+                //top.window.location.href = top.window.location.href;
+                top.window.location.reload();
+            }, 500);
+            //}, 200000); // debugging only 20 secs
+
+
+        })();
+
+        
+
+    </script>
+    <!-- Keeping this as light as possible (no dependencies on items that need to be compiled (or use .Net), becasue this will be shown during a recompile )-->
+</body>
+</html>

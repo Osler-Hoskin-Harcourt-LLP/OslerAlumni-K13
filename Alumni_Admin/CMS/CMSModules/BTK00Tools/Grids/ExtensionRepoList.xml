@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<grid>
+  <actions>
+    <action name="edit" caption="$General.Edit$" fonticonclass="icon-edit" fonticonstyle="allow" />
+    <action name="#delete" caption="$General.Delete$" fonticonclass="icon-bin" fonticonstyle="critical" confirmation="$General.ConfirmDelete$" />
+  </actions>
+  <columns>
+    <column source="ExtensionRepoName" caption="Repo Name" wrap="false" localize="true"></column>
+    <column source="ExtensionRepoUrl" caption="Repo Url" wrap="false" width="100%" />
+    <column cssclass="filling-column" />
+  </columns>
+</grid>

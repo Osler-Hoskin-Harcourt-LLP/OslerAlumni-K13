@@ -78,6 +78,18 @@
       <HintPath>..\..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="BizStreamToolkit.Agent, Version=3.0.0.24, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BizStream.KenticoToolkit.Agent.KX13.3.0.0.24\lib\net48\BizStreamToolkit.Agent.dll</HintPath>
+    </Reference>
+    <Reference Include="BizStreamToolkit.Core, Version=3.0.0.24, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BizStream.KenticoToolkit.Core.KX13.3.0.0.24\lib\net48\BizStreamToolkit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="BizStreamToolkit.Siteimprove, Version=3.0.1.24, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BizStream.KenticoToolkit.Siteimprove.KX13.3.0.1.24\lib\net48\BizStreamToolkit.Siteimprove.dll</HintPath>
+    </Reference>
+    <Reference Include="BizStreamToolkit.Tools, Version=3.0.0.24, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BizStream.KenticoToolkit.Tools.KX13.3.0.0.24\lib\net48\BizStreamToolkit.Tools.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
@@ -93,6 +105,12 @@
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Flurl, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Flurl.2.8.2\lib\net40\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Flurl.Http.2.4.2\lib\net46\Flurl.Http.dll</HintPath>
     </Reference>
     <Reference Include="GlobalLink.Connect, Version=4.18.4.0, Culture=neutral, PublicKeyToken=946d606070618fd4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\GlobalLink.Connect.4.18.4\lib\net46\GlobalLink.Connect.dll</HintPath>
@@ -1047,6 +1065,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\CMSModules\CMSInstallation\Packages\BTK00Tools_3.0.24.xml" />
+    <Content Include="App_Data\CMSModules\CMSInstallation\Packages\BTKSiteimprove_3.0.1024.xml" />
     <Content Include="App_Themes\CommunitySite\Default.css" />
     <Content Include="App_Themes\CommunitySite\Images\add.gif" />
     <Content Include="App_Themes\CommunitySite\Images\arrow.gif" />
@@ -1256,6 +1276,22 @@
     <Content Include="CMSAdminControls\CKeditor\plugins\templates\templates\images\link.png" />
     <Content Include="CMSAdminControls\CKeditor\plugins\templates\templates\images\responsive-video.png" />
     <Content Include="CMSAdminControls\CKeditor\plugins\templates\templates\images\stats.png" />
+    <Content Include="CMSModules\BTK00Tools\Grids\ExtensionRepoList.xml" />
+    <Content Include="CMSModules\BTK00Tools\Icons\toolkit-64.png" />
+    <Content Include="CMSModules\BTK00Tools\UI\ExtensionPostInstall.html" />
+    <Content Include="CMSModules\BTK00Tools\UI\Extensions_List.aspx" />
+    <Content Include="CMSModules\BTK00Tools\UI\SettingsForm.aspx" />
+    <Content Include="CMSModules\BTK00Tools\UI\Subscription.aspx" />
+    <Content Include="CMSModules\BTKCommon\Controls\ObjectFilter.ascx" />
+    <Content Include="CMSModules\BTKCommon\Filters\ToolkitGroupFilter.ascx" />
+    <Content Include="CMSModules\BTKCommon\FormControls\AgentInstallationControl.ascx" />
+    <Content Include="CMSModules\BTKCommon\UI\ExtensionInstaller.aspx" />
+    <Content Include="CMSModules\BTKCommon\UI\KenticoObjectImporter.aspx" />
+    <Content Include="CMSModules\BTKSiteImprove\Icons\siteimprove-64.png" />
+    <Content Include="CMSModules\BTKSiteImprove\Icons\siteimprove-transparent-logo.png" />
+    <Content Include="CMSModules\BTKSiteImprove\UI\ConfigurationForm.aspx" />
+    <Content Include="CMSModules\BTKSiteImprove\UI\OverviewForm.aspx" />
+    <Content Include="CMSModules\BTKSiteImprove\UI\PagesTab.aspx" />
     <Content Include="CommunitySite\media\CzechCities\IM002595.JPG" />
     <Content Include="CommunitySite\media\CzechCities\IM002601.JPG" />
     <Content Include="CommunitySite\media\CzechCities\__thumbnails\IM002595_117_78.JPG" />
@@ -1277,6 +1313,9 @@
     <Content Include="CommunitySite\media\Media\Pictures\__thumbnails\IM002601_117_78.JPG" />
     <Content Include="CommunitySite\media\Media\Pictures\__thumbnails\IM002628_117_78.JPG" />
     <Content Include="CMSFormControls\OnePlaceCampaignSelector.ascx" />
+    <Content Include="CMSPages\BTKAgent\Handlers\RequestHandler.ashx" />
+    <Content Include="App_Data\CMSModules\BTK00Tools\Install\BTK00Tools_3.0.24.zip" />
+    <Content Include="App_Data\CMSModules\BTKSiteimprove\Install\BTKSiteimprove_3.0.1024.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -14810,6 +14849,7 @@
     </When>
   </Choose>
   <ItemGroup>
+    <Folder Include="App_Data\CMSModules\CMSInstallation\Packages\Installed\" />
     <Folder Include="App_Data\CMSModules\WebAnalytics\MaxMind\" />
     <Folder Include="CMSScripts\Custom\" />
     <Folder Include="CommunitySite\media\Media\Video\__thumbnails\" />
@@ -14818,6 +14858,7 @@
     <Folder Include="OslerAlumni\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CMSResources\BTK00Tools\Default.resx" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
