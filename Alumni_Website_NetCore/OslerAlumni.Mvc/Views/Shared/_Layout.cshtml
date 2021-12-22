@@ -1,9 +1,17 @@
+@using CMS.DocumentEngine
+@using Kentico.Content.Web.Mvc
 @using Kentico.PageBuilder.Web.Mvc
 @using OslerAlumni.Mvc.Extensions
 @using OslerAlumni.Mvc.Models
 @using OslerAlumniWebsite.ViewComponents.Global
+
+@inject IPageDataContextRetriever dataRetriever
+
+
 @{
     Layout = null;
+    var page = dataRetriever.Retrieve<TreeNode>().Page;
+
 }
 
 <!DOCTYPE html>
@@ -54,7 +62,7 @@
         @await Component.InvokeAsync(typeof(BreadCrumbsViewComponent),
         new
         {
-        page = ViewBag.Page,
+        page = page,
         //To disable breadcrumbs on a page set ViewBag.ShowBreadCrumbs to false
         showBreadCrumbs = ViewBag.ShowBreadCrumbs
         })
@@ -66,8 +74,8 @@
         @await Component.InvokeAsync(typeof(RelatedCtasViewComponent),
         new
         {
-        page = ViewBag.Page,
-        });
+        page = page,
+        })
 
     </main>
 
