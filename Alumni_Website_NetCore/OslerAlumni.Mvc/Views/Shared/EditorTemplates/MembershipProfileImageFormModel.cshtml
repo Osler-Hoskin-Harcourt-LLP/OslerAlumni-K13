@@ -11,6 +11,11 @@
      prefixed if we have nested view models. However,
      it also means that this form may appear only once on the page.*/
     ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
+
+    var fileMeta = Html.MetadataProvider
+                .GetMetadataForProperties(typeof(MembershipProfileImageFormModel))
+                .Where(prop => prop.PropertyName == nameof(MembershipProfileImageFormModel.FileUpload))
+                .FirstOrDefault();
 }
 
 
@@ -95,6 +100,7 @@ else
                           nameof(MembershipProfileImageFormModel.FileUpload),
                           Html.LabelFor(
                               m => m.FileUpload,
+                              ResHelper.GetString(fileMeta.DisplayName),
                               new
                               {
                                   data_text = ResHelper.GetString(Constants.ResourceStrings.Form.GlobalFileUploadButtonText),
