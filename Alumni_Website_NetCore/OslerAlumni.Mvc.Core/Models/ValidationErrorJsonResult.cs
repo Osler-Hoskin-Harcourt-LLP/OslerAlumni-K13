@@ -1,4 +1,5 @@
 using System.Net;
+using CMS.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
@@ -36,7 +37,7 @@ namespace OslerAlumni.Mvc.Core.Models
             var result = new Dictionary<string, string[]>();
             foreach (var key in modelState.Keys)
             {
-                result.Add(key, modelState[key].Errors.Select(e => e.ErrorMessage).ToArray());
+                result.Add(key, modelState[key].Errors.Select(e => ResHelper.GetString(e.ErrorMessage)).ToArray());
             }
 
             return result;
