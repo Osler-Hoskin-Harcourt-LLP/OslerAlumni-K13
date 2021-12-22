@@ -133,7 +133,7 @@ namespace OslerAlumni.Mvc.Api.Controllers
         /// <param name="searchRequest"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult GlobalSearch(
+        public ActionResult Global(
             [FromBody] GlobalSearchRequest searchRequest)
         {
             return Search(
