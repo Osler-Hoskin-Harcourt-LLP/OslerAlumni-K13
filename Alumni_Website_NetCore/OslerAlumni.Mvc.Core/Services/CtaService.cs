@@ -102,7 +102,7 @@ namespace OslerAlumni.Mvc.Core.Services
                     GlobalConstants.Caching.CTA.CTAByPageAndFieldName,
                     page.NodeGUID,
                     fieldName,
-                    _userManager.IsInRoleAsync(new ApplicationUser(_userRepository.CurrentUser.UserInfo), GlobalConstants.Roles.CompetitorRole)),
+                    _userRepository.CurrentUser != null ? _userManager.IsInRoleAsync(new ApplicationUser(_userRepository.CurrentUser.UserInfo), GlobalConstants.Roles.CompetitorRole): false),
                 IsCultureSpecific = true,
                 CultureCode = page.DocumentCulture,
                 IsSiteSpecific = true,

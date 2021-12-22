@@ -22,6 +22,7 @@ using OslerAlumni.Mvc.Core.Kentico.Models;
 using OslerAlumni.Mvc.Core.Models;
 using OslerAlumni.Mvc.Core.Services;
 using OslerAlumni.Mvc.Models;
+using OslerAlumni.MVC.Models;
 using OslerAlumniWebsite.ViewComponents;
 using OslerAlumniWebsite.ViewComponents.Membership;
 using System;
@@ -229,7 +230,7 @@ namespace OslerAlumni.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken(Order = 1)]
         [ValidateModel(Order = 2)]
-        public IActionResult MembershipUploadProfileImage([FromBody]
+        public IActionResult MembershipUploadProfileImage([FromForm]
             MembershipProfileImageFormModel model)
         {
             bool updated = false;
@@ -267,14 +268,14 @@ namespace OslerAlumni.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken(Order = 1)]
-        public IActionResult DeleteProfileImage([Required] Guid userGuid)
+        public IActionResult DeleteProfileImage([FromBody] ProfileDeleteImageFormModel data)
         {
             bool updated = false;
 
             var currentUser = _userRepository.CurrentUser;
 
             //Ensure the user is only modifying his/her own profile.
-            if (userGuid != currentUser.UserGUID)
+            if (data.UserGuid != currentUser.UserGUID)
             {
                 return this.Forbidden();
             }
