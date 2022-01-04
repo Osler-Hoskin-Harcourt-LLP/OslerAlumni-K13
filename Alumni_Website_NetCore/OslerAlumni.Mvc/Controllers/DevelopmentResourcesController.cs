@@ -86,7 +86,6 @@ namespace OslerAlumni.Mvc.Controllers
             return View(landingPageViewModel);
         }
 
-        [EnsureParametersExist(Constants.RouteParams.Page)]
         public ActionResult Details()
         {
             var page = _dataRetriever.Retrieve<PageType_DevelopmentResource>().Page;
