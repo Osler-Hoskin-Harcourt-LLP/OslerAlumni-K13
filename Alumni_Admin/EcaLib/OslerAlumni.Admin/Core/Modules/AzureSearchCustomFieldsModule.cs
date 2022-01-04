@@ -26,21 +26,21 @@ namespace OslerAlumni.Admin.Core.Modules
         {
             base.OnInit();
 
-            SearchServiceManager.CreatingOrUpdatingIndex.Execute += AddCustomFields;
+            //SearchServiceManager.CreatingOrUpdatingIndex.Execute += AddCustomFields;
             DocumentCreator.Instance.AddingDocumentValue.Execute += SetCustomFieldValues;
         }
 
-        private void AddCustomFields(object sender, CreateOrUpdateIndexEventArgs e)
-        {
-            if (!e.Index.Fields
-                .Any(field=>
-                    string.Equals( field.Name,
-                        LastNameNormalizedField,
-                        StringComparison.OrdinalIgnoreCase)))
-            {
-                e.Index.Fields.Add(new Field(LastNameNormalizedField, DataType.String));
-            }
-        }
+        //private void AddCustomFields(object sender, CreateOrUpdateIndexEventArgs e)
+        //{
+        //    if (!e.Index.Fields
+        //        .Any(field=>
+        //            string.Equals( field.Name,
+        //                LastNameNormalizedField,
+        //                StringComparison.OrdinalIgnoreCase)))
+        //    {
+        //        e.Index.Fields.Add(new Field(LastNameNormalizedField, DataType.String));
+        //    }
+        //}
 
         private void SetCustomFieldValues(object sender, AddDocumentValueEventArgs e)
         {

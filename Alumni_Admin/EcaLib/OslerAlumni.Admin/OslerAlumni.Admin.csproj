@@ -179,9 +179,9 @@
     <Compile Include="Core\Infrastructure\AutofacHttpApplication.cs" />
     <Compile Include="Core\Modules\AzureSearchAnalyzerModule.cs" />
     <Compile Include="Core\Modules\AzureScoringProfileModule.cs" />
+    <Compile Include="Core\Modules\AzureSearchCustomFieldsModule.cs" />
     <Compile Include="Core\Modules\EventsSortingModule.cs" />
     <Compile Include="Core\Modules\PageCacheBustingModule.cs" />
-    <Compile Include="Core\Modules\AzureSearchCustomFieldsModule.cs" />
     <Compile Include="Core\Modules\UserProfileMappingModule.cs" />
     <Compile Include="Core\Repositories\AdminUserRepository.cs" />
     <Compile Include="Core\Repositories\IAdminUserRepository.cs" />
