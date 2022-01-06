@@ -14,8 +14,7 @@ namespace OslerAlumni.Mvc.Models
         public string ProfileImageUrl { get; set; }
 
         [Required(ErrorMessage = Constants.ResourceStrings.Form.MembershipProfileImage.FileUploadRequired)]
-        [Display(Name = Constants.ResourceStrings.Form.MembershipProfileImage.FileUpload)]
-        [Description(Constants.ResourceStrings.Form.MembershipProfileImage.FileUploadExplanation)]
+        [Display(Name = Constants.ResourceStrings.Form.MembershipProfileImage.FileUpload, Description = Constants.ResourceStrings.Form.MembershipProfileImage.FileUploadExplanation)]
         [FileTypeValidation("png,jpg", ErrorMessage = Constants.ResourceStrings.Form.MembershipProfileImage.FileUploadError)]
         [MaxFileSizeValidation(ErrorMessage = Constants.ResourceStrings.Form.MembershipProfileImage.FileUploadError)]
         [DataType(DataType.Upload)]
