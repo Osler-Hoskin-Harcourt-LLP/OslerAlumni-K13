@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using OslerAlumni.Core.Definitions;
 using OslerAlumni.Core.Services;
 
@@ -11,16 +12,21 @@ namespace OslerAlumni.Mvc.Core.Attributes.ActionFilters
     public class BasicAuthorizeAttribute
         : Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute
     {
-        public IConfigurationService ConfigurationService { get; set; }
 
         public string BasicRealm => "osler-realm";
         protected string Username { get; set; }
         protected string Password { get; set; }
 
-        private string ApiKey => ConfigurationService
-            .GetWebConfigSetting<string>
-                (GlobalConstants.Config.BasicAuthenticationAPIKey);
+        private string ApiKey
+        {
+            get
+            {
+                var configuration = CMS.Core.Service.Resolve<IConfiguration>();
+                return configuration[GlobalConstants.Config.BasicAuthenticationAPIKey];
 
+            }
+        }
+        
         public BasicAuthorizeAttribute()
         {
 
