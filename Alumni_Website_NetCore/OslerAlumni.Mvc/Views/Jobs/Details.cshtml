@@ -1,5 +1,6 @@
 @using CMS.Helpers
 @using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Core.Helpers
 @using OslerAlumni.Mvc.Extensions
 @using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
 @using OslerAlumni.Mvc.Models
@@ -18,7 +19,7 @@
                 <h1>@Model.Title</h1>
                 <p class="is-large no-margin-bottom"> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.Jobs.Company, Model.Company))</p>
                 <p class="is-large"> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.Jobs.Location, Model.JobLocation))</p>
-                <p> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.Jobs.DatePostedAndCategory, Html.DisplayFor(model => model.PostedDate), Model.JobCategoryDisplayName))</p>
+                <p> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.Jobs.DatePostedAndCategory, HtmlContentHelper.GetString(Html.DisplayFor(model => model.PostedDate)), Model.JobCategoryDisplayName))</p>
             </div>
         </div>
     </div>
