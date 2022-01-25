@@ -22,7 +22,7 @@ namespace OslerAlumniWebsite.ViewComponents.Global
         {
             BreadCrumbsViewModel model = null;
 
-            if (showBreadCrumbs.HasValue && showBreadCrumbs.Value)
+            if (!showBreadCrumbs.HasValue || showBreadCrumbs.Value)
             {
                 model = new BreadCrumbsViewModel();
 
