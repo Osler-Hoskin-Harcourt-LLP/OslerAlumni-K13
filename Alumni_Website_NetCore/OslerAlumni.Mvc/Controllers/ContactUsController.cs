@@ -76,7 +76,7 @@ namespace OslerAlumni.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken(Order = 1)]
         [ValidateModel(Order = 2)]
-        public IActionResult Index([FromBody]
+        public IActionResult Index([FromForm]
             ContactUsPostModel model)
         {
             var contactUsId = _contactUsFormRepository
