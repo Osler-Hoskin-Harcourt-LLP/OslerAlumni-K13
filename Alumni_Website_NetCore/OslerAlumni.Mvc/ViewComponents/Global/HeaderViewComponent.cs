@@ -70,9 +70,9 @@ namespace OslerAlumniWebsite.ViewComponents.Global
                         NavigationType.Secondary,
                         isAuthenticated),
 
-                DesktopLogoImageUrl = _globalAssetService.GetWebsiteLogoUrl(),
+                DesktopLogoImageUrl = _globalAssetService.GetWebsiteLogoUrl(LocalizationContext.CurrentCulture.CultureCode),
 
-                MobileLogoImageUrl = _globalAssetService.GetWebsiteMobileLogoUrl(),
+                MobileLogoImageUrl = _globalAssetService.GetWebsiteMobileLogoUrl(LocalizationContext.CurrentCulture.CultureCode),
 
                 GlobalSearchPageUrl = searchPageUrl,
 
