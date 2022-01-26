@@ -245,6 +245,8 @@ namespace BlankSiteCore
             services.AddSingleton<IDataSubmissionQueueItemRepository, DataSubmissionQueueItemRepository>();
             services.AddSingleton<IDataSubmissionQueueService, DataSubmissionQueueService>();
             services.AddSingleton<IOnePlaceUserExportService, OnePlaceUserExportService>();
+            services.AddSingleton<IOnePlaceFunctionService, OnePlaceFunctionService>();
+            services.AddSingleton<IOnePlaceFunctionInviteeService, OnePlaceFunctionInviteeService>();
             services.AddSingleton<IProfileService, ProfileService>();
             services.AddSingleton<IImageService, ImageService>();
             services.AddSingleton<IUserService, UserService>();

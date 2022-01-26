@@ -9,9 +9,6 @@ namespace OslerAlumni.Mvc.Api.Attributes.Error
         : ExceptionFilterAttribute
     {
         #region "Properties"
-
-        public IEventLogRepository EventLogRepository { get; set; }
-
         #endregion
 
         #region "Events"
@@ -19,6 +16,7 @@ namespace OslerAlumni.Mvc.Api.Attributes.Error
         public override void OnException(
             ExceptionContext actionExecutedContext)
         {
+            var eventLogRepository = CMS.Core.Service.Resolve<IEventLogRepository>();
             var exception = actionExecutedContext.Exception;
 
             if (exception == null)
@@ -36,7 +34,7 @@ namespace OslerAlumni.Mvc.Api.Attributes.Error
 
             var actionDescriptor = actionExecutedContext.ActionDescriptor;
 
-            EventLogRepository.LogError(
+            eventLogRepository.LogError(
                 actionDescriptor.DisplayName,
                 actionDescriptor.DisplayName,
                 exception);
