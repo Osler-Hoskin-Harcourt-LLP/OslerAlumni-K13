@@ -67,7 +67,7 @@
             }
         </div>
         <div class="columns small-12 medium-8 has-margin-bottom @(Model.IsFullWidth?"large-9":"large-4") " data-scrollto>
-            @await Component.InvokeAsync(Model.ViewComponent, new { subpageAlias = GetNodeAliasPath(Model.Controller, Model.Action) })
+            @await Component.InvokeAsync(Model.ViewComponent, new { subpageAlias = GetNodeAliasPath(Model.Controller, Model.Action), edit = ViewContext.HttpContext.Request.Query["edit"].ToString() })
         </div>
 
 

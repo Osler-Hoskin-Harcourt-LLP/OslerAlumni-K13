@@ -27,8 +27,8 @@ namespace OslerAlumniWebsite.ViewComponents.Membership
                 {
                     var model = GetProfileImageFormModel(currentUser);
 
-                    if (string.Equals(edit,
-                        true.ToString(),
+                    if (string.Equals(edit.ToLower(),
+                        true.ToString().ToLower(),
                         StringComparison.OrdinalIgnoreCase))
                     {
                         model.DisplayMode = Mode.Edit;
