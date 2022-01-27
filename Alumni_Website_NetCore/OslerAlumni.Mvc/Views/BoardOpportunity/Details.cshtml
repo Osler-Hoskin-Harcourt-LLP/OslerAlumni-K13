@@ -1,5 +1,6 @@
 @using CMS.Helpers
 @using OslerAlumni.Mvc.Core.Definitions
+@using OslerAlumni.Mvc.Core.Helpers
 @using OslerAlumni.Mvc.Extensions
 @using OslerAlumni.Mvc.Extensions.OslerControls.Image
 @using OslerAlumni.Mvc.Extensions.OslerControls.RichTextField
@@ -43,7 +44,7 @@
 
                     </div>
                 }
-                <p class="has-xs-margin-top"> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.BoardOpportunity.DatePostedAndCategory, Html.DisplayFor(model => model.PostedDate), Model.JobCategoryDisplayName))</p>
+                <p class="has-xs-margin-top"> @Html.Raw(ResHelper.GetStringFormat(Constants.ResourceStrings.BoardOpportunity.DatePostedAndCategory, HtmlContentHelper.GetString(Html.DisplayFor(model => model.PostedDate)), Model.JobCategoryDisplayName))</p>
 
             </div>
         </div>
