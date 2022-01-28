@@ -62,7 +62,7 @@ namespace OslerAlumni.Mvc.Core.Services
             {
                 var user = _userRepository.GetByGuid(userGuid);
 
-                return user.Enabled && await _userManager.VerifyUserTokenAsync(new ApplicationUser((UserInfo)user), "CMS", Constants.VerifyUserTokenPurpose, token);
+                return user.Enabled && await _userManager.VerifyUserTokenAsync(new ApplicationUser(user.UserInfo), _userManager.Options.Tokens.PasswordResetTokenProvider, Constants.VerifyUserTokenPurpose, token);
             }
             catch (Exception)
             {
