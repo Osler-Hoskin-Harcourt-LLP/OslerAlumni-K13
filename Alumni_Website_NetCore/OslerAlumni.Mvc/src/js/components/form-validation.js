@@ -106,7 +106,7 @@ const validateFields = (() => {
             }
 
             const attachmentData = new FormData();
-            if (encType == 'multipart/form-data' && data.FileUpload != '') {
+            if (encType == 'multipart/form-data' && (data.FileUpload != '' || formId == 'contact-us')) {
                 hasAttachment = true;
 
                 for (var key in data) {
