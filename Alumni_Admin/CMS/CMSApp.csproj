@@ -735,6 +735,10 @@
       <HintPath>..\Lib\CMS.Base.Web.UI.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="CMS.ComputerVision.Azure, Version=13.0.13.0, Culture=neutral, PublicKeyToken=834b12a258f213f9">
+      <HintPath>..\Lib\CMS.ComputerVision.Azure.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="CMS.DataProtection, Version=13.0.13.0, Culture=neutral, PublicKeyToken=834b12a258f213f9">
       <HintPath>..\Lib\CMS.DataProtection.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -1062,6 +1066,10 @@
     <Reference Include="CMS.WorkflowEngine, Version=13.0.13.0, Culture=neutral, PublicKeyToken=834b12a258f213f9">
       <HintPath>..\Lib\CMS.WorkflowEngine.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.Azure.CognitiveServices.Vision.ComputerVision.7.0.0\lib\net461\Microsoft.Azure.CognitiveServices.Vision.ComputerVision.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -3853,6 +3861,34 @@
     <Content Include="CMSWebParts\Viewers\DateTime.ascx" />
     <Content Include="CMSWebParts\Viewers\DateTime_files\DateTime.js" />
     <Content Include="CMSWebParts\Widgets\WidgetActions.ascx" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Bakery-And-Coffee.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Brew-Bar.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Cauca-Farmer.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Coffee-Cherries.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Coffee-Region.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Coffee-Shop.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Coffee-Triangle.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Colombia-Coffee.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Kona-Coffee.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Robusta.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\St-Helena-Coffee.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Thailand-Coffee.jpg" />
+    <Content Include="DancingGoatCore\media\CoffeeGallery\Work-And-Coffee.jpg" />
+    <Content Include="DancingGoatCore\media\EmailCampaigns\coffee-101-lesson-1.jpg" />
+    <Content Include="DancingGoatCore\media\EmailCampaigns\coffee-101-lesson-2.jpg" />
+    <Content Include="DancingGoatCore\media\EmailCampaigns\colombia-coffee-promotion.jpg" />
+    <Content Include="DancingGoatCore\media\Graphics\banner-default.jpg" />
+    <Content Include="DancingGoatCore\media\Graphics\banner2.png" />
+    <Content Include="DancingGoatCore\media\Graphics\colombia-coffee.jpg" />
+    <Content Include="DancingGoatCore\media\Graphics\default-image-product.png" />
+    <Content Include="DancingGoatCore\media\Graphics\hero-bg.jpg" />
+    <Content Include="DancingGoatCore\media\Graphics\hero-bg3.jpg" />
+    <Content Include="DancingGoatCore\media\Graphics\hero_image.jpg" />
+    <Content Include="DancingGoatCore\media\Graphics\Logos\logo-dancing-goat.png" />
+    <Content Include="DancingGoatCore\media\Graphics\Manufacturers\aerobie.png" />
+    <Content Include="DancingGoatCore\media\Graphics\Manufacturers\chemex.png" />
+    <Content Include="DancingGoatCore\media\Graphics\Manufacturers\Espro.png" />
+    <Content Include="DancingGoatCore\media\Graphics\Manufacturers\Hario.png" />
     <Content Include="Global.asax" />
     <Content Include="ObjectTranslationRESTService.svc" />
     <Content Include="DocumentRESTService.svc" />
@@ -14849,11 +14885,12 @@
   <ItemGroup>
     <Folder Include="App_Data\CMSModules\CMSInstallation\Packages\Installed\" />
     <Folder Include="App_Data\CMSModules\WebAnalytics\MaxMind\" />
-    <Folder Include="CMSScripts\Custom\" />
     <Folder Include="CommunitySite\media\Media\Video\__thumbnails\" />
     <Folder Include="CorporateSite\media\VideoGallery\__thumbnails\" />
     <Folder Include="Ecentricarts\Modules\" />
     <Folder Include="OslerAlumni\" />
+    <Folder Include="CMSScripts\Custom\" />
+    <Folder Include="CMSScripts\WebComponents\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CMSResources\BTK00Tools\Default.resx" />
