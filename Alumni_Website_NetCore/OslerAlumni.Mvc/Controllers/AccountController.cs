@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using CMS.Activities.Loggers;
 using CMS.Helpers;
+using CMS.Localization;
 using ECA.Core.Models;
 using ECA.Core.Repositories;
 using ECA.PageURL.Definitions;
@@ -145,7 +146,7 @@ namespace OslerAlumni.Mvc.Controllers
                 return Redirect(decodedReturnUrl);
             }
 
-            return new RedirectResult("/");
+            return new RedirectResult($"/" + LocalizationContext.CurrentCulture.CultureCode.Split("-")[0]);
         }
 
 
