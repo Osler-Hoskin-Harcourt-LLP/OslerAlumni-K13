@@ -134,9 +134,13 @@ namespace BlankSiteCore
 
                 options.Events.OnRedirectToLogin = context =>
                 {
-
-                    context.Response.Redirect($"/{LocalizationContext.CurrentCulture.CultureAlias}/log-in?ReturnUrl={URLHelper.UrlEncodeQueryString(context.Request.Path)}");
-
+                    string loginUrl = "/en/log-in";
+                    if (LocalizationContext.CurrentCulture.CultureCode == "fr-CA")
+                    {
+                        loginUrl = "/fr/ouverture-de-session";
+                    }
+  
+                    context.Response.Redirect($"{loginUrl}?ReturnUrl={URLHelper.UrlEncodeQueryString(context.Request.Path)}");
 
                     return Task.CompletedTask;
                 };
