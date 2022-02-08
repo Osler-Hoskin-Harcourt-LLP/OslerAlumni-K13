@@ -1,4 +1,5 @@
 @using CMS.Helpers
+@using CMS.Localization
 @using Kentico.PageBuilder.Web.Mvc
 @using OslerAlumni.Mvc.Core.Definitions
 @using OslerAlumni.Mvc.Extensions
@@ -30,24 +31,27 @@
                 <div class="c-form-wrapper is-full">
 
                     @using (Html.BeginForm(
-                        "LogInAsOslerNetwork",
-                        "Account",
-                        FormMethod.Post,
-                        new
-                        {
-                            id = "log-in-as-osler-network"
-                        }))
+                   "LogInAsOslerNetwork",
+                   "Account",
+                   FormMethod.Post,
+                   new
+                   {
+                       id = "log-in-as-osler-network"
+                   }))
                     {
 
                         @Html.AntiForgeryToken()
 
                         @Html.HiddenFor(model => model.ReturnUrl)
 
+                        <input type="hidden" name="@Constants.FormCulture" value="@LocalizationContext.CurrentCulture.CultureCode" />
+
+
                         @(Html.Osler()
-                              .FormSubmitButton()
-                              .WithText(Constants.ResourceStrings.Navigation.NetworkLogin)
-                              .AddClass("is-full-width")
-                              .ToHtmlString())
+                .FormSubmitButton()
+                .WithText(Constants.ResourceStrings.Navigation.NetworkLogin)
+                .AddClass("is-full-width")
+                .ToHtmlString())
 
                     }
                     <div class="is-full has-l-margin-top has-l-margin-bottom">

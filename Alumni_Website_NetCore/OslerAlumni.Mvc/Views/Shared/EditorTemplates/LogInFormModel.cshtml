@@ -74,7 +74,7 @@
                 @Html.LabelFor(model => model.UserName, ResHelper.GetString(userNameMeta.DisplayName))
                 @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { aria_describedby = GetErrorId(nameof(Model.UserName)) } })
             </div>
-            @Html.ValidationMessageFor(model => model.UserName, null, new { id = GetErrorId(nameof(Model.UserName)), @class = "c-form-error-message" })
+            @Html.ValidationMessageFor(model => model.UserName, ResHelper.GetString(errors[nameof(Model.UserName)].FirstOrDefault()), new { id = GetErrorId(nameof(Model.UserName)), @class = "c-form-error-message" })
         </div>
     }
     else
@@ -94,7 +94,7 @@
                 @Html.LabelFor(model => model.Password, ResHelper.GetString(passwordMeta.DisplayName))
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { aria_describedby = GetErrorId(nameof(Model.Password)) } })
             </div>
-            @Html.ValidationMessageFor(model => model.Password, null, new { id = GetErrorId(nameof(Model.Password)), @class = "c-form-error-message" })
+            @Html.ValidationMessageFor(model => model.Password, ResHelper.GetString(errors[nameof(Model.Password)].FirstOrDefault()), new { id = GetErrorId(nameof(Model.Password)), @class = "c-form-error-message" })
         </div>
     }
     else

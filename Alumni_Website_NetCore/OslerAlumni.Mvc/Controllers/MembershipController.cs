@@ -1,4 +1,5 @@
 using CMS.Helpers;
+using CMS.Localization;
 using ECA.Core.Extensions;
 using ECA.Core.Models;
 using ECA.Mvc.Navigation.Extensions;
@@ -171,7 +172,7 @@ namespace OslerAlumni.Mvc.Controllers
 
             if (!ValidateNewBoard(model.NewBoard, currentUser, ModelState))
             {
-                return new ValidationErrorJsonResult(ModelState);
+                return new ValidationErrorJsonResult(ModelState, LocalizationContext.CurrentCulture.CultureCode);
             }
 
             var newList = currentUser.BoardMembershipsList;

@@ -327,7 +327,7 @@ namespace OslerAlumni.Mvc.Controllers
                 $"Could not reset user password: {errorMessage}");
 
             ModelState.AddModelError(nameof(ResetPasswordFormModel.Password), errorMessage);
-            return new ValidationErrorJsonResult(ModelState);
+            return new ValidationErrorJsonResult(ModelState, LocalizationContext.CurrentCulture.CultureCode);
         }
 
 

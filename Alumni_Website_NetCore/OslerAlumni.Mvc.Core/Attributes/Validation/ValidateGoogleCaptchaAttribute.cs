@@ -2,11 +2,12 @@
 using ECA.Core.Repositories;
 using ECA.Mvc.Recaptcha.Models;
 using ECA.Mvc.Recaptcha.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace OslerAlumni.Mvc.Core.Attributes.Validation
 {
     public class ValidateGoogleCaptchaAttribute 
-        : KenticoValidateAttribute
+        : ValidationAttribute
     {
         private readonly IEventLogRepository _eventLogRepository;
         private readonly IGoogleRecaptchaService _googleRecaptchaService;

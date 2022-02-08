@@ -9,6 +9,8 @@ namespace OslerAlumni.Mvc.Core.Definitions
     {
         public const string VerifyUserTokenPurpose = "ResetPassword";
 
+        public const string FormCulture = "form_culture";
+
         public static readonly IReadOnlyList<string> OslerPageTypes =
             new[]
             {

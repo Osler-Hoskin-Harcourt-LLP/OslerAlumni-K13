@@ -294,6 +294,18 @@ namespace BlankSiteCore
 
             app.UseCookiePolicy();
 
+            app.Use(async (context, next) =>
+            {
+                //Add current to cookie to all get request so it can get the culture when posting to endpoints
+                if (context.Request.Method == "GET" && (context.Request.Path.StartsWithSegments("/en") || context.Request.Path.StartsWithSegments("/fr")))
+                {
+
+                    context.Response.Cookies.Append(Constants.FormCulture, LocalizationContext.CurrentCulture.CultureCode);
+                }
+
+                await next(context);
+            });
+
             app.UseCors();
 
             app.UseAuthentication();
@@ -346,6 +358,7 @@ namespace BlankSiteCore
 
 
             });
+
 
             // Set Default Serialization Options
             JsonConvert.DefaultSettings = () =>
