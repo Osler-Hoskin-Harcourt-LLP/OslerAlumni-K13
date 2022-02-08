@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using CMS.DataEngine;
 using ECA.Core.Services;
@@ -265,7 +265,7 @@ namespace OslerAlumni.OnePlace.Services
                     return result;
                 }
 
-                var contextType = Type.GetType(item.ContextObjectType);
+                var contextType = Type.GetType(item.ContextObjectType.Replace(".NetCore", ""));
 
                 var service = _dataSubmissionServiceFactory
                     .GetDataSubmissionService(contextType, payloadType);
@@ -363,7 +363,7 @@ namespace OslerAlumni.OnePlace.Services
                 }
             }
 
-            payloadType = Type.GetType(item.PayloadType);
+            payloadType = Type.GetType(item.PayloadType.Replace(".NetCore", ""));
 
             payload = JsonConvert.DeserializeObject(
                 payloadJson,
