@@ -49,6 +49,7 @@ using OslerAlumni.OnePlace.Repositories;
 using OslerAlumni.OnePlace.Services;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlankSiteCore
 {
@@ -124,12 +125,21 @@ namespace BlankSiteCore
             services.AddControllersWithViews();
 
             // Configures the application's authentication cookie
-            services.ConfigureApplicationCookie(c =>
+            services.ConfigureApplicationCookie(options =>
             {
-                c.LoginPath = new PathString("/");
-                c.ExpireTimeSpan = TimeSpan.FromDays(14);
-                c.SlidingExpiration = true;
-                c.Cookie.Name = AUTHENTICATION_COOKIE_NAME;
+                options.LoginPath = new PathString("/log-in");
+                options.ExpireTimeSpan = TimeSpan.FromDays(14);
+                options.SlidingExpiration = true;
+                options.Cookie.Name = AUTHENTICATION_COOKIE_NAME;
+
+                options.Events.OnRedirectToLogin = context =>
+                {
+
+                    context.Response.Redirect($"/{LocalizationContext.CurrentCulture.CultureAlias}/log-in?ReturnUrl={URLHelper.UrlEncodeQueryString(context.Request.Path)}");
+
+
+                    return Task.CompletedTask;
+                };
             });
 
             // Registers the authentication cookie in Xperience with the 'Essential' cookie level
@@ -162,7 +172,7 @@ namespace BlankSiteCore
             services.AddSwaggerGen();
             services.AddTransient(cc => new ContextConfig
             {
-          
+
                 AllowedCultureCodes = GlobalConstants.Cultures.AllowedCultureCodes,
                 BasePageType = PageType_BasePageType.CLASS_NAME
             });
@@ -369,7 +379,7 @@ namespace BlankSiteCore
                     DateTimeZoneHandling = DateTimeZoneHandling.Local
                 };
 
-            
+
 
         }
     }
