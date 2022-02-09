@@ -44,9 +44,6 @@
 
                         @Html.HiddenFor(model => model.ReturnUrl)
 
-                        <input type="hidden" name="@Constants.FormCulture" value="@LocalizationContext.CurrentCulture.CultureCode" />
-
-
                         @(Html.Osler()
                 .FormSubmitButton()
                 .WithText(Constants.ResourceStrings.Navigation.NetworkLogin)

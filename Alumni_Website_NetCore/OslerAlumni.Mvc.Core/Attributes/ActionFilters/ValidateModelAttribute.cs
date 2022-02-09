@@ -23,7 +23,7 @@ namespace OslerAlumni.Mvc.Core.Attributes.ActionFilters
             filterContext.HttpContext.Request.EnableBuffering();
             if (!((Controller)filterContext.Controller).ModelState.IsValid)
             {
-                string culture = filterContext.HttpContext.Request.Cookies[Constants.FormCulture];
+                string culture = filterContext.HttpContext.Request.Cookies[Constants.CultureCookie];
 
 
                 filterContext.Result =
@@ -37,7 +37,7 @@ namespace OslerAlumni.Mvc.Core.Attributes.ActionFilters
             StringValues temp;
             if (request.ContentType.ToLower().Contains("form") )
             {
-                culture = request.Form[Constants.FormCulture];
+                culture = request.Form[Constants.CultureCookie];
             }
             else
             {

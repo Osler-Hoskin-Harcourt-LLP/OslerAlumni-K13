@@ -314,7 +314,7 @@ namespace BlankSiteCore
                 if (context.Request.Method == "GET" && (context.Request.Path.StartsWithSegments("/en") || context.Request.Path.StartsWithSegments("/fr")))
                 {
 
-                    context.Response.Cookies.Append(Constants.FormCulture, LocalizationContext.CurrentCulture.CultureCode);
+                    context.Response.Cookies.Append(Constants.CultureCookie, LocalizationContext.CurrentCulture.CultureCode);
                 }
 
                 await next(context);

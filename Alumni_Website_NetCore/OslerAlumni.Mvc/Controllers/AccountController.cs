@@ -183,9 +183,14 @@ namespace OslerAlumni.Mvc.Controllers
         {
             // Signs out the current user
             _authenticationService.LogOut();
-            
+
+            string redirectUrl = "/en";
+            if (Request.Cookies[Constants.CultureCookie] == "fr-CA")
+            {
+                redirectUrl = "/fr";
+            }
             // Redirects to a different action after the sign-out
-            return new RedirectResult("/");
+            return new RedirectResult(redirectUrl);
         }
 
         [HttpGet]
