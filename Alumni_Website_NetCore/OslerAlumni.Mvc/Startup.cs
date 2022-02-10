@@ -50,7 +50,9 @@ using OslerAlumni.OnePlace.Repositories;
 using OslerAlumni.OnePlace.Services;
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BlankSiteCore
 {
@@ -141,7 +143,7 @@ namespace BlankSiteCore
                         loginUrl = "/fr/ouverture-de-session";
                     }
   
-                    context.Response.Redirect($"{loginUrl}?ReturnUrl={URLHelper.UrlEncodeQueryString(context.Request.Path)}");
+                    context.Response.Redirect($"{loginUrl}?ReturnUrl={HttpUtility.UrlEncode(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetEncodedPathAndQuery(context.Request))}");
 
                     return Task.CompletedTask;
                 };
@@ -324,7 +326,7 @@ namespace BlankSiteCore
             app.Use(async (context, next) =>
             {
                 //Add current to cookie to all get request so it can get the culture when posting to endpoints
-                if (context.Request.Method == "GET" && (context.Request.Path.StartsWithSegments("/en") || context.Request.Path.StartsWithSegments("/fr")))
+                if (context.Request.Method == "GET" && (context.Request.Path.StartsWithSegments("/en") || context.Request.Path.StartsWithSegments("/fr")) && !context.Request.Path.ToString().Contains("httperror"))
                 {
 
                     context.Response.Cookies.Append(Constants.CultureCookie, LocalizationContext.CurrentCulture.CultureCode);
@@ -399,5 +401,6 @@ namespace BlankSiteCore
 
 
         }
+
     }
 }
