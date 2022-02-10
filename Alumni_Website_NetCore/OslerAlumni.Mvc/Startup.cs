@@ -39,6 +39,7 @@ using OslerAlumni.Mvc.Api.Services;
 using OslerAlumni.Mvc.Controllers;
 using OslerAlumni.Mvc.Core.Constraints;
 using OslerAlumni.Mvc.Core.Definitions;
+using OslerAlumni.Mvc.Core.Helpers;
 using OslerAlumni.Mvc.Core.Models;
 using OslerAlumni.Mvc.Core.Repositories;
 using OslerAlumni.Mvc.Core.Services;
@@ -302,9 +303,21 @@ namespace BlankSiteCore
 
             app.UseStaticFiles();
 
-            app.UseStatusCodePagesWithReExecute("/httperrors/error/{0}");
+
+
+            //app.UseStatusCodePagesWithReExecute("/httperrors/error/{0}");
 
             app.UseKentico();
+
+            app.UseStatusCodePages(async context =>
+            {
+                await Task.Run(() =>
+                {
+                    var culture = CustomCultureHelper.GetCultureCodeFromUrl(context.HttpContext.Request.Path);
+                    string redirectPath = $"/{culture.CultureAlias}/httperrors/error/{context.HttpContext.Response.StatusCode}";
+                    context.HttpContext.Response.Redirect(redirectPath);
+                });
+            });
 
             app.UseCookiePolicy();
 
@@ -366,7 +379,7 @@ namespace BlankSiteCore
 
                 endpoints.MapControllerRoute(
                     name: "MvcLocalizedRoute",
-                    pattern: "/{controller}/{action}/{statusCode?}",
+                    pattern: "{culture}/{controller}/{action}/{statusCode?}/",
                     defaults: new { controller = HttpErrorsControllerName, action = ErrorAction }
                     );
 

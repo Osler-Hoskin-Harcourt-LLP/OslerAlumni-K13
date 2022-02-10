@@ -1,9 +1,10 @@
 @using CMS.Helpers
+@using CMS.Localization
 @using OslerAlumni.Mvc.Core.Definitions
 @using OslerAlumni.Mvc.Models
 @model LanguageToggleViewModel
 
 @if ((Model?.ShowToggle ?? false) && !string.IsNullOrWhiteSpace(Model.LinkUrl))
 {
-    <a class="c-nav-link c-nav-link-culture" href="@Html.Raw(Model.LinkUrl)" lang="@ResHelper.GetString(Constants.ResourceStrings.Lang)">@ResHelper.GetString(Constants.ResourceStrings.LanguageToggleText)</a>
+    <a class="c-nav-link c-nav-link-culture" href="@Html.Raw(Model.LinkUrl)" lang="@ResHelper.GetString(Constants.ResourceStrings.Lang, LocalizationContext.CurrentCulture.CultureCode)">@ResHelper.GetString(Constants.ResourceStrings.LanguageToggleText, LocalizationContext.CurrentCulture.CultureCode)</a>
 }
