@@ -39,6 +39,7 @@ using OslerAlumni.Mvc.Api.Services;
 using OslerAlumni.Mvc.Controllers;
 using OslerAlumni.Mvc.Core.Constraints;
 using OslerAlumni.Mvc.Core.Definitions;
+using OslerAlumni.Mvc.Core.Helpers;
 using OslerAlumni.Mvc.Core.Models;
 using OslerAlumni.Mvc.Core.Repositories;
 using OslerAlumni.Mvc.Core.Services;
@@ -49,7 +50,9 @@ using OslerAlumni.OnePlace.Repositories;
 using OslerAlumni.OnePlace.Services;
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BlankSiteCore
 {
@@ -140,7 +143,7 @@ namespace BlankSiteCore
                         loginUrl = "/fr/ouverture-de-session";
                     }
   
-                    context.Response.Redirect($"{loginUrl}?ReturnUrl={URLHelper.UrlEncodeQueryString(context.Request.Path)}");
+                    context.Response.Redirect($"{loginUrl}?ReturnUrl={HttpUtility.UrlEncode(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetEncodedPathAndQuery(context.Request))}");
 
                     return Task.CompletedTask;
                 };
@@ -302,19 +305,31 @@ namespace BlankSiteCore
 
             app.UseStaticFiles();
 
-            app.UseStatusCodePagesWithReExecute("/httperrors/error/{0}");
+
+
+            //app.UseStatusCodePagesWithReExecute("/httperrors/error/{0}");
 
             app.UseKentico();
+
+            app.UseStatusCodePages(async context =>
+            {
+                await Task.Run(() =>
+                {
+                    var culture = CustomCultureHelper.GetCultureCodeFromUrl(context.HttpContext.Request.Path);
+                    string redirectPath = $"/{culture.CultureAlias}/httperrors/error/{context.HttpContext.Response.StatusCode}";
+                    context.HttpContext.Response.Redirect(redirectPath);
+                });
+            });
 
             app.UseCookiePolicy();
 
             app.Use(async (context, next) =>
             {
                 //Add current to cookie to all get request so it can get the culture when posting to endpoints
-                if (context.Request.Method == "GET" && (context.Request.Path.StartsWithSegments("/en") || context.Request.Path.StartsWithSegments("/fr")))
+                if (context.Request.Method == "GET" && (context.Request.Path.StartsWithSegments("/en") || context.Request.Path.StartsWithSegments("/fr")) && !context.Request.Path.ToString().Contains("httperror"))
                 {
 
-                    context.Response.Cookies.Append(Constants.FormCulture, LocalizationContext.CurrentCulture.CultureCode);
+                    context.Response.Cookies.Append(Constants.CultureCookie, LocalizationContext.CurrentCulture.CultureCode);
                 }
 
                 await next(context);
@@ -366,7 +381,7 @@ namespace BlankSiteCore
 
                 endpoints.MapControllerRoute(
                     name: "MvcLocalizedRoute",
-                    pattern: "/{controller}/{action}/{statusCode?}",
+                    pattern: "{culture}/{controller}/{action}/{statusCode?}/",
                     defaults: new { controller = HttpErrorsControllerName, action = ErrorAction }
                     );
 
@@ -386,5 +401,6 @@ namespace BlankSiteCore
 
 
         }
+
     }
 }

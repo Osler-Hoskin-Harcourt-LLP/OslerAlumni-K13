@@ -16,6 +16,7 @@ namespace OslerAlumni.Mvc.Core.Helpers
         /// <param name="url"></param>
         public static CultureInfo GetCultureCodeFromUrl(string url)
         {
+            CultureInfo result = CultureInfoProvider.GetCultureInfo("en-CA");
             if (string.IsNullOrEmpty(url))
             {
                 return null;
@@ -25,15 +26,17 @@ namespace OslerAlumni.Mvc.Core.Helpers
 
             if (cultureCode.Length == 5)
             {
-                return CultureInfoProvider.GetCultureInfo(cultureCode);
+                result = CultureInfoProvider.GetCultureInfo(cultureCode);
             }
 
             if (cultureCode.Length == 2)
             {
-                return CultureInfoProvider.GetCultures().WhereEquals(nameof(CultureInfo.CultureAlias), cultureCode).FirstOrDefault();
+                result = CultureInfoProvider.GetCultures().WhereEquals(nameof(CultureInfo.CultureAlias), cultureCode).FirstOrDefault();
             }
 
-            return null;
+            
+
+            return result;
         }
     }
 }

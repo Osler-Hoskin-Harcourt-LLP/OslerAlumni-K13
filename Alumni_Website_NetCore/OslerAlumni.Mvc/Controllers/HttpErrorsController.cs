@@ -66,20 +66,13 @@ namespace OslerAlumni.Mvc.Controllers
             var statusCodeReExecuteFeature =
             HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
 
-            if (statusCodeReExecuteFeature is not null)
-            {
-                var culture = CustomCultureHelper.GetCultureCodeFromUrl(statusCodeReExecuteFeature.OriginalPath);
-                if (culture != null)
-                {
-                    LocalizationContext.CurrentCulture = culture;
-                }
-            }
-
             TreeNode page;
 
+            var culture = CustomCultureHelper.GetCultureCodeFromUrl(Request.Path);
+            LocalizationContext.CurrentCulture = culture;
             if (!_pageService.TryGetStandalonePage(
                     errorPageType,
-                   LocalizationContext.CurrentCulture.CultureCode,
+                   culture.CultureCode,
                     SiteContext.CurrentSiteName,
                     out page,
                     includeAllCoupledColumns: true))
@@ -119,7 +112,7 @@ namespace OslerAlumni.Mvc.Controllers
                 return Index(
                StandalonePageType.ServerError);
             }
-            
+
         }
 
         #endregion
