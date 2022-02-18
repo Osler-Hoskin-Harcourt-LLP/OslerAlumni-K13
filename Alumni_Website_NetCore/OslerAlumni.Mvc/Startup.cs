@@ -142,8 +142,7 @@ namespace BlankSiteCore
                     {
                         loginUrl = "/fr/ouverture-de-session";
                     }
-  
-                    context.Response.Redirect($"{loginUrl}?ReturnUrl={HttpUtility.UrlEncode(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetEncodedPathAndQuery(context.Request))}");
+                    context.Response.Redirect($"{loginUrl}?ReturnUrl={HttpUtility.UrlEncode(Microsoft.AspNetCore.Http.Extensions.UriHelper.GetEncodedPathAndQuery(context.Request))}&{context.Request.QueryString.ToString().TrimStart('?')}");
 
                     return Task.CompletedTask;
                 };
