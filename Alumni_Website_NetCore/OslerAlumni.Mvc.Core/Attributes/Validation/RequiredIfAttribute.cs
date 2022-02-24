@@ -34,7 +34,7 @@ namespace OslerAlumni.Mvc.Core.Attributes.Validation
 
         public override string FormatErrorMessage(string name)
         {
-            return ResHelper.GetString(ErrorMessageString);
+            return ErrorMessageString;
         }
     }
 }
