@@ -20,7 +20,7 @@ namespace OslerAlumni.Mvc.Api.Controllers
     /// It expects to run in the context of a session
     /// of an authenticated user on the main site.
     /// </summary>
-    [Authorize]
+    [Authorize(Policy = "PublicPage")]
     public class OnePlaceController
         : BaseApiController
     {

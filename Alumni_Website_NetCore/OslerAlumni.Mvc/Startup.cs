@@ -37,6 +37,7 @@ using OslerAlumni.Core.Services;
 using OslerAlumni.Mvc.Api.Models;
 using OslerAlumni.Mvc.Api.Services;
 using OslerAlumni.Mvc.Controllers;
+using OslerAlumni.Mvc.Core.Authorization;
 using OslerAlumni.Mvc.Core.Constraints;
 using OslerAlumni.Mvc.Core.Definitions;
 using OslerAlumni.Mvc.Core.Helpers;
@@ -123,7 +124,11 @@ namespace BlankSiteCore
                 .AddSignInManager<SignInManager<ApplicationUser>>();
 
             services.AddAuthentication();
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("PublicPage", policy =>
+        policy.Requirements.Add(new PublicPageRequirement()));
+            });
 
             services.AddControllersWithViews();
 
@@ -291,6 +296,7 @@ namespace BlankSiteCore
             services.AddSingleton<ISearchService<NewsSearchRequest, News>, NewsSearchService>();
             services.AddSingleton<ISearchService<ProfileSearchRequest, Profile>, ProfileSearchService>();
             services.AddSingleton<ISearchService<ResourceSearchRequest, Resource>, ResourceSearchService>();
+            services.AddSingleton<IAuthorizationHandler, PublicPageHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
