@@ -21,7 +21,7 @@ using System.Linq;
 
 namespace OslerAlumni.Mvc.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "PublicPage")]
     public class ProfilesController
         : BaseController
     {

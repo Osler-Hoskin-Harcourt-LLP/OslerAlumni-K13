@@ -38,7 +38,7 @@ using System.Threading.Tasks;
 
 namespace OslerAlumni.Mvc.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "PublicPage")]
     public class MembershipController
         : BaseController
     {

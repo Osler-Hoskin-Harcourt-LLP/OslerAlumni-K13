@@ -178,7 +178,7 @@ namespace OslerAlumni.Mvc.Controllers
         /// Action for signing out users.
         /// The Authorize attribute allows the action only for users who are already signed in.
         /// </summary>
-        [Authorize]
+        [Authorize(Policy = "PublicPage")]
         public IActionResult LogOut()
         {
             // Signs out the current user

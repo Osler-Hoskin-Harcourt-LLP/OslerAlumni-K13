@@ -21,7 +21,7 @@ using OslerAlumni.Mvc.Models;
 
 namespace OslerAlumni.Mvc.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "PublicPage")]
     public class ResourcesController 
         : BaseController
     {
