@@ -178,7 +178,6 @@ namespace OslerAlumni.Mvc.Controllers
         /// Action for signing out users.
         /// The Authorize attribute allows the action only for users who are already signed in.
         /// </summary>
-        [Authorize(Policy = "PublicPage")]
         public IActionResult LogOut()
         {
             // Signs out the current user
@@ -370,6 +369,22 @@ namespace OslerAlumni.Mvc.Controllers
             };
 
             return View(resetPasswordPageViewModel);
+        }
+
+        /// <summary>
+        /// This action is the conventional action for policy requirement.
+        /// If a requirement is not met, it redirect users here
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            string loginUrl = "/en/log-in";
+            if (LocalizationContext.CurrentCulture.CultureCode == "fr-CA")
+            {
+                loginUrl = "/fr/ouverture-de-session";
+            }
+            return new RedirectResult($"{loginUrl}?ReturnUrl={Request.Query["ReturnUrl"]}");
         }
 
         #endregion
