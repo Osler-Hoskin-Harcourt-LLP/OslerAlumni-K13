@@ -1,4 +1,5 @@
 using CMS.DocumentEngine;
+using CMS.Membership;
 using Kentico.Content.Web.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using OslerAlumni.Core.Kentico.Models;
@@ -16,17 +17,23 @@ namespace OslerAlumni.Mvc.Core.Authorization
         protected override Task HandleRequirementAsync(
             AuthorizationHandlerContext context, PublicPageRequirement requirement)
         {
-            var pageDataRetriever = CMS.Core.Service.Resolve<IPageDataContextRetriever>();
-            var page = pageDataRetriever.Retrieve<TreeNode>().Page;
-
-            if (page != null)
+            if (MembershipContext.AuthenticatedUser != null && !MembershipContext.AuthenticatedUser.IsPublic())
             {
-                if (PageIsPublic(page))
+                context.Succeed(requirement);
+            }
+            else
+            {
+                var pageDataRetriever = CMS.Core.Service.Resolve<IPageDataContextRetriever>();
+                var page = pageDataRetriever.Retrieve<TreeNode>().Page;
+
+                if (page != null)
                 {
-                    context.Succeed(requirement);
+                    if (PageIsPublic(page))
+                    {
+                        context.Succeed(requirement);
+                    }
                 }
             }
-
 
             return Task.CompletedTask;
         }
