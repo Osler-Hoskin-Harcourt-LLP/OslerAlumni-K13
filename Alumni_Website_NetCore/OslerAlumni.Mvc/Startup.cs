@@ -18,6 +18,7 @@ using Kentico.Content.Web.Mvc;
 using Kentico.Content.Web.Mvc.Routing;
 using Kentico.Membership;
 using Kentico.Newsletters.Web.Mvc;
+using Kentico.OnlineMarketing.Web.Mvc;
 using Kentico.Web.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -84,7 +85,7 @@ namespace BlankSiteCore
                 // features.UsePageBuilder();
                 features.UseActivityTracking();
                 // features.UseABTesting();
-                // features.UseWebAnalytics();
+                features.UseWebAnalytics();
                 features.UseEmailTracking();
                 // features.UseCampaignLogger();
                 // features.UseScheduler();
