@@ -1,6 +1,8 @@
 @using CMS.DocumentEngine
 @using Kentico.Content.Web.Mvc
+@using Kentico.OnlineMarketing.Web.Mvc
 @using Kentico.PageBuilder.Web.Mvc
+@using Kentico.Web.Mvc
 @using OslerAlumni.Mvc.Extensions
 @using OslerAlumni.Mvc.Models
 @using OslerAlumniWebsite.ViewComponents.Global
@@ -46,7 +48,7 @@
     PageDescription = ViewBag.PageDescription
     }
     })
-
+    @Html.Kentico().WebAnalyticsLoggingScript()
 </head>
 
 @* TODO: [MS/SE] Controller and action values should be added to ViewBag (in BaseController?), instead of view querying route values directly *@
