@@ -322,8 +322,11 @@ namespace BlankSiteCore
                 await Task.Run(() =>
                 {
                     var culture = CustomCultureHelper.GetCultureCodeFromUrl(context.HttpContext.Request.Path);
-                    string redirectPath = $"/{culture.CultureAlias}/httperrors/error/{context.HttpContext.Response.StatusCode}";
-                    context.HttpContext.Response.Redirect(redirectPath);
+                    if (culture != null)
+                    {
+                        string redirectPath = $"/{culture.CultureAlias}/httperrors/error/{context.HttpContext.Response.StatusCode}";
+                        context.HttpContext.Response.Redirect(redirectPath);
+                    }
                 });
             });
 
