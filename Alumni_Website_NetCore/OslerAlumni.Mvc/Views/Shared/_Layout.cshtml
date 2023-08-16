@@ -17,7 +17,6 @@
 @{
     Layout = null;
     var page = dataRetriever.Retrieve<TreeNode>().Page;
-
 }
 
 <!DOCTYPE html>
@@ -27,7 +26,7 @@
     {
         <!-- OneTrust Cookies Consent Notice start -->
 
-        <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="@MacroResolver.Resolve(SettingsKeyInfoProvider.GetValue("OslerAlumni.Content.OneTrustCode"), new MacroSettings { Culture=LocalizationContext.PreferredCultureCode })"></script>
+        <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="@MacroResolver.Resolve(SettingsKeyInfoProvider.GetValue("OslerAlumni.Content.OneTrustCode"), new MacroSettings { Culture=LocalizationContext.PreferredCultureCode })"></script>
         <script type="text/javascript">
             function OptanonWrapper() { }
         </script>
