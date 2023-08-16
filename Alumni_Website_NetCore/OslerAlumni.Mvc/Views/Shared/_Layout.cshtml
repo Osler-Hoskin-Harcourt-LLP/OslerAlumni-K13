@@ -23,6 +23,17 @@
 <!DOCTYPE html>
 <html lang="@Html.Osler().GetCurrentLanguage()">
 <head>
+    @if (!string.IsNullOrEmpty(MacroResolver.Resolve(SettingsKeyInfoProvider.GetValue("OslerAlumni.Content.OneTrustCode"), new MacroSettings { Culture = LocalizationContext.PreferredCultureCode })))
+    {
+        <!-- OneTrust Cookies Consent Notice start -->
+
+        <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="@MacroResolver.Resolve(SettingsKeyInfoProvider.GetValue("OslerAlumni.Content.OneTrustCode"), new MacroSettings { Culture=LocalizationContext.PreferredCultureCode })"></script>
+        <script type="text/javascript">
+            function OptanonWrapper() { }
+        </script>
+        <!-- OneTrust Cookies Consent Notice end -->
+    }
+
     <meta charset="UTF-8">
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,17 +51,6 @@
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window, document, 'script', 'dataLayer', '@ViewBag.GTMCode');</script>
     <!-- End Google Tag Manager -->
-
-    @if (!string.IsNullOrEmpty(MacroResolver.Resolve(SettingsKeyInfoProvider.GetValue("OslerAlumni.Content.OneTrustCode"), new MacroSettings { Culture = LocalizationContext.PreferredCultureCode })))
-    {
-        <!-- OneTrust Cookies Consent Notice start -->
-
-        <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="@MacroResolver.Resolve(SettingsKeyInfoProvider.GetValue("OslerAlumni.Content.OneTrustCode"), new MacroSettings { Culture=LocalizationContext.PreferredCultureCode })"></script>
-        <script type="text/javascript">
-            function OptanonWrapper() { }
-        </script>
-        <!-- OneTrust Cookies Consent Notice end -->
-    }
 
     @RenderSection("Head", required: false)
 
