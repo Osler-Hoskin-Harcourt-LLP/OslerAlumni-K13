@@ -68,7 +68,7 @@
 
 * Create a site in IIS called `OslerAlumni-Website`
 
-    * Set physical path to `<Local Project Git Folder Root>\Alumni_Website\OslerAlumni.Mvc`
+    * Set physical path to `<Local Project Git Folder Root>\Alumni_Website_NetCore\OslerAlumni.Mvc`
 
     * Set host name to `osleralumni-lh.ecentricarts.com`
 
@@ -86,7 +86,7 @@
 
 * Ensure `IIS_IUSRS` has correct permissions
 
-    * Go to Properties > Security on the `Alumni_Website` folder
+    * Go to Properties > Security on the `Alumni_Website_NetCore` folder
 
     * Set permissions for `IIS_IUSRS` to full control
 
@@ -96,7 +96,7 @@
     127.0.0.1    osleralumni-lh.ecentricarts.com
 	```
 
-* Navigate to `<Local Project Git Folder Root>\Alumni_Website\OslerAlumni.Mvc\`
+* Navigate to `<Local Project Git Folder Root>\Alumni_Website_NetCore\OslerAlumni.Mvc\`
 
 * Configure your local web farm name:
 
@@ -106,7 +106,7 @@
 
     * Modify the `CMSWebFarmServerName` value to replace XX with your initials, e.g. for John Ramamoorthy you would modify "OslerAlumniWebsiteXX" to "OslerAlumniWebsiteJR" *(Note that the name of the web farm is different for Admin and MVC sites)*
 
-* Open the VS solution at `<Local Project Git Folder Root>\Alumni_Website\OslerAlumni_Website.sln` (in Administrator mode) and rebuild it
+* Open the VS solution at `<Local Project Git Folder Root>\Alumni_Website_NetCore\OslerAlumniWebsite.sln` (in Administrator mode) and rebuild it
 
     * Make sure that automatic restoring of Nuget packages is enabled in your VS instance
 
@@ -211,7 +211,7 @@ npm `4.20.2`
 
     ```
     [root]
-    |-- Alumni_Website
+    |-- Alumni_Website_NetCore
     |   |-- OslerAlumni.Mvc
     |   |   |-- build
     |   |   |   |-- img // optimized image assets
