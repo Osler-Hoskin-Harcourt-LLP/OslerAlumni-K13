@@ -49,7 +49,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// </summary>
         [Required]
         [MinLength(1)]
-        [AllowedValues(
+        [System.ComponentModel.DataAnnotations.AllowedValues(
             new[]
             {
                 PageType_Page.CLASS_NAME,
