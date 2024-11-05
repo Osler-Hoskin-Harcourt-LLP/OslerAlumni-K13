@@ -3589,6 +3589,12 @@
             <param name="sameSiteMode">Value of the same site attribute.</param>
             <param name="secure">Indicates whether the cookie should contain the secure attribute.</param>
         </member>
+        <member name="M:CMS.Helpers.CookieHelper.SetValue(CMS.Helpers.CookieHelperValueSettingParameters)">
+            <summary>
+            Sets the cookie.
+            </summary>
+            <param name="parameters">Parameters to be set for cookie.</param>
+        </member>
         <member name="M:CMS.Helpers.CookieHelper.ChangeCookieExpiration(System.String,System.DateTime,System.Boolean)">
             <summary>
             Sets the specific cookie expiration time.
@@ -3736,18 +3742,18 @@
             <param name="sameSite">Same site mode of the cookie.</param>
             <param name="secure">Indicates whether secure attribute should be set for the cookie.</param>
         </member>
-        <member name="M:CMS.Helpers.CookieHelper.SetCookieValues(CMS.Base.Internal.IHttpCookie,System.String,System.String@,System.DateTime,System.Nullable{System.Boolean},System.String,CMS.Base.SameSiteMode,System.Boolean)">
+        <member name="M:CMS.Helpers.CookieHelper.SetValueInternal(CMS.Helpers.CookieHelperValueSettingParameters)">
+            <summary>
+            Sets the cookie.
+            </summary>
+            <param name="parameters">Parameters to be set for cookie.</param>
+        </member>
+        <member name="M:CMS.Helpers.CookieHelper.SetCookieValues(CMS.Base.Internal.IHttpCookie,CMS.Helpers.CookieHelperValueSettingParameters)">
             <summary>
             Sets the cookie values
             </summary>
             <param name="cookie">Cookie to set</param>
-            <param name="value">Cookie value</param>
-            <param name="path">Cookie virtual path</param>
-            <param name="expires">Expiration time</param>
-            <param name="httpOnly">Defines httpOnly flag.</param>
-            <param name="domain">Domain to associate the cookie with.</param>
-            <param name="sameSite">Same site mode of the cookie.</param>
-            <param name="secure">Indicates whether secure attribute should be set for the cookie.</param>
+            <param name="parameters">Parameters to be set for cookie.</param>
         </member>
         <member name="M:CMS.Helpers.CookieHelper.GetValueInternal(System.String,System.Boolean,System.Boolean)">
             <summary>
@@ -3819,6 +3825,51 @@
             Returns true if the object contains specified column.
             </summary>
             <param name="columnName">Column name</param>
+        </member>
+        <member name="T:CMS.Helpers.CookieHelperValueSettingParameters">
+            <summary>
+            Parameters for setting value in <see cref="T:CMS.Helpers.CookieHelper"/>.
+            </summary>
+        </member>
+        <member name="P:CMS.Helpers.CookieHelperValueSettingParameters.Name">
+            <summary>
+            Cookie name.
+            </summary>
+        </member>
+        <member name="P:CMS.Helpers.CookieHelperValueSettingParameters.Value">
+            <summary>
+            Cookie value.
+            </summary>
+        </member>
+        <member name="P:CMS.Helpers.CookieHelperValueSettingParameters.Path">
+            <summary>
+            Cookie virtual path.
+            </summary>
+        </member>
+        <member name="P:CMS.Helpers.CookieHelperValueSettingParameters.Expires">
+            <summary>
+            Expiration time.
+            </summary>
+        </member>
+        <member name="P:CMS.Helpers.CookieHelperValueSettingParameters.HttpOnly">
+            <summary>
+            Defines httpOnly flag.
+            </summary>
+        </member>
+        <member name="P:CMS.Helpers.CookieHelperValueSettingParameters.Domain">
+            <summary>
+            Domain to associate the cookie with.
+            </summary>
+        </member>
+        <member name="P:CMS.Helpers.CookieHelperValueSettingParameters.SameSiteMode">
+            <summary>
+            Value of the same site attribute.
+            </summary>
+        </member>
+        <member name="P:CMS.Helpers.CookieHelperValueSettingParameters.Secure">
+            <summary>
+            Indicates whether the cookie should contain the secure attribute.
+            </summary>
         </member>
         <member name="T:CMS.Helpers.CookieLevel">
             <summary>
@@ -6049,6 +6100,11 @@
             Name of the parameter which indicates form builder preview link expiration.
             </summary>
         </member>
+        <member name="F:CMS.Helpers.VirtualContext.PARAM_EXPIRATION">
+            <summary>
+            Name of the parameter which indicates preview link expiration.
+            </summary>
+        </member>
         <member name="F:CMS.Helpers.VirtualContext.PARAM_EMBEDED_IN_ADMINISTRATION">
             <summary>
             Name of the parameter which indicates if page is embedded in administration inside an iframe.
@@ -6082,6 +6138,12 @@
         <member name="F:CMS.Helpers.VirtualContext.FormBuilderLinkExpiration">
             <summary>
             Represents period for which the form builder preview link is valid.
+            </summary>
+        </member>
+        <member name="F:CMS.Helpers.VirtualContext.ExternalFrameExpiration">
+            <summary>
+            Represents the period which the preview/form builder link is valid for when displayed outside of the administration interface.
+            For example when the link is opened in a new tab.
             </summary>
         </member>
         <member name="P:CMS.Helpers.VirtualContext.VirtualContextPrefix">
@@ -6233,12 +6295,28 @@
         </member>
         <member name="M:CMS.Helpers.VirtualContext.GetPreviewModePathFromVirtualContext(System.String,System.Boolean,System.String,System.Boolean)">
             <summary>
-            Gets preview path based on given path and current initialized context.
+            Gets preview mode path based on given path and current initialized context.
             </summary>
             <param name="path">Application absolute path to be converted.</param>
             <param name="readonlyMode">Indicates if readonly mode should be enabled to disallow modify actions and POST requests.</param>
             <param name="cultureCode">Defines a culture code for resulting preview path. If not provided, culture code from current initialized context is used.</param>
             <param name="embededInAdministration">Indicates if page is embedded in administration inside an iframe.</param>
+        </member>
+        <member name="M:CMS.Helpers.VirtualContext.GetPreviewLinkPathFromVirtualContext(System.String)">
+            <summary>
+            Gets preview link path based on given path and current initialized context.
+            </summary>
+            <param name="path">Application absolute path to be converted.</param>
+        </member>
+        <member name="M:CMS.Helpers.VirtualContext.ValidatePreviewComonIdentifiers(System.String)">
+            <summary>
+            Validates preview parameters that are shared across all preview types (page preview, page builder, preview link)
+            </summary>
+        </member>
+        <member name="M:CMS.Helpers.VirtualContext.GetPreviewCommonIdentifiers(System.String)">
+            <summary>
+            Returns preview parameters that are shared across all preview types (page preview, page builder, preview link)
+            </summary>
         </member>
         <member name="M:CMS.Helpers.VirtualContext.GetPreviewModeParameters(System.Guid,System.String,System.Guid,System.Boolean,System.Boolean)">
             <summary>
@@ -6248,7 +6326,7 @@
             <param name="cultureCode">Context of culture for the preview.</param>
             <param name="workflowCycleGuid">Context of workflow cycle GUID.</param>
             <param name="readonlyMode">Indicates if readonly mode should be enabled to disallow modify actions and POST requests.</param>
-            <param name="embededInAdministration">Indicates if page is embedded in administration inside an iframe.</param>
+            <param name="embededInAdministration">Indicates if the page preview will be embedded in administration UI inside an iframe.</param>
             <remarks>
             Preview mode is used for the page builder and the preview tab.
             </remarks>
@@ -6261,7 +6339,7 @@
             <param name="cultureCode">Context of culture for the preview.</param>
             <param name="workflowCycleGuid">Context of workflow cycle GUID.</param>
             <remarks>
-            Preview link URL can be used by external users. This URL does not need additional authentization.
+            Preview link URL can be used by external users. This URL does not need additional authentication.
             </remarks>
         </member>
         <member name="M:CMS.Helpers.VirtualContext.GetFormBuilderPath(System.String,System.Guid)">
@@ -6270,6 +6348,14 @@
             </summary>
             <param name="path">Application absolute path to be converted.</param>
             <param name="userGuid">Context of user for the form builder.</param> 
+        </member>
+        <member name="M:CMS.Helpers.VirtualContext.GetFormBuilderPath(System.String,System.Guid,System.Boolean)">
+            <summary>
+            Returns path containing <see cref="T:CMS.Helpers.VirtualContext"/> data required by Form builder.
+            </summary>
+            <param name="path">Application absolute path to be converted.</param>
+            <param name="userGuid">Context of user for the form builder.</param> 
+            <param name="embeddedInAdministration">Indicates if the returned path will be embedded in administration UI in an iframe.</param>
         </member>
         <member name="M:CMS.Helpers.VirtualContext.AddAdministrationDomain(System.String)">
             <summary>
@@ -6286,6 +6372,11 @@
         <member name="M:CMS.Helpers.VirtualContext.GetFormBuilderLinkExpiration(System.DateTime)">
             <summary>
             Returns given <paramref name="dateTime"/> represented in UTC time as number of ticks.
+            </summary>
+        </member>
+        <member name="M:CMS.Helpers.VirtualContext.GetExternalFrameExpiration(System.DateTime)">
+            <summary>
+            Returns given <paramref name="dateTime"/> extended by the <see cref="F:CMS.Helpers.VirtualContext.PARAM_EXPIRATION"/> represented in UTC time as number of ticks.
             </summary>
         </member>
         <member name="M:CMS.Helpers.VirtualContext.AddParameterToUrl(System.String,System.String,System.String)">
@@ -7730,9 +7821,9 @@
             Provides validation RSA singed license key.
             </summary>
         </member>
-        <member name="F:CMS.Helpers.EncryptionHelper.ENCRYPT_PREFIX">
+        <member name="F:CMS.Helpers.EncryptionHelper.ENCRYPT_PREFIX_RIJNDAEL">
             <summary>
-            Prefix used in encrypt/decrypt methods to identify encrypted data.
+            Prefix used in encrypt/decrypt methods to identify encrypted data with Rijndael algorithm.
             </summary>
         </member>
         <member name="F:CMS.Helpers.EncryptionHelper.KEY">
@@ -13158,6 +13249,7 @@
             </summary>
             <param name="filename">File name</param>
             <remarks>
+            Should the file not be an image supported by <see href="https://learn.microsoft.com/en-us/dotnet/api/system.drawing.bitmap?view=netframework-4.8#remarks">Bitmap</see>, null is returned.
             As the return value is cached, the returned <see cref="T:System.Drawing.Image"/> is a shared resource. Performing
             any operation which modifies the image state has inherently side effects.
             </remarks>
@@ -13313,6 +13405,13 @@
             <param name="img">Image</param>
             <param name="format">Format of the output</param>
         </member>
+        <member name="M:CMS.Helpers.ImageHelper.GetFileExtension(System.String)">
+            <summary>
+            Gets the extension of a file
+            </summary>
+            <param name="path">Path of a given file</param>
+            <returns>The file extension of a given file</returns>
+        </member>
         <member name="M:CMS.Helpers.ImageHelper.IsSupportedByImageEditor(System.String)">
             <summary>
             Checks if image format is supported by Image Editor.
@@ -13347,6 +13446,12 @@
         <member name="M:CMS.Helpers.ImageHelper.IsImage(System.String)">
             <summary>
             Determines whether it is an image extension or not. Accepts extensions in both formats ".gif", and "gif"
+            </summary>
+            <param name="extension">File extension to check</param>
+        </member>
+        <member name="M:CMS.Helpers.ImageHelper.IsEditableImage(System.String)">
+            <summary>
+            Determines whether it is an editable image extension or not. Accepts extensions in both formats ".gif", and "gif"
             </summary>
             <param name="extension">File extension to check</param>
         </member>
@@ -14236,6 +14341,28 @@
             <summary>
             Salt for request on handler running under page CMSPages/GetImageVersion.aspx
             </summary>
+        </member>
+        <member name="T:CMS.Helpers.MediaProtectionHelper">
+            <summary>
+            Implementation of <see cref="T:CMS.Core.Internal.IMediaProtectionHelper"/> using <see cref="T:CMS.Helpers.ValidationHelper"/> to generate and validate hash.
+            </summary>
+        </member>
+        <member name="M:CMS.Helpers.MediaProtectionHelper.GetHash(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CMS.Helpers.MediaProtectionHelper.ValidateHash(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CMS.Helpers.MediaProtectionService.#ctor(CMS.Core.Internal.IMediaProtectionHelper,CMS.Core.ISettingsService)">
+            <summary>
+            Creates new instance of <see cref="T:CMS.Helpers.MediaProtectionService"/>.
+            </summary>
+        </member>
+        <member name="M:CMS.Helpers.MediaProtectionService.GetProtectedUrl(System.String,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CMS.Helpers.MediaProtectionUrlValidator.IsValid(System.String,System.String)">
+            <inheritdoc />
         </member>
         <member name="T:CMS.Helpers.OptInApprovalResultEnum">
             <summary>

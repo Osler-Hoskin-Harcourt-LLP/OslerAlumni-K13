@@ -15,14 +15,14 @@
             </summary>
             <param name="formItem">Form item.</param>
         </member>
-        <member name="T:CMS.OnlineForms.CurrentContactFromFormUpdater">
+        <member name="T:CMS.OnlineForms.ContactFromFormUpdater">
             <summary>
-            Encapsulates functionality that updates current contact based on form data.
+            Encapsulates functionality that updates contact based on form data.
             </summary>
         </member>
-        <member name="M:CMS.OnlineForms.CurrentContactFromFormUpdater.Update(CMS.OnlineForms.BizFormItem)">
+        <member name="M:CMS.OnlineForms.ContactFromFormUpdater.Update(CMS.OnlineForms.BizFormItem)">
             <summary>
-            Updates current contact based on the given <paramref name="formData"/>.
+            Updates contact based on the given <paramref name="formData"/>.
             </summary>
             <param name="formData">From data.</param>
         </member>
@@ -90,7 +90,7 @@
         </member>
         <member name="T:CMS.OnlineForms.FullConsentFormSubmissionActivityLoggingStrategy">
             <summary>
-            Logger that ensures form submission activity and current contact updating when tracking consent is available.
+            Logger that ensures form submission activity and contact updating when tracking consent is available.
             </summary>
         </member>
         <member name="M:CMS.OnlineForms.FullConsentFormSubmissionActivityLoggingStrategy.#ctor">
@@ -98,17 +98,20 @@
             Initializes an instance of the <see cref="T:CMS.OnlineForms.FullConsentFormSubmissionActivityLoggingStrategy"/> class.
             </summary>
         </member>
-        <member name="M:CMS.OnlineForms.FullConsentFormSubmissionActivityLoggingStrategy.#ctor(CMS.Base.Internal.IHttpContextRetriever,CMS.Base.ISiteService,CMS.Activities.IActivityLogService)">
+        <member name="M:CMS.OnlineForms.FullConsentFormSubmissionActivityLoggingStrategy.#ctor(CMS.Base.Internal.IHttpContextRetriever,CMS.Base.ISiteService,CMS.Activities.IActivityLogService,CMS.ContactManagement.ICurrentContactProvider,CMS.ContactManagement.IContactCreator,CMS.ContactManagement.IContactInfoProvider)">
             <summary>
             Initializes an instance of the <see cref="T:CMS.OnlineForms.FullConsentFormSubmissionActivityLoggingStrategy"/> class.
             </summary>
             <param name="httpContextRetriever">HTTP context retriever.</param>
             <param name="siteService">Site service.</param>
             <param name="activityLogService">Activity log service.</param>
+            <param name="currentContactProvider">Current contact provider.</param>
+            <param name="contactCreator">Contact creator.</param>
+            <param name="contactInfoProvider">Contact info provider.</param>
         </member>
         <member name="M:CMS.OnlineForms.FullConsentFormSubmissionActivityLoggingStrategy.Execute(CMS.OnlineForms.BizFormItem)">
             <summary>
-            Executest activity logging and updates current contact with data from the given <paramref name="formItem"/>.
+            Executes activity logging and updates contact with data from the given <paramref name="formItem"/>.
             </summary>
             <param name="formItem">Form item used as source of data for activity and contact.</param>
         </member>
@@ -886,6 +889,35 @@
             <param name="data">Custom task data</param>
             <param name="binary">Binary data</param>
         </member>
+        <member name="T:CMS.OnlineForms.BizFormDataType">
+            <summary>
+            Data type class for a representation of a file uploaded via BizForm submission.
+            </summary>
+        </member>
+        <member name="M:CMS.OnlineForms.BizFormDataType.#ctor(System.String,System.String,System.String,System.Func{System.Object,CMS.OnlineForms.BizFormUploadFile,System.Globalization.CultureInfo,CMS.OnlineForms.BizFormUploadFile},System.Func{CMS.OnlineForms.BizFormUploadFile,System.Object,System.Globalization.CultureInfo,System.Object},CMS.DataEngine.IDataTypeTextSerializer)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="sqlType">SQL type.</param>
+            <param name="fieldType">Field type.</param>
+            <param name="schemaType">Schema type.</param>
+            <param name="conversionFunc">Conversion function.</param>
+            <param name="dbConversionFunc">Function which converts value to its database representation.</param>
+            <param name="textSerializer">Text serializer used for this type.</param>
+        </member>
+        <member name="P:CMS.OnlineForms.BizFormDataType.ObjectDefaultValue">
+            <summary>
+            Default value for this data type.
+            </summary>
+        </member>
+        <member name="M:CMS.OnlineForms.BizFormDataType.Convert(System.Object,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            Converts the value to a proper type.
+            </summary>
+            <param name="value">Value to convert</param>
+            <param name="culture">Culture used for conversion of the type</param>
+            <param name="defaultValue">Default value to return in case the conversion fails</param>
+        </member>
         <member name="T:CMS.OnlineForms.BizFormUploadFile">
             <summary>
             Class represents a file uploaded via BizForm submission.
@@ -905,6 +937,12 @@
             <summary>
             Gets or sets the original file name of the uploaded file.
             </summary>
+        </member>
+        <member name="M:CMS.OnlineForms.BizFormUploadFile.op_Implicit(System.String)~CMS.OnlineForms.BizFormUploadFile">
+            <summary>
+            Implicit conversion from string.
+            </summary>
+            <param name="bizFormUploadFile"></param>
         </member>
         <member name="T:CMS.OnlineForms.BizFormUploadFileSerializer">
             <summary>
@@ -1339,6 +1377,11 @@
         <member name="P:CMS.OnlineForms.BizFormItem.ObjectDisplayName">
             <summary>
             Object display name.
+            </summary>
+        </member>
+        <member name="P:CMS.OnlineForms.BizFormItem.ObjectParent">
+            <summary>
+            Gets or sets BizForm which this item belongs to.
             </summary>
         </member>
         <member name="M:CMS.OnlineForms.BizFormItem.DeleteObject">
@@ -2154,6 +2197,11 @@
             Regular expression for macros in e-mail body, macros are in form $$type:fieldname$$ where type is "label" or "value".
             </summary>
         </member>
+        <member name="P:CMS.OnlineForms.BizFormMailSender.EncodeFields">
+            <summary>
+            Indicates if field values should be encoded in the email body.
+            </summary>
+        </member>
         <member name="P:CMS.OnlineForms.BizFormMailSender.FormConfiguration">
             <summary>
             Configuration of the form.
@@ -2208,6 +2256,12 @@
         <member name="M:CMS.OnlineForms.BizFormMailSender.GetFieldValueForMail(CMS.FormEngine.FormFieldInfo)">
             <summary>
             Returns field value for mail message. Value is transformed according to field type.
+            </summary>
+            <param name="formFieldInfo">Form field info</param>
+        </member>
+        <member name="M:CMS.OnlineForms.BizFormMailSender.GetFieldLabelForMail(CMS.FormEngine.FormFieldInfo)">
+            <summary>
+            Returns field label for mail message. 
             </summary>
             <param name="formFieldInfo">Form field info</param>
         </member>
