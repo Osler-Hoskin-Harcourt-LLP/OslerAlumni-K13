@@ -23,7 +23,7 @@ cmsdefine(["CMS/EventHub", "CMS.Builder/Constants", 'CMS.Builder/FrameLoader'], 
         frame.style.display = 'none';
         frame.onload = function () {
             // Wait for the MVC frame to complete the authentication and set the authentication response cookie
-            window.addEventListener('message', (event) => {
+            window.addEventListener('message', function onMessageCallback(event) {
                 var mvcFrameUrl = new URL(frameUrl);
                 if (event.origin !== mvcFrameUrl.origin) {
                     return;
@@ -34,8 +34,17 @@ cmsdefine(["CMS/EventHub", "CMS.Builder/Constants", 'CMS.Builder/FrameLoader'], 
                     var mvcFrameAuthenticatedEventName = frameLoader.getMvcFrameAuthenticatedEventName(frameUrl);
                     // Let the admin application know that the MVC authentication process for a specific culture has completed
                     hub.publish(mvcFrameAuthenticatedEventName);
+
+                    // In some cases an admin page can be displayed in the builder/preview frame. (No preview informational page)
+                    // Since the builder/preview frame uses the FrameLoader for loading it's content,
+                    // the admin page must publish it's loading event with administration domain.
+                    var mvcAdminFrameAuthenticatedEventName = frameLoader.getMvcFrameAuthenticatedEventName(window.location.origin);
+                    hub.publish(mvcAdminFrameAuthenticatedEventName);
+
+                    // Remove the handler once the admin application has been notified
+                    window.removeEventListener('message', onMessageCallback);
                 }
-            }, { once: true });
+            });
 
             var urlObj = new URL(frameUrl);
             frame.contentWindow.postMessage({ key: constants.AUTHENTICATE_MVC_FRAME_POST_MESSAGE, token: mvcSignInToken }, urlObj.origin);

@@ -341,7 +341,7 @@ public partial class CMSFormControls_Classes_SelectClassNames : FormEngineUserCo
                     DataClassInfo di = DataClassInfoProvider.GetDataClassInfo(className);
                     if (di == null)
                     {
-                        ValidationError = GetString("formcontrols_selectclassnames.notexist").Replace("%%code%%", className);
+                        ValidationError = HTMLHelper.HTMLEncode(GetString("formcontrols_selectclassnames.notexist").Replace("%%code%%", className));
                         return false;
                     }
                 }

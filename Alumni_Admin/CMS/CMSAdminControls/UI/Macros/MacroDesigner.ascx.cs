@@ -299,7 +299,13 @@ function DisplayWarning(checkCodeChange) {{
         tabsElem.SelectedTab = num;
         hdnSelTab.Value = num.ToString();
 
-        CookieHelper.SetValue(CookieName.MacroDesignerTab, num.ToString(), DateTime.Now.AddDays(1));
+        var parameters = new CookieHelperValueSettingParameters
+        {
+            Name = CookieName.MacroDesignerTab,
+            Value = num.ToString(),
+            Expires = DateTime.Now.AddDays(1)
+        };
+        CookieHelper.SetValue(parameters);
     }
 
     #endregion

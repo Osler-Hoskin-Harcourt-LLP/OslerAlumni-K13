@@ -659,6 +659,14 @@
       <HintPath>..\..\packages\Azure.AI.TextAnalytics.5.0.0\lib\netstandard2.0\Azure.AI.TextAnalytics.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CMS.TextAnalytics.Azure, Version=13.0.13.0, Culture=neutral, PublicKeyToken=834b12a258f213f9">
+      <HintPath>..\Lib\CMS.TextAnalytics.Azure.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.Azure.CognitiveServices.Vision.ComputerVision.7.0.0\lib\net461\Microsoft.Azure.CognitiveServices.Vision.ComputerVision.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DotNetOpenAuth">
       <HintPath>..\Lib\DotNetOpenAuth.dll</HintPath>
     </Reference>
@@ -694,6 +702,7 @@
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -991,10 +1000,6 @@
       <HintPath>..\Lib\CMS.Taxonomy.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="CMS.TextAnalytics.Azure, Version=13.0.13.0, Culture=neutral, PublicKeyToken=834b12a258f213f9">
-      <HintPath>..\Lib\CMS.TextAnalytics.Azure.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="CMS.TranslationServices.Web.UI, Version=13.0.13.0, Culture=neutral, PublicKeyToken=834b12a258f213f9">
       <HintPath>..\Lib\CMS.TranslationServices.Web.UI.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -1067,8 +1072,124 @@
       <HintPath>..\Lib\CMS.WorkflowEngine.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Microsoft.Azure.CognitiveServices.Vision.ComputerVision.7.0.0\lib\net461\Microsoft.Azure.CognitiveServices.Vision.ComputerVision.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.6.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AngleSharp, Version=0.17.1.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea">
+      <HintPath>..\packages\AngleSharp.0.17.1\lib\net472\AngleSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Azure.Core, Version=1.25.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8">
+      <HintPath>..\packages\Azure.Core.1.25.0\lib\net461\Azure.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Azure.AI.TextAnalytics, Version=5.2.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8">
+      <HintPath>..\packages\Azure.AI.TextAnalytics.5.2.0\lib\netstandard2.0\Azure.AI.TextAnalytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.19.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.19.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MimeKit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814">
+      <HintPath>..\packages\MimeKit.3.3.0\lib\net48\MimeKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MailKit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b">
+      <HintPath>..\packages\MailKit.3.3.0\lib\net48\MailKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.24\lib\net461\Microsoft.Rest.ClientRuntime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.6.35.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Common, Version=5.11.6.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\NuGet.Common.5.11.6\lib\net472\NuGet.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Configuration, Version=5.11.6.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\NuGet.Configuration.5.11.6\lib\net472\NuGet.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Frameworks, Version=5.11.6.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\NuGet.Frameworks.5.11.6\lib\net472\NuGet.Frameworks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Versioning, Version=5.11.6.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\NuGet.Versioning.5.11.6\lib\net472\NuGet.Versioning.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Packaging, Version=5.11.6.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\NuGet.Packaging.5.11.6\lib\net472\NuGet.Packaging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.35.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.6, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.6\lib\net461\System.Data.SqlClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Security.Cryptography.Pkcs.8.0.0\lib\net462\System.Security.Cryptography.Pkcs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Duplex, Version=4.10.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.ServiceModel.Duplex.4.10.0\lib\net461\System.ServiceModel.Duplex.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Primitives, Version=4.10.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.ServiceModel.Primitives.4.10.0\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -1409,6 +1530,21 @@
     <Content Include="App_Data\DancingGoat\Resources\es-ES\dancingGoat.es-ES.resx" />
     <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_35.entry.js" />
     <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_35.system.entry.js" />
+    <Content Include="CMSScripts\WebComponents\app-globals-8931cc91.js" />
+    <Content Include="CMSScripts\WebComponents\app-globals-d5563cb5.system.js" />
+    <Content Include="CMSScripts\WebComponents\components.js" />
+    <Content Include="CMSScripts\WebComponents\components.system.js" />
+    <Content Include="CMSScripts\WebComponents\css-shim-260ce44f.js" />
+    <Content Include="CMSScripts\WebComponents\css-shim-b3b7ed10.system.js" />
+    <Content Include="CMSScripts\WebComponents\dom-b7f433c1.js" />
+    <Content Include="CMSScripts\WebComponents\dom-e7eb5a5d.system.js" />
+    <Content Include="CMSScripts\WebComponents\index-4dc45cd4.js" />
+    <Content Include="CMSScripts\WebComponents\index-7b62609d.system.js" />
+    <Content Include="CMSScripts\WebComponents\index.system.js" />
+    <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_43.entry.js" />
+    <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_43.system.entry.js" />
+    <Content Include="CMSScripts\WebComponents\shadow-css-14c5e2cb.js" />
+    <Content Include="CMSScripts\WebComponents\shadow-css-8a020e34.system.js" />
     <None Include="App_Themes\Default\CMSModules\cms.messages.less" />
     <None Include="App_Themes\Default\CMSModules\cms.emailmarketing\cms.emailmarketing.emailbuilder.emailproperties.less" />
     <None Include="App_Themes\Default\CMSModules\cms.emailmarketing\cms.emailmarketing.emailbuilder.less" />
@@ -1429,6 +1565,7 @@
     </Content>
     <Content Include="App_Data\CMSModules\Cms\UI\Grids\CMS_Resource\default.xml" />
     <Content Include="App_Data\CMSModules\Cms\UI\Grids\CMS_SiteDomainAliasLiveSite\default.xml" />
+    <Content Include="App_Data\CMSModules\Cms\UI\Grids\CMS_EmailOAuthCredentials\default.xml" />
     <Content Include="App_Data\CMSModules\Cms\UI\Grids\CMS_Transformation\default.xml" />
     <Content Include="App_Data\CMSModules\Content\UI\Grids\CMS_PageFormerUrlPath\default.xml" />
     <Content Include="App_Data\CMSModules\DataProtection\UI\Grids\CMS_ConsentAgreement\list.xml" />
@@ -1724,6 +1861,7 @@
     <Content Include="CMSAdminControls\CKeditor\plugins\about\dialogs\about.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
     <Content Include="CMSAdminControls\CKeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\ajax\plugin.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\autogrow\plugin.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\autogrow\samples\autogrow.html" />
     <Content Include="CMSAdminControls\CKeditor\plugins\clipboard\dialogs\paste.js" />
@@ -1755,14 +1893,84 @@
     <Content Include="CMSAdminControls\CKeditor\plugins\div\dialogs\div.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\enterkey\samples\enterkey.html" />
     <Content Include="CMSAdminControls\CKeditor\plugins\find\dialogs\find.js" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\flash\dialogs\flash.js" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\flash\images\placeholder.png" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\htmlwriter\samples\assets\outputforflash\outputforflash.swf" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\htmlwriter\samples\assets\outputforflash\swfobject.js" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\htmlwriter\samples\outputforflash.html" />
     <Content Include="CMSAdminControls\CKeditor\plugins\htmlwriter\samples\outputhtml.html" />
     <Content Include="CMSAdminControls\CKeditor\plugins\icons.png" />
     <Content Include="CMSAdminControls\CKeditor\plugins\icons_hidpi.png" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\icons\hidpi\iframe.png" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\icons\iframe.png" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\af.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ar.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\az.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\bg.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\bn.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\bs.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ca.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\cs.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\cy.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\da.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\de-ch.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\de.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\el.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\en-au.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\en-ca.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\en-gb.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\en.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\eo.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\es-mx.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\es.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\et.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\eu.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\fa.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\fi.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\fo.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\fr-ca.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\fr.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\gl.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\gu.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\he.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\hi.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\hr.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\hu.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\id.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\is.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\it.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ja.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ka.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\km.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ko.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ku.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\lt.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\lv.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\mk.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\mn.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ms.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\nb.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\nl.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\no.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\oc.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\pl.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\pt-br.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\pt.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ro.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ru.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\si.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\sk.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\sl.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\sq.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\sr-latn.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\sr.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\sv.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\th.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\tr.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\tt.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\ug.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\uk.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\vi.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\zh-cn.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\lang\zh.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\iframe\plugin.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\image\dialogs\image.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\image\images\noimage.png" />
     <Content Include="CMSAdminControls\CKeditor\plugins\link\dialogs\anchor.js" />
@@ -1777,6 +1985,7 @@
     <Content Include="CMSAdminControls\CKeditor\plugins\pastefromword\filter\default.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\pastetools\filter\common.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\pastetools\filter\image.js" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\pastetools\plugin.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\scayt\dialogs\dialog.css" />
     <Content Include="CMSAdminControls\CKeditor\plugins\scayt\dialogs\options.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\scayt\dialogs\toolbar.css" />
@@ -1905,13 +2114,8 @@
     <Content Include="CMSAdminControls\CKeditor\plugins\tabletools\dialogs\tableCell.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\table\dialogs\table.js" />
     <Content Include="CMSAdminControls\CKeditor\plugins\toolbar\samples\toolbar.html" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\wsc\dialogs\ciframe.html" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\wsc\dialogs\tmpFrameset.html" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\wsc\dialogs\wsc.css" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\wsc\dialogs\wsc.js" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\wsc\dialogs\wsc_ie.js" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\wsc\skins\moono-lisa\wsc.css" />
     <Content Include="CMSAdminControls\CKeditor\plugins\wysiwygarea\samples\fullpage.html" />
+    <Content Include="CMSAdminControls\CKeditor\plugins\xml\plugin.js" />
     <Content Include="CMSAdminControls\CKeditor\skins\moono-lisa\dialog.css" />
     <Content Include="CMSAdminControls\CKeditor\skins\moono-lisa\dialog_ie.css" />
     <Content Include="CMSAdminControls\CKeditor\skins\moono-lisa\dialog_ie8.css" />
@@ -1934,6 +2138,7 @@
     <Content Include="CMSAdminControls\CKeditor\skins\moono-lisa\images\refresh.png" />
     <Content Include="CMSAdminControls\CKeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="CMSAdminControls\CKeditor\styles.js" />
+    <Content Include="CMSAdminControls\CKeditor\vendor\promise.js" />
     <Content Include="CMSAdminControls\CodeMirror\dialogs\InsertMacro\Tab_InsertMacroTree.aspx" />
     <Content Include="CMSAdminControls\CodeMirror\img\insertImage.png" />
     <Content Include="CMSAdminControls\CodeMirror\img\insertMacro.png" />
@@ -1954,6 +2159,7 @@
     <Content Include="CMSModules\Activities\Controls\UI\ActivityDetails\NewsletterUnsubscriptionFromAll.ascx" />
     <Content Include="CMSModules\BizForms\Tools\BizForm_Edit_EditRecordMVC.aspx" />
     <Content Include="CMSModules\BizForms\Tools\BizForm_Edit_FormBuilderMVC.aspx" />
+    <Content Include="CMSModules\Categories\Controls\CategoryAllowedPageTypes.ascx" />
     <Content Include="CMSModules\ContactManagement\Controls\ContactDemographics.ascx" />
     <Content Include="CMSModules\ContactManagement\Controls\UI\Automation\AutomationDesigner.ascx" />
     <Content Include="CMSModules\ContactManagement\Controls\UI\Automation\AutomationDesignerToolbar.ascx" />
@@ -1963,6 +2169,7 @@
     <Content Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\AutomationDesignerPage.aspx" />
     <Content Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\Process_History.aspx" />
     <Content Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\Properties\ProcessProperties.aspx" />
+    <Content Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\Activation_Schedule.aspx" />
     <Content Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\Template_Edit.aspx" />
     <Content Include="CMSModules\ContactManagement\Pages\Tools\Contact\ImportCSV.aspx" />
     <Content Include="CMSModules\Content\CMSDesk\MVC\Edit.aspx" />
@@ -1989,10 +2196,15 @@
     <Content Include="CMSModules\Ecommerce\FormControls\SKUSections.xml" />
     <Content Include="CMSModules\Ecommerce\FormControls\SKUSectionSelection.aspx" />
     <Content Include="CMSModules\Ecommerce\Pages\Tools\Products\Product_Edit_Tags.aspx" />
+    <Content Include="CMSModules\EmailEngine\Pages\EmailOAuthCredentials_Edit.aspx" />
+    <Content Include="CMSModules\EmailEngine\Pages\OAuth2AccessTokenDialog.aspx" />
     <Content Include="CMSModules\EmailTemplates\FormControls\EmailTemplateTypeSelector.ascx" />
     <Content Include="CMSModules\EmailTemplates\Pages\SendDraft.aspx" />
+    <Content Include="CMSModules\ImportExport\Controls\ExportSettingsPanel.ascx" />
     <Content Include="CMSModules\ImportExport\Controls\Export\cms_resource.ascx" />
     <Content Include="CMSModules\ImportExport\Controls\Import\ma_automationaction.ascx" />
+    <Content Include="CMSModules\MediaLibrary\Controls\MediaLibrary\MediaFileUsage.ascx" />
+    <Content Include="CMSModules\MediaLibrary\Controls\MediaLibrary\MediaFileUsageDialog.aspx" />
     <Content Include="CMSModules\Modules\Controls\NuGetPackages\ExportModule.ascx" />
     <Content Include="CMSModules\Newsletters\Controls\RecipientContactGroups.ascx" />
     <Content Include="CMSModules\Newsletters\Controls\IssueLinks.ascx" />
@@ -2049,6 +2261,7 @@
     <Content Include="CMSModules\Staging\Tools\Tasks\Tasks.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="CMSModules\System\Files\System_MediaProtection.aspx" />
     <Content Include="CMSModules\System\ObjectTypeDetails.aspx" />
     <Content Include="CMSModules\WebAnalytics\Pages\Tools\Campaign\Tab_Schedule.aspx" />
     <Content Include="CMSModules\Automation\Pages\Automation_Step_Advanced.aspx" />
@@ -4443,7 +4656,6 @@
     <Content Include="App_Themes\Default\CMSModules\cms.ecommerce.less" />
     <Content Include="App_Themes\Default\CMSComponents\calendar.less" />
     <Content Include="CMSAdminControls\CKeditor\plugins\scayt\LICENSE.md" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\wsc\LICENSE.md" />
     <Content Include="App_Themes\Default\CMSComponents\accordion.less" />
     <Content Include="App_Themes\Default\CMSModules\cms.socialmarketing\cms.socialmarketing.autopost.less" />
     <Content Include="App_Themes\Default\CMSModules\cms.socialmarketing.less" />
@@ -4480,7 +4692,6 @@
     <Content Include="App_Themes\Global\Skin\type.less" />
     <Content Include="App_Themes\Global\Skin\tooltip.less" />
     <Content Include="App_Themes\Default\CMSModules\cms.sharepoint.less" />
-    <Content Include="CMSAdminControls\CKeditor\plugins\htmlwriter\samples\assets\outputforflash\outputforflash.fla" />
     <Content Include="App_Themes\Default\CMSModules\cms.ecommerce\cms.ecommerce.products.less" />
     <Content Include="App_Themes\Default\CMSModules\cms.socialmarketing\cms.socialmarketing.linkedin.less" />
     <Content Include="CMSModules\Workflows\web.config" />
@@ -4520,6 +4731,8 @@
     <Content Include="CMSMasterPages\UI\ProcessDetail.master" />
     <Content Include="CMSAdminControls\CKeditor\skins\moono-lisa\readme.md" />
     <Content Include="CMSScripts\CMSModules\CMS.Builder\PageBuilder\messaging.localization.json" />
+    <Content Include="CMSModules\ContactManagement\Pages\Tools\SalesForce\LeadOutboundMessageHandler.ashx" />
+    <Content Include="App_Themes\Default\CMSModules\cms.system.less" />
     <Content Include="CMSAdminControls\web.config" />
     <Content Include="Admin\web.config" />
     <Content Include="CMSFormControls\web.config" />
@@ -4585,23 +4798,10 @@
     <Content Include="CMSResources\Hotfix.resx">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="CMSScripts\WebComponents\app-globals-8931cc91.js" />
-    <Content Include="CMSScripts\WebComponents\app-globals-d5563cb5.system.js" />
     <Content Include="CMSScripts\WebComponents\components.esm.js" />
-    <Content Include="CMSScripts\WebComponents\components.js" />
-    <Content Include="CMSScripts\WebComponents\components.system.js" />
-    <Content Include="CMSScripts\WebComponents\css-shim-260ce44f.js" />
-    <Content Include="CMSScripts\WebComponents\css-shim-b3b7ed10.system.js" />
-    <Content Include="CMSScripts\WebComponents\dom-b7f433c1.js" />
-    <Content Include="CMSScripts\WebComponents\dom-e7eb5a5d.system.js" />
-    <Content Include="CMSScripts\WebComponents\index-4dc45cd4.js" />
-    <Content Include="CMSScripts\WebComponents\index-7b62609d.system.js" />
+    <Content Include="CMSScripts\WebComponents\index-487129cb.js" />
     <Content Include="CMSScripts\WebComponents\index.esm.js" />
-    <Content Include="CMSScripts\WebComponents\index.system.js" />
-    <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_43.entry.js" />
-    <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_43.system.entry.js" />
-    <Content Include="CMSScripts\WebComponents\shadow-css-14c5e2cb.js" />
-    <Content Include="CMSScripts\WebComponents\shadow-css-8a020e34.system.js" />
+    <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_44.entry.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CMSFormControls\OnePlaceCampaignSelector.ascx.cs">
@@ -5023,6 +5223,13 @@
     <Compile Include="CMSModules\Activities\Controls\UI\ActivityDetails\NewsletterUnsubscriptionFromAll.ascx.designer.cs">
       <DependentUpon>NewsletterUnsubscriptionFromAll.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CMSModules\Categories\Controls\CategoryAllowedPageTypes.ascx.cs">
+      <DependentUpon>CategoryAllowedPageTypes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSModules\Categories\Controls\CategoryAllowedPageTypes.ascx.designer.cs">
+      <DependentUpon>CategoryAllowedPageTypes.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CMSModules\ContactManagement\Controls\ContactDemographics.ascx.cs">
       <DependentUpon>ContactDemographics.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5134,6 +5341,13 @@
     </Compile>
     <Compile Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\Properties\ProcessProperties.aspx.designer.cs">
       <DependentUpon>ProcessProperties.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\Activation_Schedule.aspx.cs">
+      <DependentUpon>Activation_Schedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\Activation_Schedule.aspx.designer.cs">
+      <DependentUpon>Activation_Schedule.aspx</DependentUpon>
     </Compile>
     <Compile Include="CMSModules\ContactManagement\Pages\Tools\Automation\Process\Template_Edit.aspx.cs">
       <DependentUpon>Template_Edit.aspx</DependentUpon>
@@ -5352,6 +5566,20 @@
     <Compile Include="CMSModules\Ecommerce\Pages\Tools\Products\Product_Edit_Tags.aspx.designer.cs">
       <DependentUpon>Product_Edit_Tags.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CMSModules\EmailEngine\Pages\EmailOAuthCredentials_Edit.aspx.cs">
+      <DependentUpon>EmailOAuthCredentials_Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSModules\EmailEngine\Pages\EmailOAuthCredentials_Edit.aspx.designer.cs">
+      <DependentUpon>EmailOAuthCredentials_Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CMSModules\EmailEngine\Pages\OAuth2AccessTokenDialog.aspx.cs">
+      <DependentUpon>OAuth2AccessTokenDialog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSModules\EmailEngine\Pages\OAuth2AccessTokenDialog.aspx.designer.cs">
+      <DependentUpon>OAuth2AccessTokenDialog.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CMSModules\EmailTemplates\FormControls\EmailTemplateTypeSelector.ascx.cs">
       <DependentUpon>EmailTemplateTypeSelector.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5366,6 +5594,13 @@
     <Compile Include="CMSModules\EmailTemplates\Pages\SendDraft.aspx.designer.cs">
       <DependentUpon>SendDraft.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CMSModules\ImportExport\Controls\ExportSettingsPanel.ascx.cs">
+      <DependentUpon>ExportSettingsPanel.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSModules\ImportExport\Controls\ExportSettingsPanel.ascx.designer.cs">
+      <DependentUpon>ExportSettingsPanel.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CMSModules\ImportExport\Controls\Export\cms_resource.ascx.cs">
       <DependentUpon>cms_resource.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -5379,6 +5614,20 @@
     </Compile>
     <Compile Include="CMSModules\ImportExport\Controls\Import\ma_automationaction.ascx.designer.cs">
       <DependentUpon>ma_automationaction.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CMSModules\MediaLibrary\Controls\MediaLibrary\MediaFileUsage.ascx.cs">
+      <DependentUpon>MediaFileUsage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSModules\MediaLibrary\Controls\MediaLibrary\MediaFileUsage.ascx.designer.cs">
+      <DependentUpon>MediaFileUsage.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CMSModules\MediaLibrary\Controls\MediaLibrary\MediaFileUsageDialog.aspx.cs">
+      <DependentUpon>MediaFileUsageDialog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSModules\MediaLibrary\Controls\MediaLibrary\MediaFileUsageDialog.aspx.designer.cs">
+      <DependentUpon>MediaFileUsageDialog.aspx</DependentUpon>
     </Compile>
     <Compile Include="CMSModules\Modules\Controls\NuGetPackages\ExportModule.ascx.cs">
       <DependentUpon>ExportModule.ascx</DependentUpon>
@@ -7392,6 +7641,13 @@
     </Compile>
     <Compile Include="CMSModules\Staging\Tools\TaskGroup\TaskGroup.aspx.designer.cs">
       <DependentUpon>TaskGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CMSModules\System\Files\System_MediaProtection.aspx.cs">
+      <DependentUpon>System_MediaProtection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CMSModules\System\Files\System_MediaProtection.aspx.designer.cs">
+      <DependentUpon>System_MediaProtection.aspx</DependentUpon>
     </Compile>
     <Compile Include="CMSModules\System\Macros\Benchmark.aspx.cs">
       <DependentUpon>Benchmark.aspx</DependentUpon>
@@ -14857,11 +15113,13 @@
   <ItemGroup>
     <Folder Include="App_Data\CMSModules\CMSInstallation\Packages\Installed\" />
     <Folder Include="App_Data\CMSModules\WebAnalytics\MaxMind\" />
-    <Folder Include="CMSScripts\Custom\" />
     <Folder Include="CommunitySite\media\Media\Video\__thumbnails\" />
     <Folder Include="CorporateSite\media\VideoGallery\__thumbnails\" />
     <Folder Include="Ecentricarts\Modules\" />
     <Folder Include="OslerAlumni\" />
+    <Folder Include="CMSModules\EmailEngine\FormControls\" />
+    <Folder Include="CMSScripts\Custom\" />
+    <Folder Include="CMSScripts\WebComponents\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CMSResources\BTK00Tools\Default.resx" />
