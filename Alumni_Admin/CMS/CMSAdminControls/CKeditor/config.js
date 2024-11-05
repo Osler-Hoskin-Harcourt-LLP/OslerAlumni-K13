@@ -5,45 +5,24 @@
 
 CKEDITOR.editorConfig = function( config ) {
     config.allowedContent = true; // To disable CKEditor ACF
-    config.dialog_backgroundCoverColor = '#888888';
-    //config.skin = 'moono-lisa';
-    config.enterMode = CKEDITOR.ENTER_P;
-    config.shiftEnterMode = CKEDITOR.ENTER_BR;
+    config.enterMode = CKEDITOR.ENTER_BR;
+    config.shiftEnterMode = CKEDITOR.ENTER_P;
     config.entities_latin = false;
-    //config.contentsCss = [ CKEDITOR.getUrl('contents.css'), './fonts/fonts.css' ];
-    //config.font_names = 'CelesteSans-Bold/CelesteSans-Bold;' + config.font_names;
-    // config.contentsCss = 'C:\inetpub\wwwroot\osler\alumni\Alumni_Website\OslerAlumni.Mvc\build'
+	config.licenseKey = 'WW5ZelpUVklPVk4yWTJoSk5rdHhlVGcxY0hneWIzcHdjdz09LU56WXpNemM1T0Rjek5UZzFOelEx';
 
     var sourceName = config.useInlineMode ? 'Sourcedialog' : 'Source';
 
-    config.plugins += ',templates';
-
-    config.toolbar_Standard =
+    config.toolbar_Standard = config.toolbar_Default =
     [
         [sourceName, '-'],
         ['Undo', 'Redo', '-'],
-        ['Bold', 'Italic', 'Underline', 'TextColor', 'Subscript', 'Superscript', '-'],
+        ['Bold', 'Italic', 'Underline', 'TextColor', '-'],
         ['Styles'],
         ['NumberedList', 'BulletedList', 'Outdent', 'Indent', '-'],
         ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-'],
         ['InsertLink', 'Unlink', '-'],
-        ['InsertImageOrMedia', 'QuicklyInsertImage', 'Table', 'InsertWidget', 'InsertMacro', '-'],
+        ['InsertImageOrMedia', 'QuicklyInsertImage', 'Table', 'InsertMacro', '-'],
         ['Maximize']
-    ];
-
-    config.toolbar_Osler = config.toolbar_Default =
-    [
-        [sourceName, '-'],
-        ['Cut', 'Copy', 'PasteText', 'PasteFromWord', '-'],
-        ['Undo', 'Redo', '-'],
-        ['Bold', 'Italic', 'Underline', 'TextColor', 'Subscript', 'Superscript', '-'],
-        ['Styles'],
-        ['NumberedList', 'BulletedList', 'Outdent', 'Indent', '-'],
-        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-'],
-        ['InsertLink', 'Unlink', 'Anchor', '-'],
-        ['InsertImageOrMedia', 'Table', 'HorizontalRule', 'InsertWidget', 'InsertMacro', '-'],
-        ['Maximize'],
-        ['Templates']
     ];
 
     config.toolbar_Full = [
@@ -56,7 +35,6 @@ CKEDITOR.editorConfig = function( config ) {
         '/',
         ['InsertLink', 'Unlink', 'Anchor', '-'],
         ['InsertImageOrMedia', 'QuicklyInsertImage', 'Table', 'HorizontalRule', 'SpecialChar', '-'],
-        ['InsertForms', 'InsertPolls', 'InsertRating', 'InsertYouTubeVideo', 'InsertWidget', '-'],
         ['Styles', 'Format', 'Font', 'FontSize'],
         ['TextColor', 'BGColor', '-'],
         ['InsertMacro', '-'],
@@ -129,7 +107,7 @@ CKEDITOR.editorConfig = function( config ) {
     ];
 
     config.toolbar_Group = [
-	    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'InsertLink', 'Unlink', 'InsertGroupPolls']
+        ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'InsertLink', 'Unlink']
     ];
 
     config.toolbar_Widgets = [
@@ -156,7 +134,7 @@ CKEDITOR.editorConfig = function( config ) {
         ['Maximize']
     ];
 
-    config.toolbar = config.toolbar_Osler;
+    config.toolbar = config.toolbar_Standard;
 
     config.scayt_customerid = '1:vhwPv1-GjUlu4-PiZbR3-lgyTz1-uLT5t-9hGBg2-rs6zY-qWz4Z3-ujfLE3-lheru4-Zzxzv-kq4';
 };

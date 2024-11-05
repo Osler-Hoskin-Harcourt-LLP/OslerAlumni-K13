@@ -3092,6 +3092,9 @@
 .ContentBody .icon-file-sln:before {
   content: "\e6ff";
 }
+.ContentBody .icon-file-svg:before {
+  content: "\e633";
+}
 .ContentBody .icon-file-swf:before {
   content: "\e636";
 }
@@ -3112,6 +3115,9 @@
 }
 .ContentBody .icon-file-webm:before {
   content: "\e636";
+}
+.ContentBody .icon-file-webp:before {
+  content: "\e633";
 }
 .ContentBody .icon-file-wma:before {
   content: "\e71c";
