@@ -1019,8 +1019,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\CMSModules\CMSInstallation\Packages\BTK00Tools_3.0.24.xml" />
-    <Content Include="App_Data\CMSModules\CMSInstallation\Packages\BTKSiteimprove_3.0.1024.xml" />
     <Content Include="App_Themes\CommunitySite\Default.css" />
     <Content Include="App_Themes\CommunitySite\Images\add.gif" />
     <Content Include="App_Themes\CommunitySite\Images\arrow.gif" />
