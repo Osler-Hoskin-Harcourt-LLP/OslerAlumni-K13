@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" Version="13.0.166" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.10" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
 
@@ -289,12 +290,37 @@ public partial class CMSModules_Membership_FormControls_Avatars_UserPictureEdit 
     /// </summary>
     public override bool IsValid()
     {
-        if ((uplFilePicture.PostedFile != null) && (uplFilePicture.PostedFile.ContentLength > 0) && !ImageHelper.IsImage(Path.GetExtension(uplFilePicture.PostedFile.FileName)))
+        bool isUploadedFileValid = true;
+
+        if ((uplFilePicture.PostedFile != null) && (uplFilePicture.PostedFile.ContentLength > 0))
+        {
+            // Validate the uploaded file extension
+            string fileExtension = Path.GetExtension(uplFilePicture.PostedFile.FileName);
+            isUploadedFileValid = IsFileExtensionAllowed(fileExtension) && ImageHelper.IsImage(fileExtension);
+        }
+
+        if (!isUploadedFileValid)
         {
             ErrorMessage = GetString("avat.filenotvalid");
+        }
+
+        return isUploadedFileValid;
+    }
+
+
+    /// <summary>
+    /// Indicates whether the given <paramref name="extension"/> is allowed for upload.
+    /// </summary>
+    private bool IsFileExtensionAllowed(string extension)
+    {
+        string allowedUploadExtensions = SettingsKeyInfoProvider.GetValue(SiteContext.CurrentSiteName + ".CMSUploadExtensions");
+
+        if (string.IsNullOrEmpty(allowedUploadExtensions))
+        {
             return false;
         }
-        return true;
+
+        return allowedUploadExtensions.ToLowerInvariant().Split(';').Contains(extension.TrimStart('.').ToLowerInvariant());
     }
 
 

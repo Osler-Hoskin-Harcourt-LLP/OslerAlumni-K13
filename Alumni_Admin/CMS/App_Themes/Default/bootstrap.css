@@ -3201,6 +3201,9 @@ body.cms-bootstrap,
 .cms-bootstrap .icon-file-sln:before {
   content: "\e6ff";
 }
+.cms-bootstrap .icon-file-svg:before {
+  content: "\e633";
+}
 .cms-bootstrap .icon-file-swf:before {
   content: "\e636";
 }
@@ -3221,6 +3224,9 @@ body.cms-bootstrap,
 }
 .cms-bootstrap .icon-file-webm:before {
   content: "\e636";
+}
+.cms-bootstrap .icon-file-webp:before {
+  content: "\e633";
 }
 .cms-bootstrap .icon-file-wma:before {
   content: "\e71c";
@@ -14272,6 +14278,9 @@ td.cms-bootstrap .visible-print {
 .cms-bootstrap div.automation-header div.automation-header-icon .disabled {
   color: #000000;
 }
+.cms-bootstrap div.automation-header .process-state-label {
+  padding-right: 8px;
+}
 .cms-bootstrap .automation-wrapper {
   display: -ms-flexbox;
   display: flex;
@@ -14573,6 +14582,9 @@ td.cms-bootstrap .visible-print {
 }
 .cms-bootstrap .automation-sidepanel-content .control-label {
   padding-bottom: 3px;
+}
+.cms-bootstrap .cms-automation-menu .jspPane .dropdown-menu-inner-wrap {
+  overflow: visible;
 }
 .cms-bootstrap .widget-properties-sidebar {
   height: inherit;
@@ -15048,6 +15060,22 @@ td.cms-bootstrap .visible-print {
 }
 .cms-bootstrap .map .amcharts-balloon-bg {
   fill: #ffffff;
+}
+@media screen and (min-width: 660px) {
+  .cms-bootstrap .url-input {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .cms-bootstrap .url-input {
+    width: 60%;
+  }
+}
+.cms-bootstrap .content-form-element {
+  padding-bottom: 16px;
+}
+.cms-bootstrap .url-label {
+  font-weight: bold;
 }
 .cms-bootstrap .dialog-header {
   background: #262524;
@@ -18241,12 +18269,12 @@ td.cms-bootstrap .visible-print {
 .cms-bootstrap .single-file-import-overflow {
   overflow: auto;
 }
-.cms-bootstrap .MediaProperties .nav-tabs {
+.cms-bootstrap .media-properties .nav-tabs {
   padding-top: 8px;
 }
 .cms-bootstrap .media-file-edit {
-  overflow: auto;
-  max-height: 208px;
+  overflow: hidden;
+  padding: 0px !important;
 }
 .cms-bootstrap .media-file-versions {
   overflow: auto;
@@ -18289,6 +18317,13 @@ td.cms-bootstrap .visible-print {
   padding: 0;
   margin: 0;
   height: 100%;
+}
+.cms-bootstrap .media-library-properties {
+  height: 340px;
+  width: 100%;
+}
+.cms-bootstrap .media-library-properties .form-group {
+  margin-bottom: 10px;
 }
 .cms-bootstrap .class-thumbnail-selector-content button {
   margin-top: 8px;
@@ -18585,10 +18620,4 @@ td.cms-bootstrap .visible-print {
 }
 .cke_editable:focus {
   outline: none;
-}
-
-/* ECA Overrides */
-
-.cms-bootstrap .editing-form-value-cell textarea.form-control {
-    max-width: 1100px !important;
 }
