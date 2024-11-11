@@ -41,7 +41,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// Name of the search index, e.g. "alumni-dev-global".
         /// </summary>
         [JsonIgnore]
-        public virtual string IndexName { get; set; }
+        public virtual string? IndexName { get; set; }
 
         /// <summary>
         /// List of Kentico Page Types that should be included in the search,
