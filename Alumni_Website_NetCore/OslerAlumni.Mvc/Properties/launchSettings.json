@@ -7,22 +7,30 @@
       "sslPort": 0
     }
   },
-  "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "BlankSiteCore": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "http://osleralumni-lh.reasononeinc.com:8080/home",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://osleralumni-lh.reasononeinc.com:8080"
+    "profiles": {
+        "dotnet run": {
+            "commandName": "Project",
+            "launchBrowser": false, // Set to true if you want to launch a browser on start
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "applicationUrl": "https://osleralumni-lh.reasononeinc.com:44148" // Customize this if needed
+        },
+        "IIS Express": {
+            "commandName": "IISExpress",
+            "launchBrowser": true,
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        "BlankSiteCore": {
+            "commandName": "Project",
+            "launchBrowser": true,
+            "launchUrl": "http://osleralumni-lh.reasononeinc.com:8080/home",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "applicationUrl": "http://osleralumni-lh.reasononeinc.com:8080"
+        }
     }
-  }
 }
