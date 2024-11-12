@@ -558,7 +558,13 @@ function Finished(sender) {{
                 }
 
                 var protectedValue = MachineKey.Protect(Encoding.UTF8.GetBytes(INSTALL_CHECK_PAYLOAD), INSTALL_CHECK_PURPOSE);
-                CookieHelper.SetValue(INSTALL_CHECK_COOKIE_NAME, Convert.ToBase64String(protectedValue), DateTime.MinValue);
+                var parameters = new CookieHelperValueSettingParameters
+                {
+                    Name = INSTALL_CHECK_COOKIE_NAME,
+                    Value = Convert.ToBase64String(protectedValue),
+                    Expires = DateTime.MinValue
+                };
+                CookieHelper.SetValue(parameters);
 
                 bool checkPermission = QueryHelper.GetBoolean("checkpermission", true);
                 bool testAgain = QueryHelper.GetBoolean("testagain", false);
@@ -798,7 +804,7 @@ function PrevStep(btnPrev,elementDiv) {{
 
                 // Do not allow to use empty user name or password
                 bool isSQLAuthentication = AuthenticationType == SQLServerAuthenticationModeEnum.SQLServerAuthentication;
-                if  (isSQLAuthentication && (String.IsNullOrEmpty(userServer.DBUsername) || String.IsNullOrEmpty(userServer.DBPassword)))
+                if (isSQLAuthentication && (String.IsNullOrEmpty(userServer.DBUsername) || String.IsNullOrEmpty(userServer.DBPassword)))
                 {
                     HandleError(ResHelper.GetFileString("Install.ErrorUserNamePasswordEmpty"));
                     return;

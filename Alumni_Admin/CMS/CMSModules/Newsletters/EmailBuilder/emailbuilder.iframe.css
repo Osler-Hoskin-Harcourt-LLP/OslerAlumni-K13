@@ -2988,6 +2988,9 @@
 .cms-zone .icon-file-sln:before {
   content: "\e6ff";
 }
+.cms-zone .icon-file-svg:before {
+  content: "\e633";
+}
 .cms-zone .icon-file-swf:before {
   content: "\e636";
 }
@@ -3008,6 +3011,9 @@
 }
 .cms-zone .icon-file-webm:before {
   content: "\e636";
+}
+.cms-zone .icon-file-webp:before {
+  content: "\e633";
 }
 .cms-zone .icon-file-wma:before {
   content: "\e71c";

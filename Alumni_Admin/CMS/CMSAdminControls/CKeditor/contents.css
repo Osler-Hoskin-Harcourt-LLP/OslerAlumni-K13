@@ -1,6 +1,6 @@
 /*
-Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+Copyright (c) 2003-2023, CKSource Holding sp. z o.o. All rights reserved.
+CKEditor 4 LTS ("Long Term Support") is available under the terms of the Extended Support Model.
 */
 
 body
@@ -30,12 +30,12 @@ body
 
 blockquote
 {
-	/* font-style: italic;
+	font-style: italic;
 	font-family: Georgia, Times, "Times New Roman", serif;
 	padding: 2px 0;
 	border-style: solid;
 	border-color: #ccc;
-	border-width: 0; */
+	border-width: 0;
 }
 
 .cke_contents_ltr blockquote
@@ -205,115 +205,4 @@ a > img {
 	max-width: 1920px;
 	max-height: 1080px;
 	margin:0 auto;
-}
-
-/* Osler Alumni styles [SE TODO: blow this away and utilize webpack to build a second build folder for styling. See: http://tickets.ecentricarts.com/issue/OslerAlumni-372]*/
-
-body {
-    color: #414141;
-    font-size: 16px;
-    font-family: 'CelesteSans-Bold', Helvetica, Arial, sans-serif;
-}
-
-/* headings */
-
-h1,h2,h3,h4,h5,h6 {
-    font-family: 'CelesteSans-Bold', Helvetica, Arial, sans-serif;
-    margin-bottom: 1rem;
-}
-
-h1 {
-    color: #003F67;
-    font-size: 32px;
-    line-height: 37px;
-    font-size: 50px;
-    line-height: 58px;
-}
-
-h2 {
-    color: #414141;
-    font-size: 40px;
-    line-height: 46px;
-}
-
-h3 {
-    color: #414141;
-    font-size: 30px;
-    line-height: 40px;
-}
-
-h4 {
-    color: #414141;
-    font-size: 24px;
-    line-height: 28px;
-}
-
-h5 {
-    color: #414141;
-    font-size: 18px;
-    line-height: 18px;
-}
-
-/* paragraphs */
-
-p {
-    font-size: 16px;
-    line-height: 26px;
-    color: #292929;
-    margin-bottom: 13.5px;
-}
-
-/* lists */
-
-ol {
-    /* margin-left: 20px; */
-}
-
-ul {
-    margin: 0;
-    padding: 0;
-}
-
-ul li {
-    margin: 0;
-}
-
-/* links */
-a {
-    color: #003F67;
-    font-size: 18px;
-}
-
-/* blockquote */
-blockquote {
-    margin: 0;
-    padding: 0;
-    border: none;
-    line-height: inherit;
-    color: inherit;
-}
-
-/* Figure - Blockquote - Figcaption for blockquote with attribution */
-figure.e-blockquote-wrap {
-    border-top: 1px solid #979797;
-    border-bottom: 1px solid #979797;
-    margin: 20px 0;
-    padding: 20px 0;
-}
-
-figure.e-blockquote-wrap blockquote {
-    font-size: 30px;
-    color: #465C8B;
-    line-height: 38px;
-}
-
-figure.e-blockquote-wrap figcaption {
-    margin-top: 10px;
-}
-
-figure.e-blockquote-wrap figcaption,
-figure.e-blockquote-wrap figcaption p {
-    font-size: rem-calc(13px);
-    line-height: rem-calc(20px);
-    margin-bottom: 0;
 }

@@ -43,7 +43,6 @@ namespace OslerAlumni.Mvc.Api.Models
         [JsonIgnore]
         public virtual string? IndexName { get; set; }
 
-
         /// <summary>
         /// List of Kentico Page Types that should be included in the search,
         /// e.g. [ "osleralumni.pagetype_page", "osleralumni.pagetype_news" ].
