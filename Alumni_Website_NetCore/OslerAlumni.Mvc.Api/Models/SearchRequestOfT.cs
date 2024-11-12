@@ -146,7 +146,7 @@ namespace OslerAlumni.Mvc.Api.Models
         /// Name of a Kentico Page Type field, by which the search results should be ordered.
         /// </summary>
         [JsonProperty("orderBy")]
-        public virtual string OrderBy { get; set; }
+        public virtual string? OrderBy { get; set; }
 
         /// <summary>
         /// Direction, in which the search results should be ordered.
