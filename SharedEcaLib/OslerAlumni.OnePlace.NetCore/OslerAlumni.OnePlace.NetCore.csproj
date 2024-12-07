@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="DeveloperForce.Force" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.24" />
     <PackageReference Include="Nito.AsyncEx" Version="5.1.2" />
   </ItemGroup>
 
