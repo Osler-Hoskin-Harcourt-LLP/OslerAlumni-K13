@@ -499,10 +499,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-        <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-        <Private>True</Private>
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-      <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\..\packages\Microsoft.Rest.ClientRuntime.2.3.20\lib\net461\Microsoft.Rest.ClientRuntime.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -1282,6 +1282,7 @@
     <Content Include="CMSScripts\WebComponents\components\chunk-d01dc526.js" />
     <Content Include="CMSScripts\WebComponents\components\chunk-dd14e5b2.js" />
     <Content Include="CMSScripts\WebComponents\components\chunk-e5d72975.es5.js" />
+    <Content Include="CustomDependencies\Microsoft.Rest.ClientRuntime.dll" />
     <Content Include="DancingGoat\Fonts\Core-icons.svg" />
     <Content Include="DancingGoat\Icons\icons-core.css" />
     <Content Include="DancingGoat\Images\Favicons\favicon-16.png" />
@@ -3900,6 +3901,7 @@
     <Content Include="CMSWebParts\Viewers\DateTime_files\DateTime.js" />
     <Content Include="CMSWebParts\Widgets\WidgetActions.ascx" />
     <Content Include="Global.asax" />
+    <Content Include="Microsoft.Rest.ClientRuntime.dll" />
     <Content Include="ObjectTranslationRESTService.svc" />
     <Content Include="DocumentRESTService.svc" />
     <Content Include="Default.aspx" />
@@ -4628,13 +4630,13 @@
     <Content Include="CMSScripts\WebComponents\index.esm.js" />
     <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_44.entry.js" />
   </ItemGroup>
-    <ItemGroup>
-        <Content Include="CustomDependencies\Microsoft.Rest.ClientRuntime.dll">
-            <Link>Microsoft.Rest.ClientRuntime.dll</Link>
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
+    <Content Include="CustomDependencies\Microsoft.Rest.ClientRuntime.dll">
+      <Link>Microsoft.Rest.ClientRuntime.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="CMSFormControls\OnePlaceCampaignSelector.ascx.cs">
       <DependentUpon>OnePlaceCampaignSelector.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
