@@ -4628,7 +4628,12 @@
     <Content Include="CMSScripts\WebComponents\index.esm.js" />
     <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_44.entry.js" />
   </ItemGroup>
-  <ItemGroup>
+    <ItemGroup>
+        <None Include="CustomDependencies\Microsoft.Rest.ClientRuntime.dll">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
     <Compile Include="CMSFormControls\OnePlaceCampaignSelector.ascx.cs">
       <DependentUpon>OnePlaceCampaignSelector.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
