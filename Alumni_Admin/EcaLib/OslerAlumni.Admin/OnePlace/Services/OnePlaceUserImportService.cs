@@ -193,6 +193,16 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
                     return true;
                 }
+                //BEGIN TEMP
+                else
+                {
+                    bool IOPOD = IsOnePlaceOutOfDate(contact, user);
+
+                    _eventLogRepository.LogWarning(
+                        GetType(), nameof(ImportAsUser),
+                        $"TEMP Issue for: '{user.UserName}' ({user.FirstName} {user.LastName}). Parameters: isNew = {isNew.ToString()}, IsOnePlaceOutOfDate = {IOPOD}");
+                }
+                //END TEMP
 
                 user =
                     ConvertToUser(contact, user);
@@ -254,6 +264,12 @@ namespace OslerAlumni.Admin.OnePlace.Services
                     var token = _userRepository
                         .GetPasswordResetToken(user.UserGUID);
 
+                    //BEGIN TEMP   
+                    _eventLogRepository.LogWarning(
+                        GetType(), nameof(ImportAsUser),
+                        $"TEMP Notice for: '{user.UserName}' ({user.FirstName} {user.LastName}). Password Token generated as: {token}");
+                    //END TEMP
+
                     if (string.IsNullOrWhiteSpace(token))
                     {
                         _eventLogRepository.LogError(
@@ -300,6 +316,12 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
             if (user != null)
             {
+                //BEGIN TEMP   
+                    _eventLogRepository.LogWarning(
+                        GetType(), nameof(ImportAsUser),
+                        $"TEMP Notice for: '{user.UserName}' ({user.FirstName} {user.LastName}). Mapped User Found");                
+                //END TEMP
+
                 return true;
             }
 
@@ -316,6 +338,12 @@ namespace OslerAlumni.Admin.OnePlace.Services
                     return true;
                 }
             }
+
+            //BEGIN TEMP   
+            _eventLogRepository.LogWarning(
+                GetType(), nameof(ImportAsUser),
+                $"TEMP Notice for: '{user.UserName}' ({user.FirstName} {user.LastName}). NO Mapped User Found");
+            //END TEMP
 
             return false;
         }
