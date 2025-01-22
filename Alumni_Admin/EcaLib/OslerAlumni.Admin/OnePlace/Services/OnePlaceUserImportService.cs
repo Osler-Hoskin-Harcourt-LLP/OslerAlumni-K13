@@ -200,7 +200,7 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
                     _eventLogRepository.LogWarning(
                         GetType(), nameof(ImportAsUser),
-                        $"TEMP Issue for: '{user.UserName}' ({user.FirstName} {user.LastName}). Parameters: isNew = {isNew.ToString()}, IsOnePlaceOutOfDate = {IOPOD}");
+                        $"TEMP Notice for: '{contact.Email}' ({contact.FirstName} {contact.LastName}). Parameters: isNew = {isNew.ToString()}, IsOnePlaceOutOfDate = {IOPOD}");
                 }
                 //END TEMP
 
@@ -342,7 +342,7 @@ namespace OslerAlumni.Admin.OnePlace.Services
             //BEGIN TEMP   
             _eventLogRepository.LogWarning(
                 GetType(), nameof(ImportAsUser),
-                $"TEMP Notice for: '{user.UserName}' ({user.FirstName} {user.LastName}). NO Mapped User Found");
+                $"TEMP Notice for: '{contact.Email}' ({contact.FirstName} {contact.LastName}). NO Mapped User Found");
             //END TEMP
 
             return false;
