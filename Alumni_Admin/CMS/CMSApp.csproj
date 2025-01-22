@@ -499,10 +499,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-        <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-        <Private>True</Private>
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-      <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\..\packages\Microsoft.Rest.ClientRuntime.2.3.20\lib\net461\Microsoft.Rest.ClientRuntime.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -4628,13 +4628,13 @@
     <Content Include="CMSScripts\WebComponents\index.esm.js" />
     <Content Include="CMSScripts\WebComponents\kentico-abtest-variant-listing_44.entry.js" />
   </ItemGroup>
-    <ItemGroup>
-        <Content Include="CustomDependencies\Microsoft.Rest.ClientRuntime.dll">
-            <Link>Microsoft.Rest.ClientRuntime.dll</Link>
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
+    <Content Include="CustomDependencies\Microsoft.Rest.ClientRuntime.dll">
+      <Link>Microsoft.Rest.ClientRuntime.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="CMSFormControls\OnePlaceCampaignSelector.ascx.cs">
       <DependentUpon>OnePlaceCampaignSelector.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
