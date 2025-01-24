@@ -207,6 +207,22 @@ namespace OslerAlumni.Admin.OnePlace.Services
                 user =
                     ConvertToUser(contact, user);
 
+                //BEGIN TEMP
+                if (user != null)
+                {
+                    _eventLogRepository.LogWarning(
+                          GetType(), nameof(ImportAsUser),
+                          $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). User created.");
+                }
+                else
+                {
+                    _eventLogRepository.LogWarning(
+                          GetType(), nameof(ImportAsUser),
+                          $"TEMP Notice for: '{contact.Email}' ({contact.FirstName} {contact.LastName}). User NOT created.");
+                }
+                //END TEMP
+
+
                 if (isNew)
                 {
                     importAction = ImportAction.Create;
@@ -218,6 +234,16 @@ namespace OslerAlumni.Admin.OnePlace.Services
                     user.UserName =
                         GetAvailableUserName(user);
 
+                    //BEGIN TEMP
+                    if (user != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), nameof(ImportAsUser),
+                              $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). Username: {user.UserName} created successfully.");
+                    }
+                    //END TEMP
+
+
                     // Generate a temporary based on the site password policy
                     var tempPassword =
                         _userRepository.GenerateNewPassword();
@@ -225,6 +251,15 @@ namespace OslerAlumni.Admin.OnePlace.Services
                     _userRepository.SetTemporaryPassword(
                         user,
                         tempPassword);
+
+                    //BEGIN TEMP
+                    if (user != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), nameof(ImportAsUser),
+                              $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). Code Location 1 Successfully Hit.");
+                    }
+                    //END TEMP
                 }
                 else
                 {
@@ -245,6 +280,15 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
                 _userRepository.Save(user);
 
+                //BEGIN TEMP
+                if (user != null)
+                {
+                    _eventLogRepository.LogWarning(
+                          GetType(), nameof(ImportAsUser),
+                          $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). Code Location 2 Successfully Hit.");
+                }
+                //END TEMP
+
                 if (user.UserID < 1)
                 {
                     _eventLogRepository.LogError(
@@ -257,6 +301,14 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
                 if (importAction == ImportAction.Create)
                 {
+                    //BEGIN TEMP
+                    if (user != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), nameof(ImportAsUser),
+                              $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). Code Location 3 Successfully Hit.");
+                    }
+                    //END TEMP
 
                     // Send the email notification for the newly created users,
                     // so that they can log in using their credentials
