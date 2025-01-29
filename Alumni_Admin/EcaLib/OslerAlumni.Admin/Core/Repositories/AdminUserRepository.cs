@@ -49,6 +49,26 @@ namespace OslerAlumni.Admin.Core.Repositories
 
         public string GetPasswordResetToken(Guid userGuid)
         {
+            //BEGIN TEMP
+                _eventLogRepository.LogWarning(
+                      GetType(), "ImportAsUser",
+                      $"TEMP Notice for user GUID: '{userGuid.ToString()}'. Code Location 3.4 Successfully Hit.");
+            //END TEMP
+
+            //BEGIN TEMP
+            if (_mvcApiService != null)
+            {
+                _eventLogRepository.LogWarning(
+                      GetType(), "ImportAsUser",
+                      $"TEMP Notice. Code Location 3.5 Successfully Hit.");
+            }
+            else
+            {
+                _eventLogRepository.LogWarning(
+                      GetType(), "ImportAsUser",
+                      $"TEMP Notice. MVC API SERVICE NOT INITIALIZED.");
+            }
+            //END TEMP
             return _mvcApiService.GetPasswordResetTokenAsync(userGuid).GetAwaiter().GetResult();
         }
 
