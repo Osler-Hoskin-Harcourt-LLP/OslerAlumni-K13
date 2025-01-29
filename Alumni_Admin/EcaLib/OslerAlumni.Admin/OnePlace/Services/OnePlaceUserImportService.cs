@@ -313,6 +313,15 @@ namespace OslerAlumni.Admin.OnePlace.Services
                     // Send the email notification for the newly created users,
                     // so that they can log in using their credentials
 
+                    //BEGIN TEMP
+                    if (user != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), "ImportAsUser",
+                              $"TEMP Notice for user GUID: '{user.UserGUID.ToString()}'. Code Location 3.1 Successfully Hit.");
+                    }
+                    //END TEMP
+
                     var token = _userRepository
                         .GetPasswordResetToken(user.UserGUID);
 
