@@ -62,6 +62,12 @@ namespace OslerAlumni.Admin.Core.Repositories
                       GetType(), "ImportAsUser",
                       $"TEMP Notice. Code Location 3.5 Successfully Hit.");
             }
+            else
+            {
+                _eventLogRepository.LogWarning(
+                      GetType(), "ImportAsUser",
+                      $"TEMP Notice. MVC API SERVICE NOT INITIALIZED.");
+            }
             //END TEMP
             return _mvcApiService.GetPasswordResetTokenAsync(userGuid).GetAwaiter().GetResult();
         }
