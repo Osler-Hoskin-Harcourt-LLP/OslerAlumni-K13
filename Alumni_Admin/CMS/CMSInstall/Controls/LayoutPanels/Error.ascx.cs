@@ -11,13 +11,13 @@ public partial class CMSInstall_Controls_LayoutPanels_Error : CMSUserControl
     /// </summary>
     public string ErrorLabelText
     {
-        get 
+        get
         {
             return lblError.Text;
         }
         set
         {
-            lblError.Text = ResHelper.GetFileString(value);
+            lblError.Text = HTMLHelper.HTMLEncode(ResHelper.GetFileString(value));
             lblError.RemoveCssClass("hidden");
         }
     }
@@ -30,7 +30,7 @@ public partial class CMSInstall_Controls_LayoutPanels_Error : CMSUserControl
     {
         get
         {
-           return lblError.ClientID;
+            return lblError.ClientID;
         }
     }
 

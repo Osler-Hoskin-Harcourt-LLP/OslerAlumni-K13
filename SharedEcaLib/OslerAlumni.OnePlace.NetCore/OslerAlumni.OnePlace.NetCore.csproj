@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="DeveloperForce.Force" Version="2.1.0" />
+    <PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" Version="13.0.191" />
     <PackageReference Include="Nito.AsyncEx" Version="5.1.2" />
   </ItemGroup>
 

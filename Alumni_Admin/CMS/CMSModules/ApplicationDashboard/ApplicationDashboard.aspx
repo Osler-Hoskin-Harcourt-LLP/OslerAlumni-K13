@@ -28,7 +28,8 @@
                 <div class="tile-wrapper">        
                     <div class="tile-dead">
                         <a class="tile-btn tile-dead-btn {{ tileModel.ListItemCssClass }}" data-ng-class="{'editable-mode':isEditableMode}" data-ng-href="{{ tileModel.Path }}" target="_top">
-                            <div data-tile-icon="tileModel.TileIcon" data-icon-alternative-text="tileModel.DisplayName" data-icon-style="cms-icon-200 tile-dead-icon"  />                    
+                            <div data-tile-icon="tileModel.TileIcon" data-icon-alternative-text="tileModel.DisplayName" data-icon-style="cms-icon-200 tile-dead-icon">
+                            </div>                    
                             <h3>{{ tileModel.DisplayName }}</h3>
                         </a>
                     </div>
@@ -51,7 +52,8 @@
                 <div class="tile-wrapper">        
                     <div class="tile-dead">
                         <a class="tile-btn tile-dead-btn {{ tileModel.ListItemCssClass }}" data-ng-class="{'editable-mode':isEditableMode}" data-ng-href="{{ tileModel.Path }}" target="_top">
-                            <div data-tile-icon="tileModel.TileIcon" data-icon-alternative-text="tileModel.DisplayName" data-icon-style="cms-icon-200 tile-dead-icon"  />                    
+                            <div data-tile-icon="tileModel.TileIcon" data-icon-alternative-text="tileModel.DisplayName" data-icon-style="cms-icon-200 tile-dead-icon" >
+                            </div>                    
                             <h3>{{ tileModel.DisplayName }}</h3>
                         </a>
                     </div>
@@ -66,7 +68,8 @@
         <div class="tile-live">
             <a class="tile-btn tile-live-btn {{ tileModel.ListItemCssClass }}" data-ng-href="{{ tileModel.Path }}" target="_top">
                 <div class="clearfix">
-                    <div data-tile-icon="tileModel.TileIcon" data-icon-alternative-text="tileModel.DisplayName" data-icon-style="cms-icon-150 tile-live-icon" />            
+                    <div data-tile-icon="tileModel.TileIcon" data-icon-alternative-text="tileModel.DisplayName" data-icon-style="cms-icon-150 tile-live-icon">
+                    </div>            
                     <span class="tile-live-title-container">
                         <h3>{{ tileModel.DisplayName }}</h3>
                     </span>
@@ -92,7 +95,8 @@
                      <div class="tile-single-object">
                         <a class="tile-btn tile-single-object-btn {{ tileModel.ListItemCssClass }}" data-ng-href="{{ tileModel.Path }}" data-ng-class="{'editable-mode':isEditableMode}"  target="_top">
                             <div class="clearfix">
-                                <div data-tile-icon="tileModel.TileIcon" data-icon-alternative-text="tileModel.DisplayName" data-icon-style="cms-icon-150 tile-live-icon" />            
+                                <div data-tile-icon="tileModel.TileIcon" data-icon-alternative-text="tileModel.DisplayName" data-icon-style="cms-icon-150 tile-live-icon" >
+                                </div>
                                 <span class="tile-live-title-container">
                                     <h3>{{ tileModel.ApplicationDisplayName }}</h3>
                                 </span>
