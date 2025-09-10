@@ -1026,7 +1026,7 @@
       <HintPath>..\packages\System.Formats.Asn1.8.0.1\lib\net462\System.Formats.Asn1.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MailKit, Version=4.7.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b">
+    <Reference Include="MailKit, Version=4.7.1.1, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b">
       <HintPath>..\packages\MailKit.4.7.1.1\lib\net48\MailKit.dll</HintPath>
       <Private>True</Private>
     </Reference>
