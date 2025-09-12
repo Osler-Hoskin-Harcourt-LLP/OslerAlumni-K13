@@ -1043,7 +1043,20 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
+    <ItemGroup>
+        <None Include="CustomDependencies\System.Runtime.CompilerServices.Unsafe.dll">
+            <Link>System.Runtime.CompilerServices.Unsafe.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="CustomDependencies\MailKit.dll">
+            <Link>MailKit.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
     <Content Include="App_Themes\CommunitySite\Default.css" />
     <Content Include="App_Themes\CommunitySite\Images\add.gif" />
     <Content Include="App_Themes\CommunitySite\Images\arrow.gif" />
