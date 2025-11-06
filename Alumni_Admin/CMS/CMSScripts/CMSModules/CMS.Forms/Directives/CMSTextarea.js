@@ -21,7 +21,7 @@
                 'data-ng-readonly="readonly" ' +
                 'data-ng-required="required" ' +
                 'placeholder="{{placeholder}}" ' +
-                'data-ng-maxLength="maxlength" />' +
+                'data-ng-maxLength="maxlength"></textarea>' +
         '<span class="form-control-error" data-ng-if="(form.$submitted || model.$dirty) && model.$error.required">' +
             '{{"general.requiresvalue"|resolve}}' +
         '</span>' +

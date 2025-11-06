@@ -26,11 +26,17 @@
     function controller(reportSetupDialogService, conversionsService, conversionsConfigurationService) {
         var ctrl = this;
 
-        ctrl.configuration = conversionsConfigurationService.getConfiguration(ctrl.isFunnel);
+        this.$onInit = function () {
+            ctrl.configuration = conversionsConfigurationService.getConfiguration(ctrl.isFunnel);
+        };
 
         ctrl.openDialog = function () {
             reportSetupDialogService.openDialog(ctrl.conversion, ctrl.configuration.dialogHeading)
-                .result.then(addConversion);
+                .result
+                .then(addConversion)
+                .catch(function () {
+                    // Do nothing on dismiss, but this prevents unhandled rejection.
+                });
         };
 
         function addConversion (conversion) {

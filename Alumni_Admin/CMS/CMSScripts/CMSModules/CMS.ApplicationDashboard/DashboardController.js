@@ -104,7 +104,7 @@
                 });
             });
 
-            eventHub.subscribe('cms.applicationdashboard.ApplicationAdded', function (id) {
+          eventHub.subscribe('cms.applicationdashboard.ApplicationAdded', function (id) {
                 return _this.addTile(id);
             });
 
@@ -147,8 +147,8 @@
         */
         Controller.prototype.addTile = function (appGuid) {
             var _this = this;
-            this.__tiles.load({ guid: appGuid }, function (tile) {
-                if (!_.contains(_.pluck(_this.$scope.model.tiles, 'Id'), tile.Id)) {
+          this.__tiles.load({ guid: appGuid }, function (tile) {
+                if (!_.includes(_.map(_this.$scope.model.tiles, 'Id'), tile.Id)) {
                     eventHub.publish('cms.applicationdashboard.DashboardItemLoaded', tile.Id);
                     _this.$scope.model.tiles.push(tile);
                     _this.saveChanges();

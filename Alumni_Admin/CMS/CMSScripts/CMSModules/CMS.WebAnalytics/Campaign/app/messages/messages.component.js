@@ -24,7 +24,9 @@
         ctrl.temporaryMessage = "";
         ctrl.permanentErrors = {};
 
-        messagesService.addListener(ctrl.id, showError, showSuccess);
+        ctrl.$onInit = function () {
+            messagesService.addListener(ctrl.id, showError, showSuccess);
+        };
 
         ctrl.getPermanentError = function () {
             var firstErrorKey = Object.keys(ctrl.permanentErrors)[0];
