@@ -21,7 +21,9 @@
 
     /*@ngInject*/
     function controller(personaService) {
-        activate.apply(this);
+        this.$onInit = function () {
+            activate.apply(this);
+        };
 
         function activate() {
             personaService.getPersona(this.contactId)

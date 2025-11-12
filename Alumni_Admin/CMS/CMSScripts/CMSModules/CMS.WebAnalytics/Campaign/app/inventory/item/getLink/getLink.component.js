@@ -37,6 +37,8 @@
                     assetLink: function () { return ctrl.assetLink; },
                     utmCampaign: function () { return ctrl.utmCode; }
                 }
+            }).result.catch(function () {
+                // Do nothing on dismiss, but this prevents unhandled rejection.
             });
         };
     }

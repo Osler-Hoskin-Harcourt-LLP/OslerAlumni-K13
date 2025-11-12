@@ -26,7 +26,10 @@
 
         ctrl.openDialog = function () {
             objectiveSetupDialogService.openDialog(ctrl.objectiveConversions, null, 'campaign.objective.defineobjective')
-                .then(addObjective);
+                .then(addObjective)
+                .catch(function () {
+                    // Do nothing on dismiss, but this prevents unhandled rejection.
+                });
         };
 
         function addObjective(objective) {

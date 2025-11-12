@@ -23,10 +23,12 @@
     function controller(resolveFilter) {
         var ctrl = this;
 
-        ctrl.nonFunnelConversions = ctrl.report.conversions.filter(function (c) {
-            return !c.isFunnelStep
-        });
-        
+        this.$onInit = function () {
+            ctrl.nonFunnelConversions = ctrl.report.conversions.filter(function (c) {
+                return !c.isFunnelStep
+            });
+        }
+
         ctrl.tabIndex = 0;
         ctrl.tabs = [
             resolveFilter('campaign.conversions'),
