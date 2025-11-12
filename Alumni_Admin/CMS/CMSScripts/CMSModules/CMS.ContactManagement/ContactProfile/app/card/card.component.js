@@ -25,11 +25,12 @@
 
     /*@ngInject*/
     function controller() {
-        this.contactCard = this.contact;
+        this.$onInit = function () {
+            this.contactCard = this.contact;
 
-        this.showContactAddress = false;
-        this.showContactAddress = this.contact.ContactEmail || this.contact.ContactAddress ||
-            (this.contact.ContactName && (this.contact.ContactName.indexOf('Anonymous') !== 0));
+            this.showContactAddress = this.contact.ContactEmail || this.contact.ContactAddress ||
+                (this.contact.ContactName && (this.contact.ContactName.indexOf('Anonymous') !== 0));
+        };
     };
 
 }(angular));

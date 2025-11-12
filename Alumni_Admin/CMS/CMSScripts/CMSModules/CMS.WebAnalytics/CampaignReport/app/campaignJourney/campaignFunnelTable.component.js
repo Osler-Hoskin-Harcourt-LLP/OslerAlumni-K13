@@ -74,17 +74,19 @@
             return source.name;
         };
 
-        /* Prepare items (rows) for rendered table. */
-        ctrl.sources = campaignFunnelTableService.initTableData(ctrl.conversions, ctrl.sourceDetails);
+        this.$onInit = function () {
+            /* Prepare items (rows) for rendered table. */
+            ctrl.sources = campaignFunnelTableService.initTableData(ctrl.conversions, ctrl.sourceDetails);
 
-        ctrl.summaryHits = campaignFunnelTableService.getSummaryConversionHits(ctrl.conversions);
+            ctrl.summaryHits = campaignFunnelTableService.getSummaryConversionHits(ctrl.conversions);
 
-        ctrl.conversionRate = campaignFunnelTableService.getTotalConversionRate(ctrl.conversions);
+            ctrl.conversionRate = campaignFunnelTableService.getTotalConversionRate(ctrl.conversions);
 
-        /* Flag indicating that any of sources has detail link */
-        ctrl.hasDetails = _.find(ctrl.sources, function (source) {
-            return source.link;
-        });
+            /* Flag indicating that any of sources has detail link */
+            ctrl.hasDetails = _.find(ctrl.sources, function (source) {
+                return source.link;
+            });
+        };
 
         ctrl.formatConversionName = function (conversion) {
             return conversion.typeName + (conversion.name ? ': ' + conversion.name : '');

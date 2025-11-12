@@ -1533,6 +1533,19 @@
             <param name="taskObj">Task object</param>
             <returns>Returns error message</returns>
         </member>
+        <member name="T:CMS.Synchronization.Internal.ISyncClientProxy">
+            <summary>
+            A proxy that forwards staging task data to the appropriate client.
+            </summary>
+        </member>
+        <member name="M:CMS.Synchronization.Internal.ISyncClientProxy.ProcessSyncTask(CMS.Synchronization.StagingTaskInfo,CMS.Synchronization.ServerInfo)">
+            <summary>
+            Sends given staging task to a given server using the appropriate client.
+            </summary>
+            <param name="stagingTaskInfo">The task data to send.</param>
+            <param name="serverInfo">The server to which to send the task data.</param>
+            <returns>The response from the server.</returns>
+        </member>
         <member name="T:CMS.Synchronization.ISyncManager">
             <summary>
             Interface for SyncManager

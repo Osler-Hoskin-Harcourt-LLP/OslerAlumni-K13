@@ -264,6 +264,12 @@
             </summary>
             <param name="uInfo">User info object with the user data</param>
         </member>
+        <member name="M:CMS.Membership.AuthenticationHelper.EnsureExternalUserInternal(CMS.Membership.UserInfo)">
+            <summary>
+            Ensures that the external user record is present in the database.
+            </summary>
+            <param name="uInfo">User info object with the user data</param>
+        </member>
         <member name="M:CMS.Membership.AuthenticationHelper.GetUserWindowsRoles(System.String)">
             <summary>
             Gets the user roles.

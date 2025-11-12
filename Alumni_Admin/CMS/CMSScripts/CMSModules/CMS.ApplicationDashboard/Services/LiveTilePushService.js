@@ -10,29 +10,37 @@
             this.POLLING_INTERVAL = 20;
             this.start = function (applicationGuid, newDataCallback, noDataCallback) {
                 var oldData = null, getData = function () {
-                    _this.$http.post(application.getData('applicationUrl') + 'cmsapi/Tile/UpdateTile?tileModelType=applicationLiveTileModel', { applicationGuid: applicationGuid }).success(function (newLiveTileData) {
-                        if (!newLiveTileData || isNaN(newLiveTileData.Value)) {
-                            oldData = null;
-                            noDataCallback();
-                            return;
-                        }
+                    _this
+                        .$http
+                        .post(application.getData('applicationUrl') + 'cmsapi/Tile/UpdateTile?tileModelType=applicationLiveTileModel', { applicationGuid: applicationGuid })
+                        .then(
+                            function (response) {
+                                const newLiveTileData = response.data;
 
-                        var data = {
-                            Value: newLiveTileData.Value,
-                            Description: newLiveTileData.Description
-                        };
+                                if (!newLiveTileData || isNaN(newLiveTileData.Value)) {
+                                    oldData = null;
+                                    noDataCallback();
+                                    return;
+                                }
 
-                        if (!angular.equals(oldData, data)) {
-                            oldData = data;
-                            newDataCallback(data);
-                        }
-                    }).error(function (data, status) {
-                        if (status == 403) {
-                            window.top.location.href = data.LogonPageUrl;
-                        }
-                        oldData = null;
-                        noDataCallback();
-                    });
+                                var data = {
+                                    Value: newLiveTileData.Value,
+                                    Description: newLiveTileData.Description
+                                };
+
+                                if (!angular.equals(oldData, data)) {
+                                    oldData = data;
+                                    newDataCallback(data);
+                                }
+                            },
+                            function ({ data, status }) {
+                                if (status == 403) {
+                                    window.top.location.href = data.LogonPageUrl;
+                                }
+                                oldData = null;
+                                noDataCallback();
+                            }
+                        );
                 };
 
                 getData();

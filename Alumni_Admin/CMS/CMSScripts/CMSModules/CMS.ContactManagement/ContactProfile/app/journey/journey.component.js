@@ -22,6 +22,10 @@
 
     /*@ngInject*/
     function controller(journeyService) {
+        this.$onInit = function () {
+            activate.apply(this);
+        };
+
         function activate() {
             journeyService.getJourneyForContact(this.contactId).then(onSuccess.bind(this));
         };
@@ -29,7 +33,5 @@
         function onSuccess(journey) {
             this.journey = journey;
         };
-
-        activate.apply(this);
     };
 }(angular));
