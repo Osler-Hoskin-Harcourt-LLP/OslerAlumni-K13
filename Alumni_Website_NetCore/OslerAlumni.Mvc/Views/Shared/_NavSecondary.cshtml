@@ -22,7 +22,9 @@
                             </li>
                         }
                     }
-                    <li class="c-nav-item">@Html.DisplayFor(vm => Model.LanguageToggle)</li>
+                    @{
+                        //<li class="c-nav-item">@Html.DisplayFor(vm => Model.LanguageToggle)</li>
+                    }
                 </ul>
                 @if (Model.IsAuthenticatedUser)
                 {
