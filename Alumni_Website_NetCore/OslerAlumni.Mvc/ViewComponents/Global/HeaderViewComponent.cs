@@ -122,7 +122,7 @@ namespace OslerAlumniWebsite.ViewComponents.Global
 
             return new LanguageToggleViewModel
             {
-                ShowToggle = true,
+                ShowToggle = false,
                 LinkUrl = QueryHelpers.AddQueryString(url, Request.Query)
             };
         }
