@@ -16,7 +16,7 @@ namespace OslerAlumni.Mvc.Core.Services
         /// </summary>
         /// <param name="resourceTypes"></param>
         /// <param name="culture"></param>
-        /// <returns>Comma seperated list of display names</returns>
+        /// <returns>Comma separated list of display names</returns>
         string GetResourceTypesDisplayString(string resourceTypes, string culture = null);
 
         /// <summary>

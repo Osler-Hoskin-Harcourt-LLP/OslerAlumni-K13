@@ -175,7 +175,7 @@ namespace OslerAlumni.OnePlace.Services
                     return result;
                 }
 
-                // Get ID of the the Board Member relationship type from OnePlace
+                // Get ID of the Board Member relationship type from OnePlace
                 RelationshipType opRelationshipType;
 
                 if (!_onePlaceRelationshipTypeService.TryGetRelationshipType(
