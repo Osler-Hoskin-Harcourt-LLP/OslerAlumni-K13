@@ -39,7 +39,7 @@ namespace ECA.Caching.Services
         
         /// <summary>
         /// Touches the list of cache keys that are passed in,
-        /// so that dependant cached items are busted.
+        /// so that dependent cached items are busted.
         /// </summary>
         /// <param name="cacheKeys">
         /// List of cache keys to "touch".

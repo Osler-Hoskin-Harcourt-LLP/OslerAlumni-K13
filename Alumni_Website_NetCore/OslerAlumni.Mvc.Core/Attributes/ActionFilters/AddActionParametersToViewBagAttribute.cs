@@ -10,7 +10,7 @@ namespace OslerAlumni.Mvc.Core.Attributes.ActionFilters
     /// <summary>
     /// Useful for setting the current document properties to the viewbag.
     /// The properties can then be passed on to partial views / methods without the need to add it to the viewmodel
-    /// This would keep some partial controls independant from the page they are on.
+    /// This would keep some partial controls independent from the page they are on.
     /// 
     ///
     /// Usage:

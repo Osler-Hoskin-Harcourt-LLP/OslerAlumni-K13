@@ -122,7 +122,7 @@ namespace OslerAlumni.OnePlace.Repositories
         /// <inheritdoc />
         public int PurgeDataSubmissionQueueItems(int failedAttemptCount, int modifiedDayCount, int count)
         {
-            // Get processed (without unprocessed dependant tasks)
+            // Get processed (without unprocessed dependent tasks)
             // or "hopeless" (too many failed attempts or missing dependency) items from the queue
 
             var query = new DataQuery

@@ -91,7 +91,7 @@ namespace OslerAlumni.Core.Kentico.Models
         /// Checks if the user meets the criteria for an Osler Alumnus/Alumna.
         /// </summary>
         /// <param name="siteName">
-        /// Additionally checks if the user belongs the the specified site.
+        /// Additionally checks if the user belongs to the specified site.
         /// If the provided value is null or empty, this check is omitted.
         /// </param>
         /// <returns></returns>
