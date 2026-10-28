@@ -10035,6 +10035,11 @@
             </summary>
             <param name="connection">Database connection instance.</param>
         </member>
+        <member name="M:CMS.DataEngine.SqlInstallationHelper.IsValidDatabaseName(System.String)">
+            <summary>
+            Validates database name.
+            </summary>
+        </member>
         <member name="T:CMS.DataEngine.SQLScript">
             <summary>
             SQL script to be applied during upgrade or hotfix.

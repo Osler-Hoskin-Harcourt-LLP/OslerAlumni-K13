@@ -19,29 +19,31 @@
 
     /*@ngInject*/
     function controller($timeout, campaignFunnelService) {
-        var ctrl = this,
-            chartData = campaignFunnelService.initChartData(ctrl.conversions);
+        var ctrl = this;
 
-        ctrl.legendId = ctrl.chartId + 'legend';
+        this.$onInit = function () {
+            var chartData = campaignFunnelService.initChartData(ctrl.conversions);
+            ctrl.legendId = ctrl.chartId + 'legend';
 
-        ctrl.hasData = function () {
-            return chartData && chartData.maxValue;
-        };
+            ctrl.hasData = function () {
+                return chartData && chartData.maxValue;
+            };
 
-        // Chart requires fully rendered HTML (to locate containers by ID) - this is why it's called from $timeout
-        $timeout(function () {
-            if (ctrl.hasData()) {
-                createChart();
-            }
-        });
-
-        function createChart () {
-            cmsChart({
-                chartDiv: ctrl.chartId,
-                legendDiv: ctrl.legendId,
-                data: chartData.data,
-                maxValue: chartData.maxValue
+            // Chart requires fully rendered HTML (to locate containers by ID) - this is why it's called from $timeout
+            $timeout(function () {
+                if (ctrl.hasData()) {
+                    createChart();
+                }
             });
-        }
+
+            function createChart () {
+                cmsChart({
+                    chartDiv: ctrl.chartId,
+                    legendDiv: ctrl.legendId,
+                    data: chartData.data,
+                    maxValue: chartData.maxValue
+                });
+            }
+        };
     }
 }(angular, cmsChart));

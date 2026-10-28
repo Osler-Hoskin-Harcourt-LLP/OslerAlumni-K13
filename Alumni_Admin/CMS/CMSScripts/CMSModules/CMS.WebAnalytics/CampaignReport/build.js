@@ -150,7 +150,9 @@ resolve(angular, dataFromServer.resources);
                 self.sortDesc = true;
             };
 
-        init();
+        this.$onInit = function () {
+            init();
+        };
 
         self.sort = function (type) {
             if (self.sortType === type) {
@@ -329,10 +331,12 @@ resolve(angular, dataFromServer.resources);
     function controller() {
         var ctrl = this;
 
-        /* Filter only conversions which belong to funnel */
-        ctrl.conversions = ctrl.report.conversions.filter(function(conversion) {
-            return conversion.isFunnelStep;
-        });
+        this.$onInit = function () {
+            /* Filter only conversions which belong to funnel */
+            ctrl.conversions = ctrl.report.conversions.filter(function (conversion) {
+                return conversion.isFunnelStep;
+            });
+        };
     }
 
 }(angular));
@@ -358,30 +362,32 @@ resolve(angular, dataFromServer.resources);
 
     /*@ngInject*/
     function controller($timeout, campaignFunnelService) {
-        var ctrl = this,
-            chartData = campaignFunnelService.initChartData(ctrl.conversions);
+        var ctrl = this;
 
-        ctrl.legendId = ctrl.chartId + 'legend';
+        this.$onInit = function () {
+            var chartData = campaignFunnelService.initChartData(ctrl.conversions);
+            ctrl.legendId = ctrl.chartId + 'legend';
 
-        ctrl.hasData = function () {
-            return chartData && chartData.maxValue;
-        };
+            ctrl.hasData = function () {
+                return chartData && chartData.maxValue;
+            };
 
-        // Chart requires fully rendered HTML (to locate containers by ID) - this is why it's called from $timeout
-        $timeout(function () {
-            if (ctrl.hasData()) {
-                createChart();
-            }
-        });
-
-        function createChart () {
-            cmsChart({
-                chartDiv: ctrl.chartId,
-                legendDiv: ctrl.legendId,
-                data: chartData.data,
-                maxValue: chartData.maxValue
+            // Chart requires fully rendered HTML (to locate containers by ID) - this is why it's called from $timeout
+            $timeout(function () {
+                if (ctrl.hasData()) {
+                    createChart();
+                }
             });
-        }
+
+            function createChart () {
+                cmsChart({
+                    chartDiv: ctrl.chartId,
+                    legendDiv: ctrl.legendId,
+                    data: chartData.data,
+                    maxValue: chartData.maxValue
+                });
+            }
+        };
     }
 }(angular, cmsChart));
 (function (angular, _) {
@@ -549,17 +555,19 @@ resolve(angular, dataFromServer.resources);
             return source.name;
         };
 
-        /* Prepare items (rows) for rendered table. */
-        ctrl.sources = campaignFunnelTableService.initTableData(ctrl.conversions, ctrl.sourceDetails);
+        this.$onInit = function () {
+            /* Prepare items (rows) for rendered table. */
+            ctrl.sources = campaignFunnelTableService.initTableData(ctrl.conversions, ctrl.sourceDetails);
 
-        ctrl.summaryHits = campaignFunnelTableService.getSummaryConversionHits(ctrl.conversions);
+            ctrl.summaryHits = campaignFunnelTableService.getSummaryConversionHits(ctrl.conversions);
 
-        ctrl.conversionRate = campaignFunnelTableService.getTotalConversionRate(ctrl.conversions);
+            ctrl.conversionRate = campaignFunnelTableService.getTotalConversionRate(ctrl.conversions);
 
-        /* Flag indicating that any of sources has detail link */
-        ctrl.hasDetails = _.find(ctrl.sources, function (source) {
-            return source.link;
-        });
+            /* Flag indicating that any of sources has detail link */
+            ctrl.hasDetails = _.find(ctrl.sources, function (source) {
+                return source.link;
+            });
+        };
 
         ctrl.formatConversionName = function (conversion) {
             return conversion.typeName + (conversion.name ? ': ' + conversion.name : '');
@@ -802,48 +810,6 @@ resolve(angular, dataFromServer.resources);
         }
     }
 }(angular, _));
-(function (angular, dataFromServer, urlHelper) {
-    'use strict';
-
-    angular.module('cms.webanalytics/campaignreport/demographicsLink/demographicsLink.component', [])
-        .component('cmsDemographicsLink', demographicsLinkComponent());
-
-    function demographicsLinkComponent() {
-        return {
-            bindings: {
-                data: '<'
-            },
-            templateUrl: 'cms.webanalytics/campaignreport/demographicsLink/demographicsLink.component.html',
-            controller: controller
-        };
-    }
-
-
-    /*@ngInject*/
-    function controller() {
-        var ctrl = this,
-            data = ctrl.data;
-
-        var parameters = {
-            campaignConversionID: data.campaignConversionID
-        };
-
-        if(data.utmSource)
-        {
-            parameters.utmSource = data.utmSource === dataFromServer.defaultUTMSourceName ? '' : data.utmSource;
-        }
-
-        if(typeof data.utmContent !== 'undefined')
-        {
-            parameters.utmContent = data.utmContent;
-        }
-
-        var queryString = urlHelper.buildQueryString(parameters).substring(1);
-
-        ctrl.href = dataFromServer.demographicsLink + '&' + queryString;
-        ctrl.value = ctrl.data.value;
-    }
-}(angular, dataFromServer, urlHelper));
 (function (angular) {
     'use strict';
 
@@ -870,10 +836,12 @@ resolve(angular, dataFromServer.resources);
     function controller(resolveFilter) {
         var ctrl = this;
 
-        ctrl.nonFunnelConversions = ctrl.report.conversions.filter(function (c) {
-            return !c.isFunnelStep
-        });
-        
+        this.$onInit = function () {
+            ctrl.nonFunnelConversions = ctrl.report.conversions.filter(function (c) {
+                return !c.isFunnelStep
+            });
+        }
+
         ctrl.tabIndex = 0;
         ctrl.tabs = [
             resolveFilter('campaign.conversions'),
@@ -906,7 +874,9 @@ resolve(angular, dataFromServer.resources);
     function controller() {
         var ctrl = this;
 
-        ctrl.activeTab = this.selectedIndex || 0;
+        this.$onInit = function () {
+            ctrl.activeTab = this.selectedIndex || 0;
+        };
 
         ctrl.changeTab = function (index) {
             ctrl.activeTab = index;
@@ -914,6 +884,48 @@ resolve(angular, dataFromServer.resources);
         }
     }
 }(angular));
+(function (angular, dataFromServer, urlHelper) {
+    'use strict';
+
+    angular.module('cms.webanalytics/campaignreport/demographicsLink/demographicsLink.component', [])
+        .component('cmsDemographicsLink', demographicsLinkComponent());
+
+    function demographicsLinkComponent() {
+        return {
+            bindings: {
+                data: '<'
+            },
+            templateUrl: 'cms.webanalytics/campaignreport/demographicsLink/demographicsLink.component.html',
+            controller: controller
+        };
+    }
+
+
+    /*@ngInject*/
+    function controller() {
+        var ctrl = this;
+
+        this.$onInit = function () {
+            var data = ctrl.data;
+
+            var parameters = {
+                campaignConversionID: data.campaignConversionID
+            };
+
+            if (data.utmSource) {
+                parameters.utmSource = data.utmSource === dataFromServer.defaultUTMSourceName ? '' : data.utmSource;
+            }
+            if (typeof data.utmContent !== 'undefined') {
+                parameters.utmContent = data.utmContent;
+            }
+
+            var queryString = urlHelper.buildQueryString(parameters).substring(1);
+
+            ctrl.href = dataFromServer.demographicsLink + '&' + queryString;
+            ctrl.value = ctrl.data.value;
+        };
+    }
+}(angular, dataFromServer, urlHelper));
 angular.module("cms.webanalytics/campaignreport/app.templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("cms.webanalytics/campaignreport/additionalResources.html","<!-- Resources used in non-html files (resolveFilter(resString)...) so they would not be automagically resolved by Gulp -->\r\n{{ \"campaigns.campaign.status.running\" | resolve }}\r\n{{ \"campaigns.campaign.status.scheduled\" | resolve }}\r\n{{ \"campaigns.campaign.status.draft\" | resolve }}\r\n{{ \"campaigns.campaign.status.finished\" | resolve }}\r\n{{ \"campaign.conversions\" | resolve }}\r\n{{ \"campaign.journey\" | resolve }}\r\n{{ \"campaign.visitors\" | resolve }}\r\n{{ \"campaign.report.drop\" | resolve }}\r\n{{ \"campaign.report.droprate\" | resolve }}\r\n{{ \"campaign.report.funnel.compared\" | resolve }}");
 $templateCache.put("cms.webanalytics/campaignreport/campaignObjective.component.html","<div class=\'campaign-objective content-block-50\' data-ng-if=\'$ctrl.objective\' data-ng-class=\'{met : $ctrl.objective.actual >= $ctrl.objective.target}\'>\r\n    <div class=\'objective-header col-md-8 col-sm-8 col-xs-8\'>\r\n        <h4>{{ \"campaign.objective\" | resolve }}</h4>\r\n        <span>{{::$ctrl.objective.name}}</span>\r\n    </div>\r\n    <div class=\'objective-result col-md-2 col-sm-2\'>\r\n        <span>{{::100 * $ctrl.objective.actual / $ctrl.objective.target | number : 1}}%</span>\r\n    </div>\r\n    <div class=\'objective-detail col-md-1 col-sm-1 col-xs-6\'>\r\n        <dl>\r\n            <dt>{{::$ctrl.objective.actual | shortNumber}}</dt>\r\n            <dd>{{ \"campaign.objective.actual\" | resolve }}</dd>\r\n        </dl>\r\n    </div>\r\n    <div class=\'objective-detail col-md-1 col-sm-1\'>\r\n        <dl>\r\n            <dt>{{::$ctrl.objective.target | shortNumber}}</dt>\r\n            <dd>{{ \"campaign.objective.target\" | resolve }}</dd>\r\n        </dl>\r\n    </div>\r\n</div>\r\n\r\n");
 $templateCache.put("cms.webanalytics/campaignreport/campaignReport.component.html","<div class=\'campaign-report\'>\r\n    <h2 data-ng-bind=\'::$ctrl.report.name\'></h2>\r\n    <cms-campaign-report-header report=\'$ctrl.report\'></cms-campaign-report-header>\r\n\r\n    <cms-report-tabs report=\'$ctrl.report\'></cms-report-tabs>\r\n\r\n    <footer data-ng-if=\'::$ctrl.report.updateDate\'>\r\n        <p>{{ \"campaign.report.lastupdate\" | resolve }} {{::$ctrl.report.updateDate | date:\'medium\'}}</p>\r\n    </footer>\r\n</div>\r\n");
@@ -924,6 +936,6 @@ $templateCache.put("cms.webanalytics/campaignreport/sourceDetailLink.component.h
 $templateCache.put("cms.webanalytics/campaignreport/campaignJourney/campaignFunnel.component.html","<h3>{{ \"campaign.journey\" | resolve }}</h3>\r\n<cms-campaign-funnel-chart conversions=\'$ctrl.conversions\' chart-id=\'campaignFunnelChart\'></cms-campaign-funnel-chart>\r\n<cms-campaign-funnel-table conversions=\'$ctrl.conversions\' source-details=\'$ctrl.report.sourceDetails\'></cms-campaign-funnel-table>");
 $templateCache.put("cms.webanalytics/campaignreport/campaignJourney/campaignFunnelChart.component.html","<div class=\'campaign-table-chart-container\' data-ng-if=\'$ctrl.hasData()\'>\r\n    <div id=\'{{::$ctrl.chartId}}\' class=\'column-chart\'></div>\r\n    <div id=\'{{::$ctrl.legendId}}\' class=\'legend\'></div>\r\n</div>");
 $templateCache.put("cms.webanalytics/campaignreport/campaignJourney/campaignFunnelTable.component.html","<div class=\'journey-report content-block\'>\r\n    <div data-ng-if=\'::$ctrl.conversions.length && $ctrl.sources.length\'>\r\n        <h4>{{ \"campaign.report.channelperformance\" | resolve }}</h4>\r\n        <table class=\'table table-hover\'>\r\n            <thead>\r\n                <tr class=\'unigrid-head\'>\r\n                    <th class=\'main-column-icon-size\'>\r\n                        &nbsp;\r\n                    </th>\r\n                    <th class=\'main-column-20\'>\r\n                        <a href=\'#\' data-ng-click=\'$ctrl.sort($ctrl.sortTypeName)\'>{{ \"campaign.conversion.trafficchannel\" | resolve }}</a>\r\n                        <i aria-hidden=\'true\' class=\'icon-caret-down\' data-ng-show=\'$ctrl.showSorting($ctrl.sortTypeName, $ctrl.sortDesc)\' data-ng-click=\'$ctrl.sort($ctrl.sortTypeName)\'></i>\r\n                        <i aria-hidden=\'true\' class=\'icon-caret-up\' data-ng-show=\'$ctrl.showSorting($ctrl.sortTypeName, !$ctrl.sortDesc)\' data-ng-click=\'$ctrl.sort($ctrl.sortTypeName)\'></i>\r\n                    </th>\r\n                    <th class=\'main-column-20\' data-ng-if=\'::$ctrl.hasDetails\'>\r\n                        {{ \"campaign.report.emailreports\" | resolve }}\r\n                    </th>\r\n                    <th class=\'text-right\' data-ng-repeat=\'conversion in $ctrl.conversions track by $index\'>\r\n                        <a href=\'#\' title=\'{{::$ctrl.formatConversionName(conversion)}}\' data-ng-click=\'$ctrl.sort($index)\'>{{:: conversion.name || conversion.typeName }}</a>\r\n                        <i aria-hidden=\'true\' class=\'icon-caret-down\' data-ng-show=\'$ctrl.showSorting($index, $ctrl.sortDesc)\' data-ng-click=\'$ctrl.sort($index)\'></i>\r\n                        <i aria-hidden=\'true\' class=\'icon-caret-up\' data-ng-show=\'$ctrl.showSorting($index, !$ctrl.sortDesc)\' data-ng-click=\'$ctrl.sort($index)\'></i>\r\n                    </th>\r\n                    <th class=\'text-right\'>\r\n                        <a href=\'#\' title=\'{{ \"campaign.report.conversionrateexplanation\" | resolve }}\' data-ng-click=\'$ctrl.sort($ctrl.sortTypeRate)\'>{{ \"campaign.conversionrate\" | resolve }}</a>\r\n                        <i aria-hidden=\'true\' class=\'icon-caret-down\' data-ng-show=\'$ctrl.showSorting($ctrl.sortTypeRate, $ctrl.sortDesc)\' data-ng-click=\'$ctrl.sort($ctrl.sortTypeRate)\'></i>\r\n                        <i aria-hidden=\'true\' class=\'icon-caret-up\' data-ng-show=\'$ctrl.showSorting($ctrl.sortTypeRate, !$ctrl.sortDesc)\' data-ng-click=\'$ctrl.sort($ctrl.sortTypeRate)\'></i>\r\n                    </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody class=\'tbody-hover\'>\r\n                <tr class=\'summary-row\' data-ng-repeat-start=\'source in $ctrl.sources | orderBy:$ctrl.sortValueExtractor:$ctrl.sortDesc\'>\r\n                    <td>\r\n                        <cms-collapse-button collapsed=\'source.collapsed\'></cms-collapse-button>\r\n                    </td>\r\n                    <td>\r\n                        {{::source.name}}\r\n                    </td>\r\n                    <td data-ng-if=\'::$ctrl.hasDetails\'>\r\n                        <cms-source-detail-link link=\'source.link\'></cms-source-detail-link>\r\n                    </td>\r\n                    <td class=\'text-right\' data-ng-repeat=\'hitCount in source.hits track by $index\'>\r\n                        <cms-demographics-link data=\'hitCount\'></cms-demographics-link>\r\n                    </td>\r\n                    <td class=\'text-right\'>{{::source.conversionRate | percentage:2}}</td>\r\n                </tr>\r\n                <tr data-ng-repeat-end data-ng-repeat-start=\'content in source.contents\' data-ng-if=\'!source.collapsed\'>\r\n                    <td>&nbsp;</td>\r\n                    <td data-ng-if=\'!content.content\'>{{ \"campaign.conversion.trafficnocontent\" | resolve }}</td>\r\n                    <td data-ng-if=\'content.content\'>{{::content.content}}</td>\r\n                    <td data-ng-if=\'::$ctrl.hasDetails\'>&nbsp;</td>\r\n                    <td class=\'text-right\' data-ng-repeat=\'hitCount in content.hits track by $index\'>\r\n                        <cms-demographics-link data=\'hitCount\'></cms-demographics-link>\r\n                    </td>\r\n                    <td class=\'text-right\'>{{::content.conversionRate | percentage:2}}</td>\r\n                </tr>\r\n                <tr class=\'separator-row\' data-ng-repeat-end data-ng-if=\'!source.collapsed\'>\r\n                    <td colspan=\'{{::source.hits.length + ($ctrl.hasDetails ? 4 : 3)}}\'>\r\n                        &nbsp;\r\n                    </td>\r\n                </tr>\r\n                <tr class=\'summary-row\'>\r\n                    <td>&nbsp;</td>\r\n                    <td>{{ \"general.summary\" | resolve }}</td>\r\n                    <td data-ng-if=\'::$ctrl.hasDetails\'></td>\r\n                    <td class=\'text-right\' data-ng-repeat=\'summaryHit in $ctrl.summaryHits track by $index\'>\r\n                        <cms-demographics-link data=\'summaryHit\'></cms-demographics-link>\r\n                    </td>\r\n                    <td class=\'text-right\'>\r\n                        {{::$ctrl.conversionRate | percentage:2}}\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n    <span data-ng-if=\'::!$ctrl.conversions.length\'>{{ \"campaign.nojourneystep\" | resolve }}</span>\r\n    <span data-ng-if=\'::$ctrl.conversions.length && !$ctrl.sources.length\'>{{ \"campaign.nodata\" | resolve }}</span>\r\n</div>\r\n");
-$templateCache.put("cms.webanalytics/campaignreport/demographicsLink/demographicsLink.component.html","<a href=\'{{::$ctrl.href}}\' target=\'_blank\' data-ng-if=\'::$ctrl.value > 0\'>{{::$ctrl.value}}</a>\r\n{{ ::$ctrl.value == 0 ? \'0\' : \'\' }}");
 $templateCache.put("cms.webanalytics/campaignreport/reportTabs/reportTabs.component.html","<cms-tab-switcher tabs=\'::$ctrl.tabs\' selected-index=\'$ctrl.tabIndex\' on-tab-change=\'$ctrl.changeTab(index)\'></cms-tab-switcher>\r\n\r\n<div on=\'$ctrl.tabIndex\' data-ng-switch>\r\n    <div data-ng-switch-when=\'0\'>\r\n        <h3>{{ \"campaign.conversions\" | resolve }}</h3>\r\n        <div data-ng-repeat=\'conversion in ::$ctrl.nonFunnelConversions\'>\r\n            <cms-conversion-report conversion=\'::conversion\' source-details=\'::$ctrl.report.sourceDetails\'></cms-conversion-report>\r\n        </div>\r\n        <span data-ng-if=\'::!$ctrl.nonFunnelConversions.length\'>{{ \"campaign.noconversion\" | resolve }}</span>\r\n    </div>\r\n\r\n    <div data-ng-switch-when=\'1\'>\r\n        <cms-campaign-funnel report=\'::$ctrl.report\'></cms-campaign-funnel>\r\n    </div>\r\n</div>");
-$templateCache.put("cms.webanalytics/campaignreport/reportTabs/tabSwitcher.component.html","<div class=\'content-block campaign-tab-switcher\'>\r\n    <div class=\'btn-group\'>\r\n        <button type=\'button\' class=\'btn btn-default\' data-ng-repeat=\'tab in ::$ctrl.tabs\' data-ng-class=\'{active: $ctrl.activeTab === $index}\' data-ng-click=\'$ctrl.changeTab($index)\'>\r\n            {{::tab}}\r\n        </button>\r\n    </div>\r\n</div>");}]);return 'cms.webanalytics/campaignreport/';}})
+$templateCache.put("cms.webanalytics/campaignreport/reportTabs/tabSwitcher.component.html","<div class=\'content-block campaign-tab-switcher\'>\r\n    <div class=\'btn-group\'>\r\n        <button type=\'button\' class=\'btn btn-default\' data-ng-repeat=\'tab in ::$ctrl.tabs\' data-ng-class=\'{active: $ctrl.activeTab === $index}\' data-ng-click=\'$ctrl.changeTab($index)\'>\r\n            {{::tab}}\r\n        </button>\r\n    </div>\r\n</div>");
+$templateCache.put("cms.webanalytics/campaignreport/demographicsLink/demographicsLink.component.html","<a href=\'{{::$ctrl.href}}\' target=\'_blank\' data-ng-if=\'::$ctrl.value > 0\'>{{::$ctrl.value}}</a>\r\n{{ ::$ctrl.value == 0 ? \'0\' : \'\' }}");}]);return 'cms.webanalytics/campaignreport/';}})

@@ -79,13 +79,39 @@ namespace OslerAlumni.Core.Services
         {
             string token = string.Empty;
 
+            //BEGIN TEMP
+            if (userGuid != null)
+            {
+                _eventLogRepository.LogWarning(
+                      GetType(), "ImportAsUser",
+                      $"TEMP Notice for user GUID: '{userGuid.ToString()}'. Code Location 4 Successfully Hit.");
+            }
+            //END TEMP
+
             try
             {
                 var responseBody = await GetAsync<BaseWebResponse<string>>(
                         $"{_context.Site.SitePresentationURL}/internalapi/getpasswordresettoken?userguid={userGuid}");
 
+                //BEGIN TEMP
+                if (userGuid != null)
+                {
+                    _eventLogRepository.LogWarning(
+                          GetType(), "ImportAsUser",
+                          $"TEMP Notice for user GUID: '{userGuid.ToString()}'. Code Location 5 Successfully Hit.");
+                }
+                //END TEMP
+
                 if (responseBody.Status == WebResponseStatus.Success)
                 {
+                    //BEGIN TEMP
+                    if (userGuid != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), "ImportAsUser",
+                              $"TEMP Notice for user GUID: '{userGuid.ToString()}'. Code Location 6 Successfully Hit.");
+                    }
+                    //END TEMP
                     token = responseBody.Result;
                 }
                 else
@@ -103,6 +129,15 @@ namespace OslerAlumni.Core.Services
                     nameof(GetPasswordResetTokenAsync),
                     ex);
             }
+
+            //BEGIN TEMP
+            if (userGuid != null)
+            {
+                _eventLogRepository.LogWarning(
+                      GetType(), "ImportAsUser",
+                      $"TEMP Notice for user GUID: '{userGuid.ToString()}'. Code Location 7 Successfully Hit. Token generated as: {token}");
+            }
+            //END TEMP
 
             return token;
         }

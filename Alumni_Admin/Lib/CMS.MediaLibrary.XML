@@ -1145,6 +1145,13 @@
             <param name="ensureUniqueFileName">Indicates if unique file name should be ensured</param>
             <param name="filePath">New file path</param>
         </member>
+        <member name="M:CMS.MediaLibrary.MediaFileInfoProvider.CheckAllowedExtensions(System.String,System.String)">
+            <summary>
+            Checks if the file extension is allowed for the site.
+            </summary>
+            <param name="siteName">Name of the site of the media library</param>
+            <param name="fileExtension">Extension of the file</param>
+        </member>
         <member name="M:CMS.MediaLibrary.MediaFileInfoProvider.GetFilePhysicalPath(System.String,System.String,System.String)">
             <summary>
             Returns physical path to the file.
@@ -1562,6 +1569,14 @@
               </item>
             </list>
             </remarks>
+        </member>
+        <member name="M:CMS.MediaLibrary.MediaLibraryHelper.CheckPathIsInsideLibrary(System.String,System.String)">
+            <summary>
+            Checks that the provided path lies inside the media library folder. If not, throws an exception.
+            Prevents the path traversal.
+            </summary>
+            <param name="libraryPhysicalPath">Physical path of the media library folder.</param>
+            <param name="path">Physical path which is checked against the path of the media library.</param>
         </member>
         <member name="M:CMS.MediaLibrary.MediaLibraryHelper.LogSynchronization(System.String,System.Int32,System.String,System.String,CMS.DataEngine.TaskTypeEnum,System.Boolean)">
             <summary>

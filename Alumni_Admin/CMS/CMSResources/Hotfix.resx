@@ -528,6 +528,12 @@ Enter a URL to a system image handler to obtain a protected URL containing the h
   <data name="settingskey.cmssmtpserveroauthcredentials.description" xml:space="preserve">
     <value>Select valid OAuth credentials when using the 'OAuth 2.0' authentication type. You can create and manage the credentials in the 'Email OAuth credentials' application.</value>
   </data>
+  <data name="settingskey.cmsstaginguselegacy" xml:space="preserve">
+    <value>Use legacy staging</value>
+  </data>
+	<data name="settingskey.cmsstaginguselegacy.description" xml:space="preserve">
+    <value>Enables less secure legacy version of staging.</value>
+  </data>
   <data name="settingskey.cmspop3authenticationtype" xml:space="preserve">
     <value>Authentication type</value>
   </data>
@@ -704,6 +710,9 @@ Enter a URL to a system image handler to obtain a protected URL containing the h
   </data>
   <data name="settingscategory.cmssecurityrecaptchav3" xml:space="preserve">
     <value>reCAPTCHA v3</value>
+  </data>
+  <data name="settingscategory.cmsstaginglegacy" xml:space="preserve">
+    <value>Legacy</value>
   </data>
   <data name="sf.macrosource.selecttext" xml:space="preserve">
     <value>(macro)</value>

@@ -36,7 +36,11 @@
                     }
                 }
             })
-                .result.then(ctrl.onCreate);
+                .result
+                .then(ctrl.onCreate)
+                .catch(function () {
+                    // Do nothing on dismiss, but this prevents unhandled rejection.
+                });
         };
     }
 }(angular));

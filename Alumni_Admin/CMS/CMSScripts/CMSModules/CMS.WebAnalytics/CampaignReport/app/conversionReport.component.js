@@ -46,7 +46,9 @@
                 self.sortDesc = true;
             };
 
-        init();
+        this.$onInit = function () {
+            init();
+        };
 
         self.sort = function (type) {
             if (self.sortType === type) {

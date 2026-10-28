@@ -24,7 +24,9 @@
                     }
                     @{
                         //<li class="c-nav-item">@Html.DisplayFor(vm => Model.LanguageToggle)</li>
-                    }                </ul>
+                    }
+                </ul>
+
                 @if (Model.IsAuthenticatedUser)
                 {
                     @Html.Partial("_HeaderSearchBar", Model.GlobalSearchPageUrl)

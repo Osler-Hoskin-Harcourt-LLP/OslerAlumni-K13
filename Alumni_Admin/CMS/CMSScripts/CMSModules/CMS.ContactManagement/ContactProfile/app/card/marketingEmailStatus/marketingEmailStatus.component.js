@@ -24,7 +24,9 @@
 
     /*@ngInject*/
     function controller(marketingEmailStatusService) {
-        activate.apply(this);
+        this.$onInit = function () {
+            activate.apply(this);
+        };
 
         function activate() {
             marketingEmailStatusService.getMarketingEmailStatus(this.contactId)

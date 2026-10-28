@@ -23,7 +23,9 @@
 
     /*@ngInject*/
     function controller(newsletterSubscriptionsService) {
-        activate.apply(this);
+        this.$onInit = function () {
+            activate.apply(this);
+        };
 
         function activate() {
             newsletterSubscriptionsService.getSubscriptionsForContact(this.contactId)

@@ -24,8 +24,10 @@
     function controller($scope, assetsService) {
         var ctrl = this;
 
-        ctrl.inputId = 'email_' + ctrl.asset.id;
-        ctrl.formName = ctrl.asset.id === -1 ? '' : 'promotionForm' + ctrl.asset.id;
+        ctrl.$onInit = function () {
+            ctrl.inputId = 'email_' + ctrl.asset.id;
+            ctrl.formName = ctrl.asset.id === -1 ? '' : 'promotionForm' + ctrl.asset.id;
+        };
 
         ctrl.getUtmSourceField = function () {
             if (!ctrl.utmSourceField && !ctrl.isDeleted()) {

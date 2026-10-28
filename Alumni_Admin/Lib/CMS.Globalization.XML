@@ -1348,6 +1348,14 @@
             <param name="message">The message that describes the error.</param>
             <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
         </member>
+        <member name="T:CMS.Localization.CultureRetriever">
+            <summary>
+            Provides functionality to retrieve cached <see cref="T:CMS.Localization.CultureInfo"/> objects based on culture codes or aliases.
+            </summary>
+        </member>
+        <member name="M:CMS.Localization.CultureRetriever.Get(System.String)">
+            <inheritdoc />
+        </member>
         <member name="T:CMS.Localization.CultureService">
             <summary>
             Service providing culture related support
@@ -1368,6 +1376,16 @@
         <member name="T:CMS.Localization.ICultureInfoProvider">
             <summary>
             Declares members for <see cref="T:CMS.Localization.CultureInfo"/> management.
+            </summary>
+        </member>
+        <member name="T:CMS.Localization.Internal.ICultureRetriever">
+            <summary>
+            Defines a contract for retrieving cached <see cref="T:CMS.Localization.CultureInfo"/> instances based on culture codes or aliases.
+            </summary>
+        </member>
+        <member name="M:CMS.Localization.Internal.ICultureRetriever.Get(System.String)">
+            <summary>
+            Retrieves a cached <see cref="T:CMS.Localization.CultureInfo"/> by its culture code or culture alias.
             </summary>
         </member>
         <member name="T:CMS.Localization.FileLocalizationService">

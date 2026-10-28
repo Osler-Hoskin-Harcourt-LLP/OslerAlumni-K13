@@ -80,7 +80,10 @@ window.kentico.updatableFormHelper = (function () {
             return;
         }
 
-        $(form).find("input[type='submit']").attr("onclick", "return false;");
+        form.querySelectorAll("input[type='submit']").forEach((item) => {
+            item.setAttribute("onclick", "return false;");
+        });
+
         form.updating = true;
 
         var formData = new FormData(form);
@@ -96,9 +99,15 @@ window.kentico.updatableFormHelper = (function () {
                     selectionEnd = focus.selectionEnd;
                 }
 
-                var currentScrollPosition = $(window).scrollTop();
-                $(elementIdSelector).replaceWith(event.target.responseText);
-                $(window).scrollTop(currentScrollPosition);
+                var currentScrollPosition = window.scrollY;
+                var element = document.getElementById(elementIdSelector);
+
+                if (useJQuery()) {
+                    $(element).replaceWith(event.target.responseText);
+                } else {
+                    renderMarkup(event.target.responseText, element);
+                }
+                window.scrollTo(0, currentScrollPosition);
 
                 if (focus.id) {
                     var newInput = document.getElementById(focus.id);
@@ -122,11 +131,18 @@ window.kentico.updatableFormHelper = (function () {
             var contentType = event.target.getResponseHeader("Content-Type");
 
             if (contentType.indexOf("application/json") === -1) {
-                var currentScrollPosition = $(window).scrollTop();
-                var replaceTarget = form.getAttribute("data-ktc-ajax-update");
+                var currentScrollPosition = window.scrollY;
+                var replaceTargetId = form.getAttribute("data-ktc-ajax-update");
 
-                $(replaceTarget).replaceWith(event.target.response);
-                $(window).scrollTop(currentScrollPosition);
+                var element = document.getElementById(replaceTargetId);
+
+                if (useJQuery()) {
+                    $(element).replaceWith(event.target.response);
+                } else {
+                    renderMarkup(event.target.response, element)
+                }
+
+                window.scrollTo(0, currentScrollPosition);
             } else {
                 var json = JSON.parse(event.target.response);
 
@@ -135,6 +151,32 @@ window.kentico.updatableFormHelper = (function () {
         };
 
         createRequest(form, formData, onResponse);
+    }
+
+    const renderMarkup = (markup, targetElement) => {
+        var elementFromMarkup = createElementFromMarkup(markup);
+
+        targetElement.parentNode.replaceChild(elementFromMarkup, targetElement);
+        const scripts = elementFromMarkup.querySelectorAll("script");
+        Array.prototype.forEach.call(scripts, (scriptElement) => {
+            const parent = scriptElement.parentNode;
+            const temp = document.createElement("script");
+            [...scriptElement.attributes].forEach((attr) => {
+                temp.setAttribute(attr.name, attr.value);
+            });
+
+            temp.innerHTML = scriptElement.innerHTML;
+            parent.replaceChild(temp, scriptElement);
+            scriptElement.remove();
+        });
+    };
+
+    function createElementFromMarkup(markup) {
+        var element = document.createElement("div");
+
+        element.innerHTML = markup;
+
+        return element.firstElementChild;
     }
 
     function createRequest(form, formData, onResponse) {
@@ -185,6 +227,10 @@ window.kentico.updatableFormHelper = (function () {
                 func.apply(context, args);
             }
         };
+    }
+
+    function useJQuery() {
+        return window.kentico.hasOwnProperty("builder") ? window.kentico.builder.useJQuery : false;
     }
 
     return {

@@ -23,7 +23,9 @@
 
     /*@ngInject*/
     function controller(contactGroupsMembershipService) {
-        activate.apply(this);
+        this.$onInit = function () {
+            activate.apply(this);
+        };
 
         function activate() {
             contactGroupsMembershipService.getMembershipsForContact(this.contactId)

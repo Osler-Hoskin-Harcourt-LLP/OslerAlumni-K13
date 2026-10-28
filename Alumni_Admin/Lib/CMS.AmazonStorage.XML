@@ -1753,5 +1753,42 @@
             </summary>
             <param name="datetime">String date time.</param>        
         </member>
+        <member name="T:CMS.AmazonStorage.S3RetryPolicyHelper">
+            <summary>
+            Contains utility method for Amazon S3 storage media files retriaval retries.
+            </summary>
+        </member>
+        <member name="M:CMS.AmazonStorage.S3RetryPolicyHelper.ExecuteWithRetry``1(System.Func{``0},System.Int32)">
+            <summary>
+            <para>
+            Executes the given <paramref name="executionFunc"/> while catching exception resulting from the execution.
+            The exception is thrown mainly because the file is being accessed used by another process.
+            If the exception thrown contains <see cref="T:System.IO.IOException"/> as its inner exception, the execution is retried.
+            </para>
+            <para>
+            If the retry limit is reached, the exception resulting from the last execution is re-thrown.
+            </para>
+            </summary>
+            <typeparam name="TResult">Return type of the <paramref name="executionFunc"/>.</typeparam>
+            <param name="executionFunc">Function to be executed.</param>
+            <param name="retryCount">Limit of retry executions. If the limit is reached, the exception resulting from the last execution is re-thrown.</param>
+            <returns>Return the result of <paramref name="executionFunc"/> if its execution succeeds before <paramref name="retryCount"/> limit is reached.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="executionFunc"/> is null.</exception>
+        </member>
+        <member name="M:CMS.AmazonStorage.S3RetryPolicyHelper.ExecuteWithRetry(System.Action,System.Int32)">
+            <summary>
+            <para>
+            Executes the given <paramref name="executionAction"/> while catching exception resulting from the execution.
+            The exception is thrown mainly because the file is being accessed used by another process.
+            If the exception thrown contains <see cref="T:System.IO.IOException"/> as its inner exception, the execution is retried.
+            </para>
+            <para>
+            If the retry limit is reached, the exception resulting from the last execution is re-thrown.
+            </para>
+            </summary>
+            <param name="executionAction">Action to be executed.</param>
+            <param name="retryCount">Limit of retry executions. If the limit is reached, the exception resulting from the last execution is re-thrown.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="executionAction"/> is null.</exception>
+        </member>
     </members>
 </doc>

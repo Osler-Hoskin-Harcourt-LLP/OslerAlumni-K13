@@ -17,9 +17,12 @@
 
     /*@ngInject*/
     function controller() {
-        this.isMale = this.contactCard.ContactGender === 'Male';
-        this.isFemale = this.contactCard.ContactGender === 'Female';
-        this.showTags = this.contactCard.IsCustomer || this.contactCard.IsUser;
+        this.$onInit = function () {
+            this.isMale = this.contactCard.ContactGender === 'Male';
+            this.isFemale = this.contactCard.ContactGender === 'Female';
+            this.showTags = this.contactCard.IsCustomer || this.contactCard.IsUser;
+        };
+
         this.showMarketingEmailStatus = dataFromServer.newsletterModuleAvailable;
     }
 }(angular, dataFromServer));

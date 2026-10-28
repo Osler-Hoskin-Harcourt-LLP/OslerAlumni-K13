@@ -30,7 +30,9 @@
         var ctrl = this,
             conversionToRemove;
 
-        ctrl.configuration = conversionsConfigurationService.getConfiguration(ctrl.isFunnel);
+        this.$onInit = function () {
+            ctrl.configuration = conversionsConfigurationService.getConfiguration(ctrl.isFunnel);
+        };
 
         ctrl.addConversionToList = function (conversion) {
             if (!containsConversion(conversion)) {

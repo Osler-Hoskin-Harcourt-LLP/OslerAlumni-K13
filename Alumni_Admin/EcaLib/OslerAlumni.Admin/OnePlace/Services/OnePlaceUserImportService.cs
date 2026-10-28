@@ -193,9 +193,35 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
                     return true;
                 }
+                //BEGIN TEMP
+                else
+                {
+                    bool IOPOD = IsOnePlaceOutOfDate(contact, user);
+
+                    _eventLogRepository.LogWarning(
+                        GetType(), nameof(ImportAsUser),
+                        $"TEMP Notice for: '{contact.Email}' ({contact.FirstName} {contact.LastName}). Parameters: isNew = {isNew.ToString()}, IsOnePlaceOutOfDate = {IOPOD}");
+                }
+                //END TEMP
 
                 user =
                     ConvertToUser(contact, user);
+
+                //BEGIN TEMP
+                if (user != null)
+                {
+                    _eventLogRepository.LogWarning(
+                          GetType(), nameof(ImportAsUser),
+                          $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). User created.");
+                }
+                else
+                {
+                    _eventLogRepository.LogWarning(
+                          GetType(), nameof(ImportAsUser),
+                          $"TEMP Notice for: '{contact.Email}' ({contact.FirstName} {contact.LastName}). User NOT created.");
+                }
+                //END TEMP
+
 
                 if (isNew)
                 {
@@ -208,6 +234,16 @@ namespace OslerAlumni.Admin.OnePlace.Services
                     user.UserName =
                         GetAvailableUserName(user);
 
+                    //BEGIN TEMP
+                    if (user != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), nameof(ImportAsUser),
+                              $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). Username: {user.UserName} created successfully.");
+                    }
+                    //END TEMP
+
+
                     // Generate a temporary based on the site password policy
                     var tempPassword =
                         _userRepository.GenerateNewPassword();
@@ -215,6 +251,15 @@ namespace OslerAlumni.Admin.OnePlace.Services
                     _userRepository.SetTemporaryPassword(
                         user,
                         tempPassword);
+
+                    //BEGIN TEMP
+                    if (user != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), nameof(ImportAsUser),
+                              $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). Code Location 1 Successfully Hit.");
+                    }
+                    //END TEMP
                 }
                 else
                 {
@@ -235,6 +280,15 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
                 _userRepository.Save(user);
 
+                //BEGIN TEMP
+                if (user != null)
+                {
+                    _eventLogRepository.LogWarning(
+                          GetType(), nameof(ImportAsUser),
+                          $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). Code Location 2 Successfully Hit.");
+                }
+                //END TEMP
+
                 if (user.UserID < 1)
                 {
                     _eventLogRepository.LogError(
@@ -247,12 +301,35 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
                 if (importAction == ImportAction.Create)
                 {
+                    //BEGIN TEMP
+                    if (user != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), nameof(ImportAsUser),
+                              $"TEMP Notice for: '{user.Email}' ({user.FirstName} {user.LastName}). Code Location 3 Successfully Hit.");
+                    }
+                    //END TEMP
 
                     // Send the email notification for the newly created users,
                     // so that they can log in using their credentials
 
+                    //BEGIN TEMP
+                    if (user != null)
+                    {
+                        _eventLogRepository.LogWarning(
+                              GetType(), "ImportAsUser",
+                              $"TEMP Notice for user GUID: '{user.UserGUID.ToString()}'. Code Location 3.1 Successfully Hit.");
+                    }
+                    //END TEMP
+
                     var token = _userRepository
                         .GetPasswordResetToken(user.UserGUID);
+
+                    //BEGIN TEMP   
+                    _eventLogRepository.LogWarning(
+                        GetType(), nameof(ImportAsUser),
+                        $"TEMP Notice for: '{user.UserName}' ({user.FirstName} {user.LastName}). Password Token generated as: {token}");
+                    //END TEMP
 
                     if (string.IsNullOrWhiteSpace(token))
                     {
@@ -300,6 +377,12 @@ namespace OslerAlumni.Admin.OnePlace.Services
 
             if (user != null)
             {
+                //BEGIN TEMP   
+                    _eventLogRepository.LogWarning(
+                        GetType(), nameof(ImportAsUser),
+                        $"TEMP Notice for: '{user.UserName}' ({user.FirstName} {user.LastName}). Mapped User Found");                
+                //END TEMP
+
                 return true;
             }
 
@@ -316,6 +399,12 @@ namespace OslerAlumni.Admin.OnePlace.Services
                     return true;
                 }
             }
+
+            //BEGIN TEMP   
+            _eventLogRepository.LogWarning(
+                GetType(), nameof(ImportAsUser),
+                $"TEMP Notice for: '{contact.Email}' ({contact.FirstName} {contact.LastName}). NO Mapped User Found");
+            //END TEMP
 
             return false;
         }

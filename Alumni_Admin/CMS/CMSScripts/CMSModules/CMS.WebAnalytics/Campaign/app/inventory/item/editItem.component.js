@@ -30,7 +30,10 @@
         ctrl.openDialog = function () {
             if (confirmationService.canEditAsset()) {
                 urlAssetSetupDialogService.openDialog(ctrl.asset, 'contentedit.header')
-                    .then(updateAsset);
+                    .then(updateAsset)
+                    .catch(function () {
+                        // Do nothing on dismiss, but this prevents unhandled rejection.
+                    });
             }
         };
 

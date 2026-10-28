@@ -1967,6 +1967,11 @@
             List of registered mapped folders
             </summary>
         </member>
+        <member name="F:CMS.IO.Path.mMappedZipPaths">
+            <summary>
+            List of registered zip archives mapped folders
+            </summary>
+        </member>
         <member name="F:CMS.IO.Path.lockObject">
             <summary>
             Locking object
@@ -2117,6 +2122,19 @@
             <summary>
             Gets an array containing the characters that are not allowed in path names.
             </summary>
+        </member>
+        <member name="M:CMS.IO.Path.IsMappedZipPath(System.String)">
+            <summary>
+            Checks if the path is a mapped zip path.
+            </summary>
+            <returns>True if any of registered mapped zip paths is a subpath of <paramref name="path"/>.</returns>
+        </member>
+        <member name="M:CMS.IO.Path.RegisterZipMappedPath(System.String,System.String)">
+            <summary>
+            Maps folder which is mapped to a zip file to another folder.
+            </summary>
+            <param name="path">Mapped folder.</param>
+            <param name="targetPath">Target folder.</param>
         </member>
         <member name="T:CMS.IO.AbstractStorageProvider">
             <summary>
